@@ -1,0 +1,28 @@
+@import "../styles/colors.scss";
+
+.welcome {
+  display: flex;
+  height: 100vh;
+  background-image: url("../../public//bg.jpeg");
+  background-position: center;
+  background-size: cover;
+  justify-content: right;
+  align-items: center;
+
+  &__wrapper {
+    padding: 100px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    text-align: center;
+    font-size: 52px;
+  }
+
+  &__subtitle {
+    font-size: 22px;
+    max-width: 560px;
+    width: 100%;
+  }
+}
