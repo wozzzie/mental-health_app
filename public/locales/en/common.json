@@ -40,5 +40,8 @@
     "new-header": "New Header",
     "variables": "Variables",
     "headers": "Headers"
+  },
+  "btn": {
+    "btn-start": "Start our journey"
   }
 }
