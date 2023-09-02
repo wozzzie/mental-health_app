@@ -1,0 +1,92 @@
+.header {
+  width: 100%;
+  transition: background-color 0.5s ease, height 0.5s ease;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  padding: 20px 20px;
+  z-index: 10;
+  max-width: 1440px;
+    // height: 5rem; /* 80px */
+  //   background-color: black;
+  margin: 0 auto;
+
+//   &_sticky {
+//     background-color: #230555;
+//     height: 60px;
+//   }
+
+  &__logo {
+    filter: invert(28%) sepia(12%) saturate(272%) hue-rotate(290deg)
+      brightness(110%) contrast(125%);
+    cursor: pointer;
+    left: 0;
+  }
+
+  &__btns {
+    // right: 0;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  &__btn {
+    width: 100%;
+    background: linear-gradient(black, black) padding-box,
+      linear-gradient(to right, #5389ff, #a359ff) border-box;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0.5rem; /* 8px */
+    padding-bottom: 0.5rem; /* 8px */
+    padding-left: 2rem; /* 32px */
+    padding-right: 2rem; /* 32px */
+    border-width: 2px;
+    border: none;
+    border-radius: 0.5rem; /* 8px */
+    border-width: 2px;
+  }
+
+  &__theme {
+    -webkit-appearance: none;
+    appearance: none;
+    background-image: url(https://i.postimg.cc/mrRKDbbT/flag-en-big.jpg);
+    border-radius: 50px;
+    outline: none;
+    transition: background-image 0.9s;
+    box-shadow: 0px 1px 5px 0px rgb(68 65 65);
+    position: relative;
+    background-position: cover;
+    cursor: pointer;
+    width: 2.5rem; /* 40px */
+    height: 1.25rem; /* 20px */
+
+    &:before {
+      content: "";
+      background-color: #cc0100;
+      border-radius: 50px;
+      transition: all 0.9s;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 1.25rem; /* 20px */
+      width: 1.25rem; /* 20px */
+    }
+
+    &:checked {
+      background-image: url(https://i.postimg.cc/zGW1vtKF/image.png);
+      transition: background-image 0.9s;
+    }
+
+    &:checked:before {
+      transform: translate(100%);
+      transition: all 0.9s;
+      background-color: #051c79;
+    }
+  }
+}
