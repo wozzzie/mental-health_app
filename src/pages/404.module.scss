@@ -1,0 +1,39 @@
+.error {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
+  &__block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 22px;
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+    }
+  }
+
+  &__text {
+    font-size: 16px;
+
+    @media (max-width: 768px) {
+      font-size: 14px;
+    }
+  }
+
+  &__img {
+    width: 40%;
+  }
+}
