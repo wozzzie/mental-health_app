@@ -1,0 +1,12 @@
+{
+  "/_app": "pages/_app.js",
+  "/_document": "pages/_document.js",
+  "/auth/sign-in": "pages/auth/sign-in.js",
+  "/": "pages/index.js",
+  "/_error": "pages/_error.js",
+  "/404": "pages/404.js",
+  "/auth/sign-up": "pages/auth/sign-up.js",
+  "/en/500": "pages/en/500.html",
+  "/default/500": "pages/default/500.html",
+  "/ru/500": "pages/ru/500.html"
+}

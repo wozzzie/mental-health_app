@@ -9,7 +9,7 @@
 /coverage
 
 # next.js
-/.next/
+# /.next/
 /out/
 
 # production
@@ -35,3 +35,6 @@ yarn-error.log*
 next-env.d.ts
 
 .github
+
+private-firebase
+.firebase
