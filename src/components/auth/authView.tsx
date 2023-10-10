@@ -50,10 +50,12 @@ const AuthView = ({ authCallback, page }: Props) => {
   const [loading, setLoading] = useState(false);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
+    console.log("2");
+
     setLoading(true);
     try {
       await authCallback(email, password);
-
+      console.log("1");
       setLoading(false);
       Router.push(ROUTES.APP);
     } catch (e) {
@@ -148,7 +150,11 @@ const AuthView = ({ authCallback, page }: Props) => {
                     ? `${t("header.btn-signin")}`
                     : `${t("header.btn-signup")}`
                 }
-                iconProps={{ src: "/sign-in.png", alt: "sign-in icon", size: 32 }}
+                iconProps={{
+                  src: "/sign-in.png",
+                  alt: "sign-in icon",
+                  size: 32,
+                }}
                 testId="auth-btn"
               />
             </ErrorBoundaryWithMessage>

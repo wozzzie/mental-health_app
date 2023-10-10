@@ -1,9 +1,0 @@
-{
-  "version": 1,
-  "functions": {
-    "/404": {},
-    "/auth/sign-up": {},
-    "/": {},
-    "/auth/sign-in": {}
-  }
-}

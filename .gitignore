@@ -9,7 +9,7 @@
 /coverage
 
 # next.js
-# /.next/
+/.next/
 /out/
 
 # production
@@ -38,3 +38,5 @@ next-env.d.ts
 
 private-firebase
 .firebase
+# Local Netlify folder
+.netlify
