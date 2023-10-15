@@ -1,0 +1,41 @@
+.meditation {
+    background: #FFC75F;
+    padding: 95px 0;
+  
+    &__img {
+      display: block;
+      width: 175px;
+  
+    }
+  
+    &-text {
+      max-width: 684px;
+      flex-basis: 250px;
+      flex-grow: 2;
+      margin-left: 20px;
+      &__title {
+        color: #FFF;
+  
+  /* Heading / H3 Title */
+        font-family: DM Sans;
+        font-size: 42px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 52px; /* 123.81% */
+        letter-spacing: -0.4px;
+        margin-bottom: 20px;
+      }
+  
+      &__description {
+        color: #FFF;
+  
+  /* Text / Article */
+      font-family: DM Sans;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 28px;
+      }
+  
+    }
+  }

@@ -1,0 +1,77 @@
+.footer {
+
+    padding-bottom: 100px;
+
+    .policy-links {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        margin: 0;
+        min-width: 300px;
+        justify-self: start;
+    }
+
+    &-team-logo {
+        margin: 0 auto;
+        justify-self: center;
+    }
+
+    &-title {
+        color: var(--colors-heading, #1E0E62);
+        text-align: center;
+        font-family: DM Sans;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.293px;
+    }
+
+    &-description {
+        color: var(--colors-text, rgba(21, 20, 57, 0.40));
+        text-align: center;
+        /* Text / Paragraph */
+        font-family: DM Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+    }
+
+    .contacts {
+        justify-self: end;
+        display: flex;
+        min-width: 300px;
+        &-title {
+            color: var(--colors-heading, #1E0E62);
+            /* Text / Paragraph */
+            font-family: DM Sans;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 26px;
+            margin:auto 10px;
+
+        }
+        &-link {
+            margin: auto 10px;
+        }
+    }
+}
+
+@media (max-width:1080px){
+    .container {
+        flex-direction: column;
+    }
+
+    .policy-links {
+    }
+    .footer-team-logo {
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+
+    .contacts {
+        margin: 0 auto;
+    }
+}

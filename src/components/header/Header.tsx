@@ -1,7 +1,7 @@
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "next/link";
+import Link from "../link/Link";
 import Image from "next/image";
 
 import { logout } from "../../firebase/firebaseClient";
@@ -14,6 +14,7 @@ import LandingButton from "../landing-button/LandingButton";
 import styles from "./style.module.scss";
 import PageContainer from "../page-container/pageContainer";
 import Divider from "../divider/Divider";
+import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
 
 const Header = () => {
   const router = useRouter();
@@ -86,19 +87,22 @@ const Header = () => {
             <PageContainer flex classes={styles["top-navigation-wrapper"]}>
             <Image src="/logo.svg" alt="Balance" className={styles["top-navigation__logo"]} width={298} height={50}/>
             <nav className={styles["top-navigation-menu"]}>
-              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-home")}</a>
-              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-features")}</a>
-              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-blog")}</a>
+              <Link href="#" text={t("header.link-home")}/>
+              <Link href="#" text={t("header.link-features")}/>
+              <Link href="#" text={t("header.link-blog")}/>
+              <LanguageSwitcher />
             </nav>
             <nav className={styles["sign-buttons"]}>
               <LandingButton
                 text={t("header.btn-signin")}
                 type="text"
                 onClick={handleSignIn}
+              
                 />
                 <LandingButton
-                text={t("header.btn-signup")+"dddddd"}
+                text={t("header.btn-signup")}
                 onClick={handleSignUp}
+              
                 />
             </nav>
             </PageContainer> 
