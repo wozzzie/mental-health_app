@@ -90,3 +90,72 @@
     }
   }
 }
+
+.top-navigation {
+  min-height:100px;
+  position: relative;
+  
+
+  & .top-navigation-wrapper {
+    min-height: 100px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    position: relative;
+  }
+
+  &__logo {
+    height:50px;
+    width:298px;
+    display: block;
+    position: relative;
+    margin: auto 0;
+    flex-grow: 0;
+  }
+
+  &-menu {
+    margin: auto;
+    display: flex;
+    position: relative;
+    justify-content: space-around;
+    max-width: 350px;
+    flex-basis: 300px;
+    flex-grow:1;
+    &__element {
+      display: block;
+      position: relative;
+      color: var(--colors-heading, #1E0E62);
+/* Text / Paragraph */
+      font-family: DM Sans;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 26px;
+      text-decoration: none; 
+    }
+
+  }
+
+  .sign-buttons {
+    min-width:178px;
+    margin:auto 0;
+    position: relative;
+    display: flex;
+
+    &__sign-up-btn {
+      height:40px;
+      width:100px;
+      border-radius:20px;
+      border: none;
+      background: #FFC75F;
+      color:#fff;
+      display: block;
+    }
+
+    &__sign-in-btn {
+      display: block;
+      background: none;
+      border:none;
+      width:100px;
+    }
+  }
+}
