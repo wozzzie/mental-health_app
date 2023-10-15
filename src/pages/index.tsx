@@ -11,14 +11,13 @@ import Button from "../components/button/Button";
 
 export default function WelcomePage() {
   const { t } = useTranslation();
-
   return (
     <>
       <ErrorBoundaryWithMessage>
         <Header />
       </ErrorBoundaryWithMessage>
 
-      <PageContainer>
+      {/* <PageContainer>
         <div className={styles.welcome}>
           <picture>
             <img
@@ -35,7 +34,7 @@ export default function WelcomePage() {
             <Button type="button" text={t("btn.btn-start")} />
           </div>
         </div>
-      </PageContainer>
+      </PageContainer> */}
       {/* <Footer /> */}
     </>
   );
