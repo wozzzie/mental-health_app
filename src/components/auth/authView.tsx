@@ -14,6 +14,7 @@ import { getAuthError } from "../../utils/helpers";
 
 import styles from "./style.module.scss";
 import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
+import Checkbox from "../checkbox/Checkbox";
 
 interface Props {
   authCallback: (email: string, password: string) => Promise<UserCredential>;
@@ -48,6 +49,7 @@ const AuthView = ({ authCallback, page }: Props) => {
   } = useForm<schemaType>({ resolver });
   const [authError, setAuthError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     console.log("2");
@@ -64,6 +66,11 @@ const AuthView = ({ authCallback, page }: Props) => {
       setLoading(false);
     }
   });
+
+
+  const handleCheckboxChange = (newChecked: boolean) => {
+    setIsChecked(newChecked);
+  };
 
   return (
     <PageContainer>
@@ -85,13 +92,10 @@ const AuthView = ({ authCallback, page }: Props) => {
           </Link>
         </h2> */}
         <picture>
-          <img
-            src="/sign-in-img.png"
-            className={styles["form__img"]}
-            alt="sign-in"
-          />
+          <img src="/logo.svg" className={styles["form__img"]} alt="sign-in" />
         </picture>
         <div className={styles["form__block"]}>
+          <h3 className={styles["form__title"]}>{t("sign.sign-up")}</h3>
           <form className={styles["form"]} onSubmit={onSubmit}>
             {loading ? (
               <div className={styles["form__loading"]}>
@@ -111,11 +115,8 @@ const AuthView = ({ authCallback, page }: Props) => {
                   id="email"
                   type="text"
                   {...register("email")}
-                  placeholder={t("sign.placeholder-email") || ""}
+                  placeholder={t("sign.email") || ""}
                 />
-                <label className={styles["form__label"]} htmlFor="email">
-                  {t("sign.email")}
-                </label>
                 {errors.email?.message && (
                   <p className={styles["form__error"]} data-testid="auth-error">
                     {errors.email?.message}
@@ -129,11 +130,8 @@ const AuthView = ({ authCallback, page }: Props) => {
                   id="password"
                   type="password"
                   {...register("password")}
-                  placeholder={t("sign.placeholder-password") || ""}
+                  placeholder={t("sign.password") || ""}
                 />
-                <label className={styles["form__label"]} htmlFor="password">
-                  {t("sign.password")}
-                </label>
                 {errors.password?.message && (
                   <p className={styles["form__error"]} data-testid="auth-error">
                     {errors.password?.message}
@@ -141,6 +139,13 @@ const AuthView = ({ authCallback, page }: Props) => {
                 )}
               </div>
             </div>
+            <ErrorBoundaryWithMessage>
+              <Checkbox
+                label={t("sign.agree")}
+                isChecked={isChecked}
+                onChange={handleCheckboxChange}
+              />
+            </ErrorBoundaryWithMessage>
 
             <ErrorBoundaryWithMessage>
               <Button

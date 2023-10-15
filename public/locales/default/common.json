@@ -23,13 +23,10 @@
     "btn-go-home": "Go Home"
   },
   "sign": {
-    "sign": "Sign",
-    "in": "in",
-    "up": "up",
-    "use": "to use",
-    "GraphiQL": "GraphiQL App",
-    "email": "Email",
-    "password": "Password",
+    "sign-up": "Sign Up Now",
+    "email": "Your email",
+    "password": "Your password",
+    "agree": "I agree to the Terms of Service.",
     "account-false": "Don't have an account? ",
     "account-true": "Already have an account? ",
     "placeholder-email": "Enter your email",

@@ -2,14 +2,15 @@
 @import "./colors.scss";
 
 :root {
-  --foreground-rgb: 255, 255, 255;
+  --foreground-rgb: #1E0E62;
   --background-start-rgb: 0, 0, 0;
   --background-end-rgb: 0, 0, 0;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: $dark_blue-color;
+  // background: $dark_blue-color;
+  font-family: 'DM Sans', sans-serif;
   margin: 0px;
   height: 100%;
 }
