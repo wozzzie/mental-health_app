@@ -20,6 +20,10 @@
         -webkit-tap-highlight-color: transparent;
         background-color: #d5a650;
     }
+
+    &:disabled {
+        background-color: #d9d9d9;
+    }
 }
 
 .button-text {
@@ -40,5 +44,9 @@
     &:active {
         background-color:#eee;
         -webkit-tap-highlight-color: transparent;
+    }
+
+    &:disabled {
+        color: #464647;
     }
 }

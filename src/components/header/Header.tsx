@@ -89,9 +89,11 @@ const Header = () => {
             <nav className={styles["sign-buttons"]}>
               <LandingButton
                 text="Sign In"
-                type="text"/>
-              <LandingButton
-              text="Sign Up"
+                type="text"
+                />
+                <LandingButton
+                text="Sign Up"
+                
                 />
             </nav>
             </PageContainer> 
