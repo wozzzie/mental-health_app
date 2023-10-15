@@ -20,7 +20,7 @@ const LandingButton = ({type="filled", disabled=false, onClick, iconProps, testI
         className={type === "filled" ? classes["button-filled"] : classes["button-text"]} 
         disabled={disabled}
         data-testid={testId}
-
+        onClick={onClick}
         >
             {iconProps ? (
                 <Image

@@ -20,14 +20,18 @@ const Header = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
 
-  useEffect(()=>{
-    console.log(styles);
-  },[]);
-
   const handleSignOut = async () => {
     logout();
     router.push(ROUTES.WELCOME);
   };
+
+  const handleSignUp = () => {
+    router.push(ROUTES.SIGN_UP)
+  }
+
+  const handleSignIn = () => {
+    router.push(ROUTES.SIGN_IN)
+  }
 
   return (
     // <div
@@ -82,18 +86,19 @@ const Header = () => {
             <PageContainer flex classes={styles["top-navigation-wrapper"]}>
             <Image src="/logo.svg" alt="Balance" className={styles["top-navigation__logo"]} width={298} height={50}/>
             <nav className={styles["top-navigation-menu"]}>
-              <a href="#" className={styles["top-navigation-menu__element"]}>Home</a>
-              <a href="#" className={styles["top-navigation-menu__element"]}>Features</a>
-              <a href="#" className={styles["top-navigation-menu__element"]}>Blog</a>
+              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-home")}</a>
+              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-features")}</a>
+              <a href="#" className={styles["top-navigation-menu__element"]}>{t("header.link-blog")}</a>
             </nav>
             <nav className={styles["sign-buttons"]}>
               <LandingButton
-                text="Sign In"
+                text={t("header.btn-signin")}
                 type="text"
+                onClick={handleSignIn}
                 />
                 <LandingButton
-                text="Sign Up"
-                
+                text={t("header.btn-signup")+"dddddd"}
+                onClick={handleSignUp}
                 />
             </nav>
             </PageContainer> 
