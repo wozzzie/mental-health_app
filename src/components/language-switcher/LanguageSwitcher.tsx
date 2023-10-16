@@ -12,7 +12,6 @@ const LanguageSwitcher = () => {
     const {i18n, t} = useTranslation();
 
     useEffect(() => {
-        console.log(i18n.languages);
 
     }, []);
 
@@ -20,7 +19,6 @@ const LanguageSwitcher = () => {
         const lang = e.value.toLowerCase();
         if (i18n.languages.includes(lang)) {
             i18n.changeLanguage(lang);
-            console.log("yes")
         }
         else {
             throw new Error("missing locale");
