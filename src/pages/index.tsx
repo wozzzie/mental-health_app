@@ -8,6 +8,10 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import styles from "./style.module.scss";
 import { ErrorBoundaryWithMessage } from "../components/error-boundary/errorBoundary";
 import Button from "../components/button/Button";
+import Home from "../components/home/Home"
+import Meditation from "@/components/meditation/Meditation";
+import Features from "@/components/features/Features";
+import Footer from "@/components/footer/Footer";
 
 export default function WelcomePage() {
   const { t } = useTranslation();
@@ -16,7 +20,18 @@ export default function WelcomePage() {
       <ErrorBoundaryWithMessage>
         <Header />
       </ErrorBoundaryWithMessage>
-
+      <ErrorBoundaryWithMessage>
+        <Home/>
+      </ErrorBoundaryWithMessage>
+      <ErrorBoundaryWithMessage>
+        <Meditation/>
+      </ErrorBoundaryWithMessage>
+      <ErrorBoundaryWithMessage>
+        <Features/>
+      </ErrorBoundaryWithMessage>
+      <ErrorBoundaryWithMessage>
+        <Footer/>
+      </ErrorBoundaryWithMessage>
       {/* <PageContainer>
         <div className={styles.welcome}>
           <picture>
