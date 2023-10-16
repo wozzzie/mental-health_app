@@ -15,6 +15,7 @@ import styles from "./style.module.scss";
 import PageContainer from "../page-container/pageContainer";
 import Divider from "../divider/Divider";
 import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
+import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
 
 const Header = () => {
   const router = useRouter();
@@ -90,7 +91,9 @@ const Header = () => {
               <Link href="#" text={t("header.link-home")}/>
               <Link href="#" text={t("header.link-features")}/>
               <Link href="#" text={t("header.link-blog")}/>
-              <LanguageSwitcher />
+              <ErrorBoundaryWithMessage >
+                <LanguageSwitcher />
+              </ErrorBoundaryWithMessage>
             </nav>
             <nav className={styles["sign-buttons"]}>
               <LandingButton

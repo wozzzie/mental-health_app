@@ -2,26 +2,36 @@ import { useTranslation } from "next-i18next"
 import classes from "./style.module.scss"
 import Image from "next/image"
 import PageContainer from "../page-container/pageContainer";
-import ReactDropdown from "react-dropdown";
+import ReactDropdown, { Option } from "react-dropdown";
 import { useEffect, useState } from "react";
 
 const LanguageSwitcher = () => {
 
-    const languages = ["EN", "RU"];
-
     const [curLanguage, setCurLanguage] = useState("EN");
 
-    const {i18n} = useTranslation();
+    const {i18n, t} = useTranslation();
 
-    const handleChangeLanguage = (e) => {
-        i18n.changeLanguage(e.label.toLowerCase());
+    useEffect(() => {
+        console.log(i18n.languages);
+
+    }, []);
+
+    const handleChangeLanguage = (e : Option) => {
+        const lang = e.value.toLowerCase();
+        if (i18n.languages.includes(lang)) {
+            i18n.changeLanguage(lang);
+            console.log("yes")
+        }
+        else {
+            throw new Error("missing locale");
+        }
     }
 
     return (
         <ReactDropdown 
         className={classes["dropdown-root"]}
         menuClassName={classes["dropdown-menu"]}
-        options={languages} 
+        options={i18n.languages.map(i=>i.toUpperCase())} 
         onChange={handleChangeLanguage} 
         value={curLanguage}
         arrowOpen={<Image src="/up-chevron.png" alt="arrow up" width={20} height={20}/>}

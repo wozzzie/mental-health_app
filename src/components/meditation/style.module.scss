@@ -38,4 +38,14 @@
       }
   
     }
+}
+
+@media (max-width: 480px) {
+  .meditation {
+    text-align: center;
+
+    &-text {
+      margin-top: 40px;
+    }
   }
+}
