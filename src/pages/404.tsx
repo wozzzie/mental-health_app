@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
+import Link from "next/link";
 import PageContainer from "../components/page-container/pageContainer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, GetStaticPropsContext } from "next";
 import Logo from "../../public/logo-animated.svg";
+import ROUTES from "../constants/routes";
 
 import styles from "./404.module.scss";
 
@@ -14,7 +16,15 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <Logo className={styles["error__logo"]} />
+        <div className={styles["error__logo"]}>
+          <Link
+            className={styles["form__link"]}
+            data-testid="login-link"
+            href={ROUTES.WELCOME}
+          >
+            <Logo />
+          </Link>
+        </div>
         <h1 className={styles["error__title"]}>{t("404.title")}</h1>
       </div>
     </PageContainer>
