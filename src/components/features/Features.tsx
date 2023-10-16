@@ -8,7 +8,7 @@ const Features = () => {
     const { t } = useTranslation();
 
     return (
-        <section className={classes["features"]}>
+        <section className={classes["features"]} id="features">
             <PageContainer>
                 <h2 className={classes["features__title"]}>{t("features.title")}</h2>
                 <div className={classes["features-list"]}>

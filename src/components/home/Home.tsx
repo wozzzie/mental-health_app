@@ -11,7 +11,7 @@ const Home = () => {
     return (
         <>
         
-            <header className={classes["main-header"]}>
+            <header className={classes["main-header"]} id="home">
                 <PageContainer flex classes={classes["container"]}>
                     <div className={classes["main-header-text"]}>
                         <h1 className={classes["main-header-text__title"]}>{t("home.title")}</h1>

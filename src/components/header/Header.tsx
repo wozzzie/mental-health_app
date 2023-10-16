@@ -16,6 +16,7 @@ import PageContainer from "../page-container/pageContainer";
 import Divider from "../divider/Divider";
 import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
 import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
+import Logo from "./logo.svg"
 
 const Header = () => {
   const router = useRouter();
@@ -86,10 +87,10 @@ const Header = () => {
     <>
       <header className={styles["top-navigation"]}>
             <PageContainer flex classes={styles["top-navigation-wrapper"]}>
-            <Image src="/logo.svg" alt="Balance" className={styles["top-navigation__logo"]} width={298} height={50}/>
+            <Logo className={styles["top-navigation__logo"]}/>
             <nav className={styles["top-navigation-menu"]}>
-              <Link href="#" text={t("header.link-home")}/>
-              <Link href="#" text={t("header.link-features")}/>
+              <Link href="#home" text={t("header.link-home")}/>
+              <Link href="#features" text={t("header.link-features")}/>
               <Link href="#" text={t("header.link-blog")}/>
               <ErrorBoundaryWithMessage >
                 <LanguageSwitcher />

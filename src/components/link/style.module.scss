@@ -10,4 +10,21 @@
     line-height: 26px;
     text-decoration: none; 
     margin:auto 0;
+
+    &-text {
+        &:after {
+            position: absolute;
+            display:block;
+            content: "";
+            height: 2px;
+            background-color: var(--colors-heading, #1E0E62);
+            width: 0px;
+            transition: 0.5s all;
+            left:50%;
+            transform: translateX(-50%);
+        }
+        &:hover::after {
+            width:100%;
+        }
+    }
 }

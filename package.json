@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.3.1",
+    "@svgr/webpack": "^8.1.0",
     "firebase": "^10.3.0",
     "next-redux-wrapper": "^8.1.0",
     "react-error-boundary": "^4.0.11",

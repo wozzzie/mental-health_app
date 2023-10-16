@@ -21,7 +21,7 @@ const Link = ({href,img,text, classes} : LinkProps) => {
     
 
     return (
-        <a href={href} className={styles["landing-link"] +" " + classes}>
+        <a href={href} className={styles["landing-link"] +" "+(img ? "" : styles["landing-link-text"])+" " + classes}>
             {img ? (
                 <Image src={img.src} alt={img.alt} width={img.w} height={img.h} className={styles["landing-link__image"]}/>
             ) : <></>}
