@@ -1,0 +1,48 @@
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  letter-spacing: 0px;
+  text-align: left;
+  color: #15143966;
+}
+
+.customCheckbox {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.hiddenCheckbox {
+  display: none;
+}
+
+.customCheckmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 19px;
+  height: 19px;
+  border-radius: 6px;
+  border: 1px solid #ebeaed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customCheckmark span {
+  display: none;
+}
+
+.customCheckmark.checked span {
+  display: block;
+}
+
+.customCheckbox input:checked + .customCheckmark {
+  background-color: #ffc75f;
+  border: 1px solid #ffc75f;
+}

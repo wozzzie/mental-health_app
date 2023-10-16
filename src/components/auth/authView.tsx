@@ -14,6 +14,9 @@ import { getAuthError } from "../../utils/helpers";
 
 import styles from "./style.module.scss";
 import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
+import Checkbox from "../checkbox/Checkbox";
+import LandingButton from "../landing-button/LandingButton";
+import Divider from "../divider/divider";
 
 interface Props {
   authCallback: (email: string, password: string) => Promise<UserCredential>;
@@ -48,6 +51,7 @@ const AuthView = ({ authCallback, page }: Props) => {
   } = useForm<schemaType>({ resolver });
   const [authError, setAuthError] = useState<string>("");
   const [loading, setLoading] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
 
   const onSubmit = handleSubmit(async ({ email, password }) => {
     console.log("2");
@@ -65,33 +69,32 @@ const AuthView = ({ authCallback, page }: Props) => {
     }
   });
 
+  const handleCheckboxChange = (newChecked: boolean) => {
+    setIsChecked(newChecked);
+  };
+
   return (
     <PageContainer>
       <section className={styles["form__wrapper"]}>
-        {/* <h2 className={styles["form__title"]}>
-          <span>
-            {" "}
-            {t("sign.sign")}{" "}
-            {page === "SIGN_IN" ? `${t("sign.in")}` : `${t("sign.up")}`}{" "}
-            {t("sign.use")}
-          </span>
-
-          <Link
-            className={styles["form__title_link"]}
-            data-testid="welcome-link"
-            href={ROUTES.WELCOME}
-          >
-            {t("sign.GraphiQL")}
-          </Link>
-        </h2> */}
         <picture>
-          <img
-            src="/sign-in-img.png"
-            className={styles["form__img"]}
-            alt="sign-in"
-          />
+          <img src="/logo.svg" className={styles["form__img"]} alt="sign-in" />
         </picture>
         <div className={styles["form__block"]}>
+          <h3
+            className={styles["form__title"]}
+            style={{ textAlign: page === "SIGN_IN" ? "center" : "left" }}
+          >
+            {page === "SIGN_IN"
+              ? `${t("sign.sign-in")}`
+              : `${t("sign.account-create")}`}
+          </h3>
+
+          {page === "SIGN_IN" ? (
+            ""
+          ) : (
+            <p className={styles["form__terms"]}>{t("sign.terms")}</p>
+          )}
+
           <form className={styles["form"]} onSubmit={onSubmit}>
             {loading ? (
               <div className={styles["form__loading"]}>
@@ -104,77 +107,132 @@ const AuthView = ({ authCallback, page }: Props) => {
                 {authError}
               </p>
             )}
-            <div className={styles["form__controls"]}>
+            <div
+              className={`${styles["form__controls"]} ${
+                page === "SIGN_IN" ? styles["form__controls_signin"] : ""
+              }`}
+            >
+              {page === "SIGN_IN" ? (
+                ""
+              ) : (
+                <label className={styles["form__label"]}>
+                  {t("sign.label-email")}
+                </label>
+              )}
               <div className={styles["form__item"]}>
                 <input
                   className={styles["form__input"]}
                   id="email"
                   type="text"
                   {...register("email")}
-                  placeholder={t("sign.placeholder-email") || ""}
+                  placeholder={t("sign.email") || ""}
                 />
-                <label className={styles["form__label"]} htmlFor="email">
-                  {t("sign.email")}
-                </label>
                 {errors.email?.message && (
                   <p className={styles["form__error"]} data-testid="auth-error">
                     {errors.email?.message}
                   </p>
                 )}
               </div>
-
-              <div className={styles["form__item"]}>
-                <input
-                  className={styles["form__input"]}
-                  id="password"
-                  type="password"
-                  {...register("password")}
-                  placeholder={t("sign.placeholder-password") || ""}
-                />
-                <label className={styles["form__label"]} htmlFor="password">
-                  {t("sign.password")}
+              {page === "SIGN_IN" ? (
+                ""
+              ) : (
+                <label className={styles["form__label"]}>
+                  {t("sign.label-password")}
                 </label>
+              )}
+
+              <div
+                className={
+                  page === "SIGN_IN"
+                    ? styles["form__item"]
+                    : styles["form__item-signup"]
+                }
+              >
+                {page === "SIGN_IN" ? (
+                  <input
+                    className={styles["form__input"]}
+                    id="password"
+                    type="password"
+                    {...register("password")}
+                    placeholder={t("sign.password") || ""}
+                  />
+                ) : (
+                  <input
+                    className={styles["form__input"]}
+                    id="password"
+                    type="password"
+                    {...register("password")}
+                    placeholder={t("sign.password-only") || ""}
+                  />
+                )}
+
                 {errors.password?.message && (
                   <p className={styles["form__error"]} data-testid="auth-error">
                     {errors.password?.message}
                   </p>
                 )}
+                {page === "SIGN_IN" ? (
+                  ""
+                ) : (
+                  <input
+                    className={styles["form__input"]}
+                    id="password"
+                    type="password"
+                    {...register("password")}
+                    placeholder={t("sign.repeat-password") || ""}
+                  />
+                )}
               </div>
             </div>
-
+            <div
+              className={`${page === "SIGN_IN" ? styles["form__agree"] : ""}`}
+            >
+              {" "}
+              {page === "SIGN_IN" ? (
+                <ErrorBoundaryWithMessage>
+                  <Checkbox
+                    label={t("sign.agree")}
+                    isChecked={isChecked}
+                    onChange={handleCheckboxChange}
+                  />
+                </ErrorBoundaryWithMessage>
+              ) : null}
+            </div>
             <ErrorBoundaryWithMessage>
-              <Button
-                type="submit"
+              <LandingButton
                 text={
                   page === "SIGN_IN"
-                    ? `${t("header.btn-signin")}`
-                    : `${t("header.btn-signup")}`
+                    ? `${t("sign.account-signin")}`
+                    : `${t("sign.sign-up")}`
                 }
-                iconProps={{
-                  src: "/sign-in.png",
-                  alt: "sign-in icon",
-                  size: 32,
-                }}
-                testId="auth-btn"
               />
             </ErrorBoundaryWithMessage>
-
-            <p>
+            <div
+              className={`${
+                page === "SIGN_IN"
+                  ? styles["form__divider"]
+                  : styles["form__divider_none"]
+              }`}
+            >
+              <ErrorBoundaryWithMessage>
+                <Divider />
+              </ErrorBoundaryWithMessage>
+            </div>
+            <p
+              className={`${page === "SIGN_IN" ? styles["form__account"] : ""}`}
+            >
               {page === "SIGN_IN" ? (
                 <>
-                  {t("sign.account-false")}
-                  <Link data-testid="login-link" href={ROUTES.SIGN_UP}>
-                    {t("header.btn-signup")}!
-                  </Link>
-                </>
-              ) : (
-                <>
                   {t("sign.account-true")}
-                  <Link data-testid="login-link" href={ROUTES.SIGN_IN}>
-                    {t("header.btn-signin")}!
+                  <Link
+                    className={styles["form__link"]}
+                    data-testid="login-link"
+                    href={ROUTES.SIGN_UP}
+                  >
+                    {t("sign.sign-up")}!
                   </Link>
                 </>
-              )}
+              ) : null}
             </p>
           </form>
         </div>
