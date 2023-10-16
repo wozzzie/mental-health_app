@@ -39,9 +39,7 @@
     "password": "Min 8 symbols, one letter, one digit, one special character!"
   },
   "404": {
-    "oops": "Oops!",
-    "error": "You are lost",
-    "btn-go-home": "Go Home"
+    "title": "404 - PAGE NOT FOUND"
   },
   "sign": {
     "sign-up": "Sign Up",

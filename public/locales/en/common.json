@@ -13,21 +13,21 @@
     "link-blog": "Blog"
   },
   "meditation": {
-    "title":"Meditation",
+    "title": "Meditation",
     "description": "Dive into the world of harmony and inner peace with our innovative meditation functionality. We introduce you to a unique range of tools designed to deepen and inspire your meditative practices"
   },
   "features": {
     "title": "A Lot of Features",
-    "element-title-1":"breathing function",
+    "element-title-1": "breathing function",
     "element-title-2": "Daily Fortune",
     "element-title-3": "GIFs with kittens",
     "element-description-1": "Breathing is fundamental to well-being, and our unique feature is designed to help you tap into its potential for a healthier, more balanced life.",
     "element-description-2": "Begin your day positively, let these quotes inspire you to pursue your dreams with determination and optimism.",
-    "element-description-3": "Watch these charming feline companions in action, and let their antics bring a smile to your face." 
+    "element-description-3": "Watch these charming feline companions in action, and let their antics bring a smile to your face."
   },
   "footer": {
     "rights": "© 2023 All Rights Reserved.",
-    "about":"About",
+    "about": "About",
     "policy": "Policy",
     "terms": "Terms",
     "title": "Web Marvels",
@@ -39,9 +39,7 @@
     "password": "Min 8 symbols, one letter, one digit, one special character!"
   },
   "404": {
-    "oops": "Oops!",
-    "error": "You are lost",
-    "btn-go-home": "Go Home"
+    "title": "404 - PAGE NOT FOUND"
   },
   "sign": {
     "sign-up": "Sign Up",
