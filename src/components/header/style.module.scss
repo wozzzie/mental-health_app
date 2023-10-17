@@ -101,6 +101,7 @@
     padding-bottom: 10px;
     padding-top: 10px;
     position: relative;
+    gap:20px;
   }
 
   &__logo {
@@ -119,14 +120,13 @@
     position: relative;
     justify-content: space-around;
     max-width: 350px;
-    flex-basis: 300px;
+    gap:20px;
     flex-grow:1;
     &__element {
       display: block;
       position: relative;
       color: var(--colors-heading, #1E0E62);
 /* Text / Paragraph */
-      font-family: DM Sans;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -160,5 +160,11 @@
       border:none;
       width:100px;
     }
+  }
+}
+
+:lang(ru) {
+  .sign-buttons {
+    width: 290px;
   }
 }
