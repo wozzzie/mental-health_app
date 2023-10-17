@@ -217,6 +217,7 @@ const AuthView = ({ authCallback, page }: Props) => {
             </div>
             <ErrorBoundaryWithMessage>
               <LandingButton
+                type="submit"
                 text={
                   page === "SIGN_IN"
                     ? `${t("sign.account-signin")}`
