@@ -24,11 +24,12 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
   } catch (err) {
-    const locale = ctx.locale || "en";
+    const locale = ctx.locale || "En";
 
     return {
       props: {
         ...(await serverSideTranslations(locale, ["common"])),
+        uid: null,
       },
     };
   }
@@ -36,7 +37,15 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
 const SignUp = () => {
   const onSignUp = async (email: string, password: string) => {
-    return await registerWithEmailAndPassword(email, password);
+    console.log("authCallback called with", email);
+    try {
+      const result = await registerWithEmailAndPassword(email, password);
+      console.log("Registration success:", result);
+      return result;
+    } catch (error) {
+      console.error("Registration error:", error);
+      throw error;
+    }
   };
 
   return (

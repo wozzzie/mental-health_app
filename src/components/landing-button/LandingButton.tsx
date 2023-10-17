@@ -2,7 +2,7 @@ import classes from "./style.module.scss";
 import Image from "next/image";
 
 type LandingButtonProps = {
-  type?: "text" | "filled";
+  type?: "text" | "filled" | "submit";
   disabled?: boolean;
   onClick?: () => void | Promise<boolean> | Promise<void>;
   iconProps?: {
@@ -27,7 +27,7 @@ const LandingButton = ({
   return (
     <button
       className={
-        (type === "filled" ? classes["button-filled"] : classes["button-text"])
+        (type === "filled" || type === "submit" ? classes["button-filled"] : classes["button-text"])
         + (fullwidth ? " " + classes["button-fullwidth"] : "")
         + " " + classes["button"]
       }

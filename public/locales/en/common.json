@@ -37,7 +37,9 @@
   "validation": {
     "required": "Required field!",
     "email": "Write correct email!",
-    "password": "Min 8 symbols, one letter, one digit, one special character!"
+    "password": "Min 8 symbols, one letter, one digit, one special character!",
+    "passwordRepeat": "Min 8 symbols, one letter, one digit, one special character!",
+    "password-match": "Password mismatch"
   },
   "404": {
     "title": "404 - PAGE NOT FOUND"
