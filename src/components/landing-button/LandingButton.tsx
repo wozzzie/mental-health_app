@@ -12,6 +12,7 @@ type LandingButtonProps = {
   };
   text?: string;
   testId?: string;
+  fullwidth?: boolean;
 };
 
 const LandingButton = ({
@@ -21,11 +22,13 @@ const LandingButton = ({
   iconProps,
   testId,
   text = "",
+  fullwidth= false,
 }: LandingButtonProps) => {
   return (
     <button
       className={
-        type === "filled" ? classes["button-filled"] : classes["button-text"]
+        (type === "filled" ? classes["button-filled"] : classes["button-text"])
+        + (fullwidth ? " " + classes["button-fullwidth"] : "")
       }
       disabled={disabled}
       data-testid={testId}

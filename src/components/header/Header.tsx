@@ -36,6 +36,10 @@ const Header = () => {
     router.push(ROUTES.SIGN_IN)
   }
 
+  const handlePushToApp = () => {
+    router.push(ROUTES.APP)
+  }
+
   return (
     // <div
     //   className={styles.header}
@@ -98,14 +102,14 @@ const Header = () => {
             </nav>
             <nav className={styles["sign-buttons"]}>
               <LandingButton
-                text={t("header.btn-signin")}
+                text={user ? t("header.btn-signout") : t("header.btn-signin")}
                 type="text"
-                onClick={handleSignIn}
+                onClick={user ? handleSignOut : handleSignIn}
               
                 />
                 <LandingButton
-                text={t("header.btn-signup")}
-                onClick={handleSignUp}
+                text={user ? t("header.btn-app-page") : t("header.btn-signup")}
+                onClick={user ? handlePushToApp :handleSignUp}
               
                 />
             </nav>

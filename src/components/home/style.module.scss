@@ -13,6 +13,7 @@
     flex-grow:1;
     margin: auto 0;
     margin-right: 20px;
+    
 
     &__title {
       color: var(--colors-heading, #1E0E62);
@@ -66,5 +67,9 @@
   } 
 }
 
-
+@media (max-width:810px) {
+  .main-header-text {
+    padding-bottom: 40px;
+  }
+}
 
