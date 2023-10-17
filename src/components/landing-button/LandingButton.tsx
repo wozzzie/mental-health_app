@@ -29,6 +29,7 @@ const LandingButton = ({
       className={
         (type === "filled" ? classes["button-filled"] : classes["button-text"])
         + (fullwidth ? " " + classes["button-fullwidth"] : "")
+        + " " + classes["button"]
       }
       disabled={disabled}
       data-testid={testId}

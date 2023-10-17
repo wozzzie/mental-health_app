@@ -138,10 +138,11 @@
   }
 
   .sign-buttons {
-    min-width:178px;
+    width:230px;
     margin:auto 0;
     position: relative;
     display: flex;
+    justify-content: space-around;
 
     &__sign-up-btn {
       height:40px;
