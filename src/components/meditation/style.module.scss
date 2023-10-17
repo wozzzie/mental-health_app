@@ -2,10 +2,14 @@
     background: #FFC75F;
     padding: 95px 0;
   
+    .container {
+      gap:40px 20px;
+    }
+
     &__img {
       display: block;
       width: 175px;
-  
+      margin: auto;
     }
   
     &-text {
@@ -17,7 +21,7 @@
         color: #FFF;
   
   /* Heading / H3 Title */
-        font-family: DM Sans;
+        font-family: 'DM Sans','Raleway', sans-serif;
         font-size: 42px;
         font-style: normal;
         font-weight: 700;
@@ -30,7 +34,7 @@
         color: #FFF;
   
   /* Text / Article */
-      font-family: DM Sans;
+
       font-size: 18px;
       font-style: normal;
       font-weight: 500;
@@ -40,12 +44,10 @@
     }
 }
 
-@media (max-width: 480px) {
-  .meditation {
-    text-align: center;
-
-    &-text {
-      margin-top: 40px;
+:lang(en) {
+  @media (max-width: 480px) {
+    .meditation {
+      text-align: center;
     }
   }
 }

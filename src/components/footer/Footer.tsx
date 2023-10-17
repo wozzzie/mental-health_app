@@ -9,7 +9,7 @@ const Footer = () => {
 
     return (
        <footer className={classes["footer"]}>
-            <PageContainer flex classes={classes["container"]}>
+            <PageContainer grid classes={classes["container"]}>
                 <div className={classes["policy-links"]}>
                     <Link href="#" text={t("footer.about")} classes={classes["footer-link"]}/>
                     <Link href="#" text={t("footer.policy")} classes={classes["footer-link"]}/>
