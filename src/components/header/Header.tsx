@@ -1,22 +1,21 @@
 import { useTranslation } from "next-i18next";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import Link from "../link/Link";
 import Image from "next/image";
 
-import { logout } from "../../firebase/firebaseClient";
 import ROUTES from "../../constants/routes";
-import { useAuth } from "../auth/authProvider";
+import Link from "../link/Link";
+import Logo from "./logo.svg";
 import Button from "../button/Button";
 import LandingButton from "../landing-button/LandingButton";
-// import LanguageSwitcher from "../languageSwitcher";
-
-import styles from "./style.module.scss";
 import PageContainer from "../page-container/pageContainer";
-import Divider from "../divider/Divider";
+import Divider from "../divider/divider";
 import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
 import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
-import Logo from "./logo.svg"
+import { logout } from "../../firebase/firebaseClient";
+import { useAuth } from "../auth/authProvider";
+
+import styles from "./style.module.scss";
 
 const Header = () => {
   const router = useRouter();
@@ -29,12 +28,12 @@ const Header = () => {
   };
 
   const handleSignUp = () => {
-    router.push(ROUTES.SIGN_UP)
-  }
+    router.push(ROUTES.SIGN_UP);
+  };
 
   const handleSignIn = () => {
-    router.push(ROUTES.SIGN_IN)
-  }
+    router.push(ROUTES.SIGN_IN);
+  };
 
   const handlePushToApp = () => {
     router.push(ROUTES.APP)

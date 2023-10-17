@@ -1,9 +1,11 @@
 import { useRouter } from "next/router";
 import { useTranslation } from "next-i18next";
-// import Button from "@/components/Button";
+import Link from "next/link";
 import PageContainer from "../components/page-container/pageContainer";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { GetStaticProps, GetStaticPropsContext } from "next";
+import Logo from "../../public/logo-animated.svg";
+import ROUTES from "../constants/routes";
 
 import styles from "./404.module.scss";
 
@@ -14,20 +16,16 @@ const ErrorPage = () => {
   return (
     <PageContainer>
       <div className={styles.error}>
-        <picture className={styles["error__img"]}>
-          <img src="/error.png" alt="error" />
-        </picture>
-
-        <div className={styles["error__block"]}>
-          <h1 className={styles["error__title"]}>{t("404.oops")}</h1>
-          <p className={styles["error__text"]}>{t("404.error")}</p>
-          {/* <Button
-            type="button"
-            onClick={() => router.push("/")}
-            text={t("404.btn-go-home")}
-            iconProps={{ src: "/home.svg", alt: "home icon", size: 24 }}
-          /> */}
+        <div className={styles["error__logo"]}>
+          <Link
+            className={styles["form__link"]}
+            data-testid="login-link"
+            href={ROUTES.WELCOME}
+          >
+            <Logo />
+          </Link>
         </div>
+        <h1 className={styles["error__title"]}>{t("404.title")}</h1>
       </div>
     </PageContainer>
   );

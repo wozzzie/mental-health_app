@@ -2,7 +2,8 @@
   "/_app": "pages/_app.js",
   "/_error": "pages/_error.js",
   "/_document": "pages/_document.js",
+  "/": "pages/index.js",
+  "/auth/sign-up": "pages/auth/sign-up.js",
   "/auth/sign-in": "pages/auth/sign-in.js",
-  "/404": "pages/404.js",
-  "/auth/sign-up": "pages/auth/sign-up.js"
+  "/404": "pages/404.js"
 }

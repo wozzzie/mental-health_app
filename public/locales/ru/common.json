@@ -1,8 +1,8 @@
 {
   "home": {
-    "subtitle": "Resources, inspirations, and tools to cultivate harmony withing yourself - in balance app",
-    "title": "Dive into the realm of emotional well-being on our mental health website. Resources, inspiration, and tools to cultivate harmony within yourself.",
-    "explore": "Explore"
+    "subtitle": "Ресурсы, вдохновение и инструменты для развития внутренней гармонии — все это в приложении Balance.",
+    "title": "Погрузитесь в сферу эмоционального благополучия на нашем сайте ментального здоровья.",
+    "explore": "Вперёд"
   },
   "header": {
     "btn-signin": "Войти",
@@ -14,25 +14,25 @@
     "link-blog": "Блог"
   },
   "meditation": {
-    "title":"Meditation",
-    "description": "Dive into the world of harmony and inner peace with our innovative meditation functionality. We introduce you to a unique range of tools designed to deepen and inspire your meditative practices"
+    "title": "Медитации",
+    "description": "Погрузитесь в мир гармонии и внутреннего покоя с помощью нашей инновационной функции медитации. Мы познакомим вас с уникальным набором инструментов, предназначенных для углубления и вдохновения ваших медитативных практик."
   },
   "features": {
-    "title": "A Lot of Features",
-    "element-title-1":"breathing function",
-    "element-title-2": "Daily Fortune",
-    "element-title-3": "GIFs with kittens",
-    "element-description-1": "Breathing is fundamental to well-being, and our unique feature is designed to help you tap into its potential for a healthier, more balanced life.",
-    "element-description-2": "Begin your day positively, let these quotes inspire you to pursue your dreams with determination and optimism.",
-    "element-description-3": "Watch these charming feline companions in action, and let their antics bring a smile to your face." 
+    "title": "Множество возможностей",
+    "element-title-1": "Функция дыхания",
+    "element-title-2": "Ежедневное вдохновение",
+    "element-title-3": "ГИФки с котятами",
+    "element-description-1": "Дыхание имеет основополагающее значение для благополучия, и наша уникальная функция создана, чтобы помочь вам использовать его потенциал для более здоровой и сбалансированной жизни.",
+    "element-description-2": "Начните свой день позитивно, пусть эти цитаты вдохновят вас следовать своей мечте с решимостью и оптимизмом.",
+    "element-description-3": "Наблюдайте за этими очаровательными котятами, и пусть они вызовут улыбку на вашем лице."
   },
   "footer": {
     "rights": "© 2023 Все права защищены.",
-    "about":"About",
-    "policy": "Policy",
-    "terms": "Terms",
+    "about": "О нас",
+    "policy": "Политика конфиденциальности",
+    "terms": "Условия пользования",
     "title": "Web Marvels",
-    "description": "Be sure to take a look at our Terms of Use and Privacy Policy"
+    "description": "Обязательно ознакомьтесь с нашими Условиями использования и Политикой конфиденциальности."
   },
   "validation": {
     "required": "Поле обязательно для заполнения!",
@@ -40,21 +40,19 @@
     "password": "Минимум 8 символов, одна буква, одна цифра, один специальный символ!"
   },
   "404": {
-    "oops": "Упс!",
-    "error": "Вы потерялись",
-    "btn-go-home": "На главную"
+    "title": "404 - СТРАНИЦА НЕ НАЙДЕНА"
   },
   "sign": {
     "sign-up": "Войти",
     "sign-in": "Войти",
     "email": "Электронная почта",
-    "password": "Пароль",
-    "password-only": "Password",
-    "repeat-password": "Repeate",
+    "password": "Ваш пароль",
+    "password-only": "Пароль",
+    "repeat-password": "Повторить пароль",
     "agree": "Я согласен с условиями пользования.",
     "terms": "Регистрируясь, вы соглашаетесь с Условиями пользования.",
-    "label-email": "E-MAIL",
-    "label-password": "PASSWORD",
+    "label-email": "Электронная почта",
+    "label-password": "Пароль",
     "account-signin": "Войти",
     "account-create": "Создать аккаунт",
     "account-false": "Нет учетной записи? ",
