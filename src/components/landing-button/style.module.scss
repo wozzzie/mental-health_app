@@ -1,52 +1,61 @@
-.button-filled {
+.button {
+
     min-height:40px;
     padding: 0 20px;
     border-radius:20px;
     border: none;
-    background: #FFC75F;
-    color:#fff;
     display: block;
-    color: var(--colors-white, #FFF);
     text-align: center;
-    /* Buttons / Small */
-    font-family: DM Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
     transition: all 0.2s;
-
-    &:active {
-        outline: none;
-        -webkit-tap-highlight-color: transparent;
-        background-color: #d5a650;
+    line-height: 21px;
+    white-space: nowrap;
+    flex-grow: 1;
+    &-filled {
+        
+        background: #FFC75F;
+        color:#fff;
+        
+        color: var(--colors-white, #FFF);
+        
+        /* Buttons / Small */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        transition: all 0.2s;
+    
+        &:active {
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            background-color: #d5a650;
+        }
+    
+        &:disabled {
+            background-color: #d9d9d9;
+        }
     }
-
-    &:disabled {
-        background-color: #d9d9d9;
+    
+    &-text {
+        background: none;
+        width:100px;
+        color: var(--colors-heading, #1E0E62);
+        /* Buttons / Small */
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+        
+        &:active {
+            background-color:#eee;
+            -webkit-tap-highlight-color: transparent;
+        }
+    
+        &:disabled {
+            color: #464647;
+        }
     }
+    
+    &-fullwidth {
+        min-width:100%;
+    }
+        
 }
 
-.button-text {
-    display: block;
-    background: none;
-    border:none;
-    width:100px;
-    color: var(--colors-heading, #1E0E62);
-    /* Buttons / Small */
-    font-family: DM Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    min-height: 40px;
-    padding:0 20px;
-    border-radius: 20px;
-    transition: all 0.2s;
-    &:active {
-        background-color:#eee;
-        -webkit-tap-highlight-color: transparent;
-    }
-
-    &:disabled {
-        color: #464647;
-    }
-}

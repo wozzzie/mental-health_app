@@ -8,7 +8,6 @@
       color: var(--colors-heading, #1E0E62);
       text-align: center;
       /* Heading / H3 Title */
-      font-family: DM Sans;
       font-size: 42px;
       font-style: normal;
       font-weight: 700;
@@ -21,7 +20,8 @@
     &-list {
         display: flex;
         justify-content: space-around;
-        flex-wrap: wrap;    
+        flex-wrap: wrap;  
+        gap:40px 20px;
     }
   
     &-element {
@@ -31,7 +31,6 @@
         margin-bottom: 40px;
         color: var(--colors-heading, #1E0E62);
   /* Text / Label */
-        font-family: DM Sans;
         font-size: 14px;
         font-style: normal;
         font-weight: 700;
@@ -44,7 +43,6 @@
       &__description {
         color: var(--colors-text, rgba(21, 20, 57, 0.40));
   /* Text / Paragraph */
-        font-family: DM Sans;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -53,10 +51,3 @@
       }
     }
   }
-
-@media (max-width:920px) {
-  .features-element {
-    margin-top: 40px;
-  }
-}
-  
