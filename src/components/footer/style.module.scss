@@ -17,6 +17,7 @@
         max-width: 400px;
         justify-self: start;
         gap:20px;
+        margin: auto;
     }
 
     &-team-logo {
@@ -50,6 +51,7 @@
         min-width: 300px;
         margin: 0 auto;
         justify-content: space-around;
+        margin: auto;
         &-title {
             color: var(--colors-heading, #1E0E62);
             /* Text / Paragraph */
@@ -64,6 +66,8 @@
             margin: auto 10px;
         }
     }
+
+    
 }
 
 :lang(en) {
@@ -72,9 +76,6 @@
             .container {
                grid-template-rows: 1fr 1fr 1fr;
                grid-template-columns: none;
-            }
-            .contacts, .policy-links  {
-                margin: 0 auto;
             }
             
         }
