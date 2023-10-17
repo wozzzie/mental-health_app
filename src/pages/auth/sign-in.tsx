@@ -24,7 +24,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       },
     };
   } catch (err) {
-    const locale = ctx.locale || "en";
+    const locale = ctx.locale || "En";
     return {
       props: {
         ...(await serverSideTranslations(locale, ["common"])),

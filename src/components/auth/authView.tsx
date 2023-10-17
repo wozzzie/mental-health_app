@@ -39,6 +39,9 @@ const AuthView = ({ authCallback, page }: Props) => {
         /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#-_?&])[A-Za-z\d@$!%*#-_?&]{8,}$/,
         t("validation.password") || ""
       ),
+    passwordRepeat: Yup.string()
+      .required(t("validation.required") || "")
+      .oneOf([Yup.ref("password")], t("validation.password-match") || ""),
   });
 
   const resolver = yupResolver(schema);
@@ -53,7 +56,11 @@ const AuthView = ({ authCallback, page }: Props) => {
   const [loading, setLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
 
-  const onSubmit = handleSubmit(async ({ email, password }) => {
+  const onSubmit = handleSubmit(async ({ email, password, passwordRepeat }) => {
+    if (password !== passwordRepeat) {
+      setAuthError("Passwords do not match");
+      return;
+    }
     console.log("2");
 
     setLoading(true);
@@ -148,39 +155,49 @@ const AuthView = ({ authCallback, page }: Props) => {
                     : styles["form__item-signup"]
                 }
               >
-                {page === "SIGN_IN" ? (
+                <div className={styles["form__error-block"]}>
                   <input
                     className={styles["form__input"]}
                     id="password"
                     type="password"
                     {...register("password")}
-                    placeholder={t("sign.password") || ""}
+                    placeholder={
+                      page === "SIGN_UP"
+                        ? t("sign.password-only") || ""
+                        : t("sign.password") || ""
+                    }
                   />
-                ) : (
-                  <input
-                    className={styles["form__input"]}
-                    id="password"
-                    type="password"
-                    {...register("password")}
-                    placeholder={t("sign.password-only") || ""}
-                  />
-                )}
 
-                {errors.password?.message && (
-                  <p className={styles["form__error"]} data-testid="auth-error">
-                    {errors.password?.message}
-                  </p>
-                )}
+                  {errors.password?.message && (
+                    <p
+                      className={styles["form__error"]}
+                      data-testid="auth-error"
+                    >
+                      {errors.password?.message}
+                    </p>
+                  )}
+                </div>
+
                 {page === "SIGN_IN" ? (
                   ""
                 ) : (
-                  <input
-                    className={styles["form__input"]}
-                    id="password"
-                    type="password"
-                    {...register("password")}
-                    placeholder={t("sign.repeat-password") || ""}
-                  />
+                  <div className={styles["form__error-block"]}>
+                    <input
+                      className={styles["form__input"]}
+                      id="password-repeat"
+                      type="password"
+                      {...register("passwordRepeat")}
+                      placeholder={t("sign.repeat-password") || ""}
+                    />
+                    {errors.passwordRepeat?.message && (
+                      <p
+                        className={styles["form__error"]}
+                        data-testid="auth-error"
+                      >
+                        {errors.passwordRepeat?.message}
+                      </p>
+                    )}
+                  </div>
                 )}
               </div>
             </div>
@@ -205,6 +222,7 @@ const AuthView = ({ authCallback, page }: Props) => {
                     ? `${t("sign.account-signin")}`
                     : `${t("sign.sign-up")}`
                 }
+                disabled={!isChecked}
               />
             </ErrorBoundaryWithMessage>
             <div
