@@ -1,35 +1,37 @@
 .dropdown {
-  &-root {
-    color: var(--colors-heading, #1e0e62);
-    font-family: DM Sans;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 26px;
-    text-decoration: none;
-    cursor: pointer;
-  }
-
-  &-menu {
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
-    padding: 10px;
-    position: absolute;
-    z-index: 10;
-    background: white;
-    border-radius: 2px;
-  }
-
-  &-placeholder {
-    cursor: pointer;
-  }
-
-  &-arrow {
-    position: absolute;
-    display: block;
-    margin: auto 0;
-  }
-
-  &-control {
-    display: flex;
-  }
+    &-root {
+        color: var(--colors-heading, #1E0E62);
+    /* Text / Paragraph */
+        font-family: DM Sans;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 26px;
+        text-decoration: none; 
+        cursor: pointer;
+    }
+    &-menu {
+        box-shadow: 0px 0px 2px rgba(0,0,0,0.5);
+        padding: 10px;
+        position:absolute;
+        z-index:10;
+        background: white;
+        border-radius:2px;
+    }
+    
+    
+    &-placeholder {
+        cursor: pointer;
+    }
+    
+    &-arrow {
+        position: absolute;
+        display:block;
+        margin: auto 0;
+    }
+    
+    &-control {
+        display: flex;
+    }
 }
+
