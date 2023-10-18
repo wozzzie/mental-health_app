@@ -102,7 +102,7 @@ const Header = () => {
             <nav className={styles["sign-buttons"]}>
               <LandingButton
                 text={user ? t("header.btn-signout") : t("header.btn-signin")}
-                type="text"
+                variant="text"
                 onClick={user ? handleSignOut : handleSignIn}
               
                 />

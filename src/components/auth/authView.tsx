@@ -17,6 +17,8 @@ import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
 import Checkbox from "../checkbox/Checkbox";
 import LandingButton from "../landing-button/LandingButton";
 import Divider from "../divider/divider";
+import { useAuth } from "./authProvider";
+import {useEffect} from "react"
 
 interface Props {
   authCallback: (email: string, password: string) => Promise<UserCredential>;
@@ -25,6 +27,14 @@ interface Props {
 
 const AuthView = ({ authCallback, page }: Props) => {
   const { t } = useTranslation();
+  const { user } = useAuth();
+
+  useEffect(()=> {
+    if (user) {
+      setLoading(false);
+      Router.push(ROUTES.APP);
+    }
+  }, [user])
 
   const schema = Yup.object().shape({
     email: Yup.string()
@@ -57,6 +67,7 @@ const AuthView = ({ authCallback, page }: Props) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const onSubmit = handleSubmit(async ({ email, password, passwordRepeat }) => {
+    console.log("0")
     if (password !== passwordRepeat) {
       setAuthError("Passwords do not match");
       return;
@@ -69,6 +80,7 @@ const AuthView = ({ authCallback, page }: Props) => {
       console.log("1");
       setLoading(false);
       Router.push(ROUTES.APP);
+      console.log("3")
     } catch (e) {
       const err = getAuthError(e);
       setAuthError(err);
