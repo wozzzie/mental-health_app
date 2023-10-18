@@ -29,7 +29,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     return {
       props: {
         ...(await serverSideTranslations(locale, ["common"])),
-        uid: null,
       },
     };
   }
