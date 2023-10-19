@@ -5,8 +5,8 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import { logInWithEmailAndPassword } from "../../firebase/firebaseClient";
 import ROUTES from "../../constants/routes";
 import { firebaseAdmin } from "../../firebase/firebaseAdmin";
-import AuthView from "../../components/auth/authView";
 import { ErrorBoundaryWithMessage } from "../../components/error-boundary/errorBoundary";
+import SignInController from "../../components/auth/sign-in";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -40,7 +40,7 @@ const SignIn = () => {
 
   return (
     <ErrorBoundaryWithMessage>
-      <AuthView authCallback={onSignIn} page="SIGN_IN" />
+      <SignInController authCallback={onSignIn} page="SIGN_IN" />
     </ErrorBoundaryWithMessage>
   );
 };
