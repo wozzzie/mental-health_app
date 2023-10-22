@@ -63,20 +63,15 @@ const SignUpController = ({ authCallback, page }: Props) => {
   const [isChecked, setIsChecked] = useState(true);
 
   const onSubmit = handleSubmit(async ({ email, password, passwordRepeat }) => {
-    console.log("0");
     if (password !== passwordRepeat) {
       setAuthError("Passwords do not match");
       return;
     }
-    console.log("2");
+
 
     setLoading(true);
     try {
       await authCallback(email, password);
-      console.log("1");
-      setLoading(false);
-      Router.push(ROUTES.APP);
-      console.log("3");
     } catch (e) {
       const err = getAuthError(e);
       setAuthError(err);
