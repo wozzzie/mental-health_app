@@ -13,7 +13,7 @@ type LandingButtonProps = {
   text?: string;
   testId?: string;
   fullwidth?: boolean;
-  type: "submit" | "reset" | "button"
+  type?: "submit" | "reset" | "button"
 };
 
 const LandingButton = ({
