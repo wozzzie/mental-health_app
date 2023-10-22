@@ -12,6 +12,7 @@ import Home from "../components/home/Home"
 import Meditation from "@/components/meditation/Meditation";
 import Features from "@/components/features/Features";
 import Footer from "@/components/footer/Footer";
+import LandingQuote from "@/components/landing-quote/LandingQuote";
 
 export default function WelcomePage() {
   const { t } = useTranslation();
@@ -30,8 +31,12 @@ export default function WelcomePage() {
         <Features/>
       </ErrorBoundaryWithMessage>
       <ErrorBoundaryWithMessage>
+        <LandingQuote/>
+      </ErrorBoundaryWithMessage>
+      <ErrorBoundaryWithMessage>
         <Footer/>
       </ErrorBoundaryWithMessage>
+      
       {/* <PageContainer>
         <div className={styles.welcome}>
           <picture>

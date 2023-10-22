@@ -1,0 +1,36 @@
+.quote {
+    padding: 80px 0;
+
+    &-wrapper {
+        padding: 45px 0;
+        position: relative;
+        img {
+            position: absolute;
+            display: block;
+            left:100px;
+        }
+
+        &__text {
+            max-width: 800px;
+            margin: 0 auto;
+            color: var(--colors-heading, #1E0E62);
+            /* Heading / H5 Lead */
+            font-size: 22px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 32px; 
+        }
+
+        &-author {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--colors-text, rgba(21, 20, 57, 0.40));
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 26px; /* 185.714% */
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+    }
+}
