@@ -1,17 +1,15 @@
+import React, { useEffect } from "react";
 import nookies from "nookies";
+import Router from "next/router";
 import { InferGetServerSidePropsType, GetServerSidePropsContext } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { SyntheticEvent, useEffect, useState } from "react";
-import Router from "next/router";
-import Header from "../../components/header/Header";
-import PageContainer from "../../components/page-container/pageContainer";
-import { firebaseAdmin } from "@/firebase/firebaseAdmin";
-import ROUTES from "@/constants/routes";
+import { firebaseAdmin } from "../../firebase/firebaseAdmin";
+import { logout } from "../../firebase/firebaseClient";
+import ROUTES from "../../constants/routes";
+import Widgetbar from "../../components/widgetbar/Widgetbar";
+import Screen from "../../components/screen/Screen";
 
 import styles from "./style.module.scss";
-import React from "react";
-
-import { logout } from "@/firebase/firebaseClient";
 
 const AppPage = ({
   exp: expTime,
@@ -29,12 +27,9 @@ const AppPage = ({
 
   return (
     <>
-      <Header />
-      <PageContainer>
-        <div className={styles.app}>
-          <div className={styles["app__sidebar"]}></div>
-        </div>
-      </PageContainer>
+      <Screen>
+        <Widgetbar />
+      </Screen>
     </>
   );
 };
