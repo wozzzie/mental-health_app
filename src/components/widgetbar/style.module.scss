@@ -1,0 +1,25 @@
+.widget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 64px;
+  max-height: 872px;
+  height: 85vh;
+
+  &__block {
+    &_main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 33px;
+    }
+
+    &_additional {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 22px;
+    }
+  }
+}
