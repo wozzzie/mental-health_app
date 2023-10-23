@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./style.module.scss";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import { useDispatch } from "react-redux";
-import { toggleWidget } from "../screen/ScreenSlice";
+import { openWidget, toggleWidget } from "../screen/ScreenSlice";
 
 const Widgetbar = () => {
 
@@ -34,7 +34,7 @@ const Widgetbar = () => {
         <div className={styles["widget__breath"]}>
           <Image src="/breath.svg" width={24} height={24} alt="Breath" />
         </div>
-        <div className={styles["widget__quotes"]} onClick={()=>dispatch(toggleWidget("quote"))}>
+        <div className={styles["widget__quotes"]} onClick={()=>dispatch(openWidget("quote"))}>
           <Image src="/quotes.svg" width={24} height={24} alt="Quotes" />
         </div>
         <div className={styles["widget__meditation"]} onClick={()=>dispatch(toggleWidget("meditation"))}>
