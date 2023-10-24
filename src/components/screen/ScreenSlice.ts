@@ -36,6 +36,14 @@ type InitialStateType = {
     widgets: Array<WidgetAbstraction>
 }
 
+type ResizePayload = {
+    payload: {
+        type: WidgetType,
+        width: number,
+        height: number
+    }
+}
+
 const initialState : InitialStateType = {
     widgets: [
         {
@@ -43,8 +51,8 @@ const initialState : InitialStateType = {
             x: 0,
             y: 0,
             type: "music",
-            width: 100,
-            height: 200,
+            width: 400,
+            height: 245,
             active: false
         },
         {
@@ -85,6 +93,7 @@ const initialState : InitialStateType = {
         },
     ]
 }
+
 
 export const counterSlice = createSlice({
   name: 'screen',
@@ -135,10 +144,18 @@ export const counterSlice = createSlice({
                 widgetToMutate.y = action.payload.y
             }
         },
+
+        resizeWidget: (state, action : ResizePayload) => {
+            const w = state.widgets.find(i => i.type === action.payload.type);
+            if (w) {
+                w.width = action.payload.width
+                w.height = action.payload.height
+            }
+        }
   },
 })
 
 // Action creators are generated for each case reducer function
-export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget  } = counterSlice.actions
+export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget, resizeWidget  } = counterSlice.actions
 
 export default counterSlice.reducer
