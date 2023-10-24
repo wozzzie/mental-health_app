@@ -77,8 +77,8 @@ const initialState : InitialStateType = {
             x: 0,
             y: 0,
             type: "quote",
-            width: 100,
-            height: 200,
+            width: 411,
+            height: 136,
             active: false
         },
         {

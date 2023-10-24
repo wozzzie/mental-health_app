@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import { AppDispatch } from "../../store/store";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
-import { closeWidget } from "../screen/ScreenSlice";
 
 import styles from "./style.module.scss";
 
@@ -14,7 +12,6 @@ const QuotesWidget: React.FC = () => {
 
   const dispatch: AppDispatch = useDispatch();
   const [quote, setQuote] = useState("");
-  const [isHovered, setIsHovered] = useState(false);
 
   const fetchRandomQuote = async () => {
     const languageCode = activeLocale === "En" ? "en" : "ru";
@@ -46,41 +43,7 @@ const QuotesWidget: React.FC = () => {
     console.log("Component render method called.");
   }, []);
 
-  const handleMouseEnter = () => {
-    setIsHovered(true);
-  };
-
-  const handleMouseLeave = () => {
-    setIsHovered(false);
-  };
-
-  const handleClose = () => {
-    dispatch(closeWidget("quote"));
-  };
-
-  return (
-    <div
-      className={`${styles["quote-widget"]} ${
-        isHovered ? styles["quote-widget_hovered"] : ""
-      }`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <WidgetWrapper>
-        {isHovered && (
-          <div className={styles["cross-widget"]} onClick={handleClose}>
-            <Image
-              src="/cross-icon.svg"
-              width={18}
-              height={12}
-              alt="Close widget"
-            />
-          </div>
-        )}
-        &ldquo;{quote}&ldquo;
-      </WidgetWrapper>
-    </div>
-  );
+  return <WidgetWrapper>&ldquo;{quote}&ldquo;</WidgetWrapper>;
 };
 
 export default QuotesWidget;
