@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "./style.module.scss";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import { useDispatch } from "react-redux";
-import { toggleWidget } from "../screen/ScreenSlice";
+import { openWidget, toggleWidget } from "../screen/ScreenSlice";
 
 const Widgetbar = () => {
 

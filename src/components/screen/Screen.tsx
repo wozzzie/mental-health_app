@@ -4,6 +4,7 @@ import { DraggableData, Rnd } from "react-rnd";
 import { WidgetAbstraction, WidgetType, closeWidget, resizeWidget } from "./ScreenSlice";
 import { useEffect, useMemo, useRef } from "react";
 import { openWidget, raiseWidget, changeWidgetPosition } from "./ScreenSlice";
+import QuotesWidget from "../quotes-widget/QuotesWidget";
 import MusicWidget from "../music-widget/MusicWidget";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
@@ -77,7 +78,7 @@ const WidgetView: React.FC<WidgetAbstraction> = ({x,y,width,height,type}) => {
                 </>
               ) : type === "quote" ? (
                 <>
-                  quote
+                 <QuotesWidget/>
                 </>
               ) : (
                 <>
@@ -99,11 +100,9 @@ type ScreenProps = {
 const Screen: React.FC<ScreenProps> = ({ children, className }) => {
   const classes = [styles["screen"], className].join(" ");
 
-  const widgets = useSelector((state : any)=> state.screen.widgets)
+  const widgets = useSelector((state: any) => state.screen.widgets);
 
-  const dispatch = useDispatch()
-
-  
+  const dispatch = useDispatch();
 
   const widgetRender = useMemo(() => (
     widgets
