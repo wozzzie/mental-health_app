@@ -1,7 +1,6 @@
 .widget-wrapper {
-  background: rgba(255, 255, 255, 0.53);
+  background: #ffffff44;
   border-radius: 22px;
   padding: 20px;
-  transition: 0.5s;
-  position: relative;
+  backdrop-filter: blur(10px);
 }

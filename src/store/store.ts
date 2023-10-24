@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
-import screenReducer from "../components/screen/ScreenSlice";
+import screenReducer from "../components/screen/ScreenSlice"
+import musicReducer from "../components/music-widget/musicSlice"
 
 const store = configureStore({
   reducer: {
-    screen: screenReducer,
+    screen:  screenReducer,
+    music: musicReducer
   },
 });
 

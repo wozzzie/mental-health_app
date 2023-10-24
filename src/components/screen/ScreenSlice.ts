@@ -35,55 +35,64 @@ type InitialStateType = {
   widgets: Array<WidgetAbstraction>;
 };
 
-const initialState: InitialStateType = {
-  widgets: [
-    {
-      id: "1",
-      x: 0,
-      y: 0,
-      type: "music",
-      width: 100,
-      height: 200,
-      active: false,
-    },
-    {
-      id: "2",
-      x: 0,
-      y: 0,
-      type: "meditation",
-      width: 100,
-      height: 200,
-      active: false,
-    },
-    {
-      id: "3",
-      x: 0,
-      y: 0,
-      type: "gif",
-      width: 100,
-      height: 200,
-      active: false,
-    },
-    {
-      id: "4",
-      x: 0,
-      y: 0,
-      type: "quote",
-      width: 411,
-      height: 136,
-      active: false,
-    },
-    {
-      id: "5",
-      x: 0,
-      y: 0,
-      type: "news",
-      width: 100,
-      height: 200,
-      active: false,
-    },
-  ],
-};
+type ResizePayload = {
+    payload: {
+        type: WidgetType,
+        width: number,
+        height: number
+    }
+}
+
+const initialState : InitialStateType = {
+    widgets: [
+        {
+            id: "1",
+            x: 0,
+            y: 0,
+            type: "music",
+            width: 400,
+            height: 245,
+            active: false
+        },
+        {
+            id: "2",
+            x: 0,
+            y: 0,
+            type: "meditation",
+            width: 100,
+            height: 200,
+            active: false
+        },
+        {
+            id: "3",
+            x: 0,
+            y: 0,
+            type: "gif",
+            width: 100,
+            height: 200,
+            active: false
+        },
+        {
+            id: "4",
+            x: 0,
+            y: 0,
+            type: "quote",
+            width: 100,
+            height: 200,
+            active: false
+        },
+        {
+            id: "5",
+            x: 0,
+            y: 0,
+            type: "news",
+            width: 100,
+            height: 200,
+            active: false
+        },
+    ]
+}
+
 
 export const counterSlice = createSlice({
   name: "screen",
@@ -122,25 +131,25 @@ export const counterSlice = createSlice({
       else console.log("toggle: widget not found");
     },
 
-    changeWidgetPosition: (state, action: WidgetMutatorInPayload) => {
-      const widgetToMutate = state.widgets.find(
-        (i) => i.type === action.payload.type
-      );
-      if (widgetToMutate) {
-        widgetToMutate.x = action.payload.x;
-        widgetToMutate.y = action.payload.y;
-      }
-    },
+        changeWidgetPosition: (state, action : WidgetMutatorInPayload) => {
+            const widgetToMutate = state.widgets.find(i => i.type === action.payload.type);
+            if (widgetToMutate) {
+                widgetToMutate.x = action.payload.x
+                widgetToMutate.y = action.payload.y
+            }
+        },
+
+        resizeWidget: (state, action : ResizePayload) => {
+            const w = state.widgets.find(i => i.type === action.payload.type);
+            if (w) {
+                w.width = action.payload.width
+                w.height = action.payload.height
+            }
+        }
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {
-  closeWidget,
-  raiseWidget,
-  openWidget,
-  changeWidgetPosition,
-  toggleWidget,
-} = counterSlice.actions;
+export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget, resizeWidget  } = counterSlice.actions
 
 export default counterSlice.reducer;
