@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
+import { useRouter } from "next/router";
 import { AppDispatch } from "../../store/store";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import { closeWidget } from "../screen/ScreenSlice";
 
 import styles from "./style.module.scss";
-import { useRouter } from "next/router";
 
 const QuotesWidget: React.FC = () => {
   const router = useRouter();
