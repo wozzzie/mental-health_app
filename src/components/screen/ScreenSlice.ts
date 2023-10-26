@@ -7,7 +7,7 @@ export type WidgetAbstraction = {
     x: number;
     y: number;
     type: WidgetType;
-  };
+    active: boolean;
 };
 
 interface IDInPayload {
@@ -66,7 +66,15 @@ const initialState : InitialStateType = {
 }
 
 
-export const counterSlice = createSlice({
+type WidgetMutatorInPayload = {
+    payload: {
+        x: number,
+        y: number,
+        type: WidgetType
+    }
+}
+
+export const screenSlice = createSlice({
   name: "screen",
   initialState: initialState,
   reducers: {
@@ -103,18 +111,18 @@ export const counterSlice = createSlice({
       else console.log("toggle: widget not found");
     },
 
-        changeWidgetPosition: (state, action : WidgetMutatorInPayload) => {
-            const widgetToMutate = state.widgets.find(i => i.type === action.payload.type);
-            if (widgetToMutate) {
-                widgetToMutate.x = action.payload.x
-                widgetToMutate.y = action.payload.y
-            }
-        },
+    changeWidgetPosition: (state, action : WidgetMutatorInPayload) => {
+        const widgetToMutate = state.widgets.find(i => i.type === action.payload.type);
+        if (widgetToMutate) {
+            widgetToMutate.x = action.payload.x
+            widgetToMutate.y = action.payload.y
+        }
+    },
 
   },
 });
 
 // Action creators are generated for each case reducer function
-export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget } = counterSlice.actions
+export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget } = screenSlice.actions
 
-export default counterSlice.reducer;
+export default screenSlice.reducer;
