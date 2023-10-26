@@ -28,13 +28,36 @@ const QuotesWidget: React.FC = () => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+       
+        saveQuoteToServer(data.content);
         setQuote(data.content);
       } else {
         console.error("Failed to fetch quote");
       }
     } catch (error) {
       console.error(error);
+    }
+  };
+
+  const saveQuoteToServer = async (quote: string) => {
+    try {
+      const quoteData = { content: quote };
+      const response = await fetch("http://localhost:3001/api/quotes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(quoteData),
+      })
+
+      console.log('response',response);
+      if (response.status === 201) {
+        console.log("Quote saved to the server successfully");
+      } else {
+        console.error("Failed to save quote to the server");
+      }
+    } catch (error) {
+      console.error("Error while saving quote to the server:", error);
     }
   };
 
