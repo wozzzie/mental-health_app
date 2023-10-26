@@ -74,5 +74,10 @@
   },
   "btn": {
     "btn-start": "В путь"
+  },
+  "music": {
+    "wrong-url-message-title": "Введена неверная ссылка",
+    "input-placeholder": "Введите ссылку Spotify, YT Music или Apple music",
+    "start-message-title": "Музыкальный виджет"
   }
 }

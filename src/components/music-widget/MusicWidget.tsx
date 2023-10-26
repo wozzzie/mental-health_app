@@ -1,31 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.scss";
-import { resizeWidget } from "../screen/ScreenSlice";
 import { useEffect, useRef, useState} from "react"
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
 import { closeWidget } from "../screen/ScreenSlice";
 import { useCallback, useMemo } from "react"
 import { setLink } from "./musicSlice";
-
+import { useTranslation } from "next-i18next";
 
 const MusicWidget = () => {
 
-// https://open.spotify.com/playlist/37i9dQZF1EIXJ18peKvF9W?si=745ac55aee9d402f
-//"https://music.apple.com/us/album/promo-single/1703859928"
   const link = useSelector(s => s.music.link);
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation();
 
-  const validatedType = useMemo<"start" | "ytmusic" | "apple" | "spotify" | "wrong">(
+  const validatedType = useMemo<"start" | "apple" | "spotify" | "wrong">(
     () => (
       !link ? "start"
       : link.indexOf("https://open.spotify.com/") === 0 ? "spotify"
       : link.indexOf("https://music.apple.com/") === 0 ? "apple" 
-      : link.indexOf("https://music.youtube.com/watch") === 0 ? "ytmusic"
       : "wrong"
     ),
     [link]
@@ -33,7 +30,7 @@ const MusicWidget = () => {
   
 
   return (
-    <>
+    <div className={styles["music-widget"]}>
       {
         validatedType === "apple" ? (
           <iframe 
@@ -56,18 +53,31 @@ const MusicWidget = () => {
             width="100%" 
             height="352" 
             frameBorder="0" 
-            allowfullscreen="" 
             allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
             loading="lazy"></iframe>
-        ) : <div className={styles["wrong-url-message"]}>wrong</div>
+        ) : validatedType === "start" ? (
+          <div className={styles["start-message"]}>
+          <h3 className={styles["start-message-title"]}>
+            {t("music.start-message-title")}
+          </h3>
+          </div>
+        ) : validatedType === "wrong" ? (
+        <div className={styles["wrong-url-message"]}>
+          <h3 className={styles["wrong-url-message-title"]}>
+            {t("music.wrong-url-message-title")}
+          </h3>
+        </div>
+        ) : ""
       }
-      <input 
-      className={styles["music-link-input"]} 
-      placeholder="Paste Apple Music, Spotify or YT Music URL"
-      ref={inputRef}
-      />
-      <button onClick={()=>dispatch(setLink(inputRef.current.value))}>Open</button>
-    </>
+      <div className={styles["music-link"]}>
+        <input 
+        className={styles["music-link-input"]} 
+        placeholder={t("music.input-placeholder")}
+        ref={inputRef}
+        />
+        <button className={styles["music-link-btn"]} onClick={()=>dispatch(setLink(inputRef?.current?.value || ""))}>Open</button>
+      </div>
+    </div>
   );
   
 }
@@ -75,3 +85,16 @@ export default MusicWidget;
 
 // https://open.spotify.com/embed/playlist/37i9dQZF1EIXJ18peKvF9W?utm_source=generator&theme=0
 // https://open.spotify.com/playlist/37i9dQZF1EIXJ18peKvF9W?si=745ac55aee9d402f
+
+//https://youtu.be/Urh_botbjRQ
+
+//
+//<iframe src="" frameborder="0" allow="encrypted-media" id="ytplayer"></iframe>
+
+// https://www.youtube.com/embed/?listType=playlist&amp;list=OLAK5uy_nNwjlnTS3h6Gp0IK_b4wpUyRsYThMmg4A
+// https://music.youtube.com/playlist?list=OLAK5uy_nNwjlnTS3h6Gp0IK_b4wpUyRsYThMmg4A&feature=shared
+
+//https://open.spotify.com/playlist/37i9dQZF1EIXJ18peKvF9W?si=745ac55aee9d402f
+// https://music.youtube.com/playlist?list=OLAK5uy_nNwjlnTS3h6Gp0IK_b4wpUyRsYThMmg4A&feature=shared
+//"https://music.apple.com/us/album/promo-single/1703859928"
+// Paste Apple Music, Spotify or YT URL

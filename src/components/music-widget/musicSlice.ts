@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-type musicState = {
+export type musicState = {
     link: null | string
 }
 
