@@ -14,6 +14,10 @@ interface IDInPayload {
   payload: string;
 }
 
+interface StringInPayload {
+    payload: string;
+}
+
 interface TypeInPayload {
   payload: WidgetType;
 }
@@ -23,6 +27,8 @@ interface WidgetAbstractionInPayload {
 
 type InitialStateType = {
   widgets: Array<WidgetAbstraction>;
+  wallpaperWindowActive: boolean;
+  wallpaper: string;
 };
 
 const initialState : InitialStateType = {
@@ -62,7 +68,10 @@ const initialState : InitialStateType = {
             type: "news",
             active: false
         },
-    ]
+    ],
+
+    wallpaperWindowActive: false,
+    wallpaper: "/app-bg.jpeg"
 }
 
 
@@ -119,10 +128,35 @@ export const screenSlice = createSlice({
         }
     },
 
+    changeWallpaper: (s, action : StringInPayload) => {
+        s.wallpaper = action.payload
+    },
+
+    openWallpaperWindow: (s) => {
+        s.wallpaperWindowActive = true;
+    },
+
+    closeWallpaperWindow: (s) => {
+        s.wallpaperWindowActive = false;
+    },
+
+    toggleWallpaperWindow: (s) => {
+        s.wallpaperWindowActive = !s.wallpaperWindowActive;
+    }
+
   },
 });
 
-// Action creators are generated for each case reducer function
-export const {  closeWidget, raiseWidget, openWidget, changeWidgetPosition, toggleWidget } = screenSlice.actions
+export const {  
+    closeWidget, 
+    raiseWidget, 
+    openWidget, 
+    changeWidgetPosition, 
+    toggleWidget, 
+    changeWallpaper,
+    openWallpaperWindow,
+    closeWallpaperWindow,
+    toggleWallpaperWindow 
+} = screenSlice.actions
 
 export default screenSlice.reducer;

@@ -3,11 +3,13 @@ import Image from "next/image";
 import styles from "./style.module.scss";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import { useDispatch } from "react-redux";
-import { openWidget, toggleWidget } from "../screen/ScreenSlice";
+import { openWidget, toggleWidget, toggleWallpaperWindow } from "../screen/ScreenSlice";
 
 const Widgetbar = () => {
 
   const dispatch = useDispatch();
+
+
 
   return (
     <WidgetWrapper className={styles["widget"]}>
@@ -20,7 +22,7 @@ const Widgetbar = () => {
         />
       </div>
       <div className={styles["widget__block_main"]}>
-        <div className={styles["widget__gallery"]}>
+        <div className={styles["widget__gallery"]} onClick={()=>dispatch(toggleWallpaperWindow())}>
           <Image
             src="/gallery.svg"
             width={24}

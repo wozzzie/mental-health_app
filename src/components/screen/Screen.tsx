@@ -9,7 +9,7 @@ import MusicWidget from "../music-widget/MusicWidget";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
 import { useEffect } from "react";
-
+import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 
 const WidgetView: React.FC<WidgetAbstraction> = ({x,y,type}) => {
 
@@ -90,6 +90,12 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
 
   const widgets = useSelector((state: any) => state.screen.widgets);
 
+  const wallpaper = useSelector((s: any) => s.screen.wallpaper)
+
+  const wallpaperWindowActive = useSelector(s => s.screen.wallpaperWindowActive);
+
+
+
   const dispatch = useDispatch();
 
   const widgetRender = useMemo(() => (
@@ -108,8 +114,21 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
   ), [widgets])
 
   return (
-    <div className={classes}>
+    <div 
+      className={classes}
+      style={{
+        backgroundImage: `url(${wallpaper})`
+      }}
+      >
       {children}
+
+      {
+        wallpaperWindowActive && (
+          <WallpaperWindow> 
+            {/* СЮДА КИДАТЬ КОМПОНЕНТЫ ГАЛЕРЕИ */}
+          </WallpaperWindow>
+        )
+      }
       <div className={styles["widgets-container"]}>
         {widgetRender}
       </div>
