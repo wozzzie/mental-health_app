@@ -1,65 +1,27 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.scss";
 import { DraggableData, Rnd } from "react-rnd";
-import { WidgetAbstraction, WidgetType, closeWidget, resizeWidget } from "./ScreenSlice";
-import { useEffect, useMemo, useRef } from "react";
+import { WidgetAbstraction, WidgetType, closeWidget } from "./ScreenSlice";
+import { useLayoutEffect, useMemo, useRef } from "react";
 import { openWidget, raiseWidget, changeWidgetPosition } from "./ScreenSlice";
 import QuotesWidget from "../quotes-widget/QuotesWidget";
 import MusicWidget from "../music-widget/MusicWidget";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
+import { useEffect } from "react";
 
-const WidgetView: React.FC<WidgetAbstraction> = ({x,y,width,height,type}) => {
+
+const WidgetView: React.FC<WidgetAbstraction> = ({x,y,type}) => {
 
   const dispatch = useDispatch()
 
   const savePosition = (type: WidgetType,d : DraggableData) => {
     dispatch(changeWidgetPosition({type,x:d.x,y:d.y}))
-    console.log(d)
   }
 
-  const sizeRef = useRef<any>();
 
-  useEffect(() => {
-    if (sizeRef.current) {
-      dispatch(resizeWidget({
-        type:type,
-        width:sizeRef.current.clientWidth,
-        height: sizeRef.current.clientHeight
-      }))
-    }
-  },[sizeRef?.current?.clientHeight, sizeRef?.current?.clientWidth])
-
-  return (
-    <Rnd
-          default={{
-            x: x,
-            y: y,
-            width: width,
-            height: height,
-          }}
-          maxHeight={height}
-          maxWidth={width}
-          minHeight={height}
-          minWidth={width}
-          bounds="parent"
-          onDragStop={(e,d)=>savePosition(type,d)}
-          style={{
-            overflow: "hidden",
-          }}
-        >
-          <div 
-            className={styles["autofill-block"]}
-            onMouseDown={() => dispatch(raiseWidget(type))}
-            ref={sizeRef}
-            >
-            <WidgetWrapper className={styles["widget-wrapper"]}>
-            <div className={styles["widget-control"]}>
-              <button onClick={()=>dispatch(closeWidget(type))}>
-                <Image src="/close.svg" alt="close" width={15} height={15}/>
-              </button>
-            </div>
-            { // сюда вставлять виджеты
+  const child = (<>
+    { // сюда вставлять виджеты
               type === "gif" ? (
                 <>
                   gif
@@ -86,6 +48,32 @@ const WidgetView: React.FC<WidgetAbstraction> = ({x,y,width,height,type}) => {
                 </>
               )
             }
+  </>)
+
+  return (
+    <Rnd
+          default={{
+            x: x,
+            y: y
+          }}
+          bounds="parent"
+          onDragStop={(e,d)=>savePosition(type,d)}
+          style={{
+            overflow: "hidden",
+          }}
+          enableResizing={false}
+        >
+          <div 
+            className={styles["autofill-block"]}
+            onMouseDown={() => dispatch(raiseWidget(type))}
+            >
+            <WidgetWrapper className={styles["widget-wrapper"]}>
+            <div className={styles["widget-control"]}>
+              <button onClick={()=>dispatch(closeWidget(type))}>
+                <Image src="/close.svg" alt="close" width={15} height={15}/>
+              </button>
+            </div>
+            {child}
             </WidgetWrapper>
           </div>
         </Rnd>
@@ -113,8 +101,6 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
           x={i.x}
           y={i.y}
           id={i.id}
-          width={i.width}
-          height={i.height}
           active={i.active}
           type={i.type}
           />

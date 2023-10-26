@@ -27,10 +27,19 @@ const AppPage = ({
 
   return (
     <>
-      <Screen>
-        <Widgetbar />
-      </Screen>
+      <style global jsx>{`
+        html,
+        body {
+          overflow: hidden;
+        }
+      `}</style>
+      <div className={styles["app"]}>
+        <Screen>
+          <Widgetbar />
+        </Screen>
+      </div>
     </>
+    
   );
 };
 

@@ -74,5 +74,10 @@
   },
   "btn": {
     "btn-start": "Start our journey"
+  },
+  "music": {
+    "wrong-url-message-title": "Wrong URL entered",
+    "input-placeholder": "Enter Spotify, YT or Apple music URL",
+    "start-message-title": "Music widget"
   }
 }
