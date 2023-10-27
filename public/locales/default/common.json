@@ -77,7 +77,7 @@
   },
   "music": {
     "wrong-url-message-title": "Wrong URL entered",
-    "input-placeholder": "Enter Spotify, YT or Apple music URL",
+    "input-placeholder": "Enter Spotify or Apple Music URL",
     "start-message-title": "Music widget"
   }
 }
