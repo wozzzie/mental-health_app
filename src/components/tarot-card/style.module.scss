@@ -1,0 +1,63 @@
+@mixin card-face {
+    position: absolute;
+    display: block;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    width: 100px;
+    height: 171px;
+    top: 0;
+    left: 0;
+    backface-visibility: hidden;
+}
+
+@keyframes rot {
+    from {
+        transform: rotateX(0deg) perspective(2px);
+    }
+
+    to {
+        transform: rotateY(360deg) perspective(2px);
+    }
+}
+
+.tarot-card {
+    transform-style: preserve-3d;
+    width: 100px;
+    height: 200px;
+    transition: 0.5s all;
+    transform: translateZ(-20px) rotateY(0deg) perspective(400px);
+    transform-style: preserve-3d;
+    transform-origin: center;
+    position: relative;
+    overflow: visible;
+    padding: 20px;
+    animation: rot 4s infinite linear;
+    * {
+        overflow: visible;
+    }
+    img {
+        @include card-face;
+        
+    }
+
+    &-back {
+        @include card-face;
+        transform: rotate3d(1,0,0,180deg);
+        background-color: #ff000055
+    }
+
+    &-front {
+        @include card-face;
+        transform: rotateY(0deg);
+        transform-origin: left;
+        background-color: #00ff0055
+    }
+}
+
+.sss {
+    width:200px;
+    height: 100px;
+    background: white;
+    margin: 0 auto;
+    margin-top: 300px;
+}

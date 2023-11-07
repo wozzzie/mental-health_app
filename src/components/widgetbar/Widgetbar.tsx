@@ -4,16 +4,21 @@ import styles from "./style.module.scss";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import { useDispatch } from "react-redux";
 import { openWidget, toggleWidget, toggleWallpaperWindow } from "../screen/ScreenSlice";
+import { useState, useMemo } from "react"
+
 
 const Widgetbar = () => {
 
   const dispatch = useDispatch();
 
+  const [wrapperActive, setWrapperActive] = useState<boolean>(true);
+
+  const wrapperClasses =  useMemo(() => styles["widget"] + (wrapperActive ? " " + styles["widget_active"] : ""), [wrapperActive]);
 
 
   return (
-    <WidgetWrapper className={styles["widget"]}>
-      <div className={styles["widget__menu"]}>
+    <WidgetWrapper className={wrapperClasses}>
+      <div className={styles["widget__menu"]} onClick={()=>setWrapperActive(s => !s)}>
         <Image
           src="/burger-menu.svg"
           width={18}

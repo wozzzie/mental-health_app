@@ -23,7 +23,7 @@ const Footer = () => {
                     <div className={classes["contacts-title"]}>Contacts</div>
                     <Link href="https://www.upwork.com/freelancers/~012a786fa6b9dc2a12" img={{src:"/upwork.svg", w:30, h: 30, alt:"upwork"}} classes={classes["contacts-link"]}/>
                     <Link href="mailto:hello.webmarvels@gmail.com" img={{src:"/email.svg", w:45, h: 30, alt:"email"}} classes={classes["contacts-link"]}/>
-                    <Link href="#" img={{src:"/linkedin.svg", w:45, h: 30, alt:"linkedin"}} classes={classes["contacts-link"]}/>
+                    <Link href="https://www.linkedin.com/company/web-marvels/" img={{src:"/linkedin.svg", w:45, h: 30, alt:"linkedin"}} classes={classes["contacts-link"]}/>
                 </div>
             </PageContainer>
        </footer> 
