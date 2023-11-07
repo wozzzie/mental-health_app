@@ -5,7 +5,16 @@
   justify-content: space-between;
   width: 64px;
   max-height: 872px;
-  height: 85vh;
+  height: 64px;
+  transition: 0.5s all;
+  overflow: hidden;
+  &_active {
+    height: 85vh;
+  }
+
+  &__menu {
+    margin-bottom: 33px;
+  }
 
   &__block {
     &_main {
