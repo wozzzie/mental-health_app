@@ -2,6 +2,7 @@ import { useTranslation } from "next-i18next"
 import classes from "./style.module.scss"
 import PageContainer from "../page-container/pageContainer";
 import Link from "../link/Link";
+import ROUTES from "@/constants/routes";
 
 const Footer = () => {
 
@@ -12,8 +13,8 @@ const Footer = () => {
             <PageContainer grid classes={classes["container"]}>
                 <div className={classes["policy-links"]}>
                     <Link href="#" text={t("footer.about")} classes={classes["footer-link"]}/>
-                    <Link href="#" text={t("footer.policy")} classes={classes["footer-link"]}/>
-                    <Link href="#" text={t("footer.terms")} classes={classes["footer-link"]}/>
+                    <Link href={ROUTES.POLICY} text={t("footer.policy")} classes={classes["footer-link"]}/>
+                    <Link href={ROUTES.TERMS} text={t("footer.terms")} classes={classes["footer-link"]}/>
                 </div>
                 <div className={classes["footer-team-logo"]}>
                     <h2 className={classes["footer-title"]}>{t("footer.title")}</h2>
