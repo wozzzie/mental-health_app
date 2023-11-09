@@ -10,4 +10,15 @@
   &__image {
     cursor: pointer;
   }
+
+  &__add {
+    width: 268px;
+    height: 108px;
+    border-radius: 8px;
+    border: 1px dashed #ffffff63;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
 }
