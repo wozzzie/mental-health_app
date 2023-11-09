@@ -18,7 +18,7 @@
     "description": " Unveil a unique collection of resources crafted to enrich and ignite your meditation practice, promising a transformative experience. Elevate your meditation journey today!"
   },
   "features": {
-    "title":  "A Closer Look at Balance Vista",
+    "title": "A Closer Look at Balance Vista",
     "element-title-1": "Breathing Exercises",
     "element-title-2": "Daily Fortune",
     "element-title-3": "And Kittens!",
@@ -79,5 +79,9 @@
     "wrong-url-message-title": "Wrong URL entered",
     "input-placeholder": "Enter Spotify or Apple Music URL",
     "start-message-title": "Music widget"
+  },
+  "drag-n-drop": {
+    "drop": "Drag & Drop your files here or ",
+    "choose": "choose a file"
   }
 }

@@ -79,5 +79,9 @@
     "wrong-url-message-title": "Введена неверная ссылка",
     "input-placeholder": "Введите ссылку Spotify или Apple Music",
     "start-message-title": "Музыкальный виджет"
+  },
+  "drag-n-drop": {
+    "drop": "Перетащите файлы сюда или ",
+    "choose": "выберите файл"
   }
 }

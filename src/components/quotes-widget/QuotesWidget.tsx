@@ -28,7 +28,7 @@ const QuotesWidget: React.FC = () => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-       
+
         saveQuoteToServer(data.content);
         setQuote(data.content);
       } else {
@@ -48,9 +48,9 @@ const QuotesWidget: React.FC = () => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(quoteData),
-      })
+      });
 
-      console.log('response',response);
+      console.log("response", response);
       if (response.status === 201) {
         console.log("Quote saved to the server successfully");
       } else {
@@ -66,7 +66,11 @@ const QuotesWidget: React.FC = () => {
     console.log("Component render method called.");
   }, []);
 
-  return <WidgetWrapper>&ldquo;{quote}&ldquo;</WidgetWrapper>;
+  return (
+    <WidgetWrapper className={styles["widget__wrapper"]}>
+      &ldquo;{quote}&ldquo;
+    </WidgetWrapper>
+  );
 };
 
 export default QuotesWidget;

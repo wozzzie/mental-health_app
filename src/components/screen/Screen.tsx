@@ -10,75 +10,70 @@ import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
 import { useEffect } from "react";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
+import GalleryWidget from "../gallery-widget/GalleryWidget";
+import Tarot from "../tarot/Tarot";
 
-const WidgetView: React.FC<WidgetAbstraction> = ({x,y,type}) => {
+const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
+  const dispatch = useDispatch();
 
-  const dispatch = useDispatch()
+  const savePosition = (type: WidgetType, d: DraggableData) => {
+    dispatch(changeWidgetPosition({ type, x: d.x, y: d.y }));
+  };
 
-  const savePosition = (type: WidgetType,d : DraggableData) => {
-    dispatch(changeWidgetPosition({type,x:d.x,y:d.y}))
-  }
-
-
-  const child = (<>
-    { // сюда вставлять виджеты
-              type === "gif" ? (
-                <>
-                  gif
-                </>
-              ) : type === "meditation" ? (
-                <>
-                  meditation
-                </>
-              ) : type === "music" ? (
-                <>
-                  <MusicWidget/>
-                </>
-              ) : type === "news" ? (
-                <>
-                  news
-                </>
-              ) : type === "quote" ? (
-                <>
-                 <QuotesWidget/>
-                </>
-              ) : (
-                <>
-                  default
-                </>
-              )
-            }
-  </>)
+  const child = (
+    <>
+      {
+        // сюда вставлять виджеты
+        type === "gif" ? (
+          <Tarot />
+        ) : type === "meditation" ? (
+          <>meditation</>
+        ) : type === "music" ? (
+          <>
+            <MusicWidget />
+          </>
+        ) : type === "news" ? (
+          <>news</>
+        ) : type === "quote" ? (
+          <>
+            <QuotesWidget />
+          </>
+        ) : (
+          <>default</>
+        )
+      }
+    </>
+  );
 
   return (
     <Rnd
-          default={{
-            x: x,
-            y: y
-          }}
-          bounds="parent"
-          onDragStop={(e,d)=>savePosition(type,d)}
-          style={{
-            overflow: "hidden",
-          }}
-          enableResizing={false}
-        >
-          <div 
-            className={styles["autofill-block"]}
-            onMouseDown={() => dispatch(raiseWidget(type))}
-            >
-            <WidgetWrapper className={styles["widget-wrapper"]}>
-            <div className={styles["widget-control"]}>
-              <button onClick={()=>dispatch(closeWidget(type))}>
-                <Image src="/close.svg" alt="close" width={15} height={15}/>
-              </button>
-            </div>
-            {child}
-            </WidgetWrapper>
+      default={{
+        x: x,
+        y: y,
+      }}
+      bounds="parent"
+      onDragStop={(e, d) => savePosition(type, d)}
+      style={{
+        overflow: "hidden",
+      }}
+      enableResizing={false}
+    >
+      <div
+        className={styles["autofill-block"]}
+        onMouseDown={() => dispatch(raiseWidget(type))}
+      >
+        <WidgetWrapper className={styles["widget-wrapper"]}>
+          <div className={styles["widget-control"]}>
+            <button onClick={() => dispatch(closeWidget(type))}>
+              <Image src="/close.svg" alt="close" width={15} height={15} />
+            </button>
           </div>
-        </Rnd>
+          {child}
+        </WidgetWrapper>
+      </div>
+    </Rnd>
   );
-}
+};
 
 type ScreenProps = {
   children: React.ReactNode;
@@ -90,48 +85,47 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
 
   const widgets = useSelector((state: any) => state.screen.widgets);
 
-  const wallpaper = useSelector((s: any) => s.screen.wallpaper)
+  const wallpaper = useSelector((s: any) => s.screen.wallpaper);
 
-  const wallpaperWindowActive = useSelector(s => s.screen.wallpaperWindowActive);
-
-
+  const wallpaperWindowActive = useSelector(
+    (s) => s.screen.wallpaperWindowActive
+  );
 
   const dispatch = useDispatch();
 
-  const widgetRender = useMemo(() => (
-    widgets
-      .filter((i : WidgetAbstraction) => i.active)
-      .map((i : WidgetAbstraction) => (
-        <WidgetView 
-          key={i.id}
-          x={i.x}
-          y={i.y}
-          id={i.id}
-          active={i.active}
-          type={i.type}
+  const widgetRender = useMemo(
+    () =>
+      widgets
+        .filter((i: WidgetAbstraction) => i.active)
+        .map((i: WidgetAbstraction) => (
+          <WidgetView
+            key={i.id}
+            x={i.x}
+            y={i.y}
+            id={i.id}
+            active={i.active}
+            type={i.type}
           />
-    ))
-  ), [widgets])
+        )),
+    [widgets]
+  );
 
   return (
-    <div 
+    <div
       className={classes}
       style={{
-        backgroundImage: `url(${wallpaper})`
+        backgroundImage: `url(${wallpaper})`,
       }}
-      >
+    >
       {children}
 
-      {
-        wallpaperWindowActive && (
-          <WallpaperWindow> 
-            {/* СЮДА КИДАТЬ КОМПОНЕНТЫ ГАЛЕРЕИ */}
-          </WallpaperWindow>
-        )
-      }
-      <div className={styles["widgets-container"]}>
-        {widgetRender}
-      </div>
+      {wallpaperWindowActive && (
+        <WallpaperWindow>
+          <GalleryWidget />
+        </WallpaperWindow>
+      )}
+
+      <div className={styles["widgets-container"]}>{widgetRender}</div>
     </div>
   );
 };
