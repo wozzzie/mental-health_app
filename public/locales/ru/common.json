@@ -77,7 +77,7 @@
   },
   "music": {
     "wrong-url-message-title": "Введена неверная ссылка",
-    "input-placeholder": "Введите ссылку Spotify, YT Music или Apple music",
+    "input-placeholder": "Введите ссылку Spotify или Apple Music",
     "start-message-title": "Музыкальный виджет"
   },
   "drag-n-drop": {
