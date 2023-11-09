@@ -1,0 +1,46 @@
+.policy {
+    padding: 100px 50px;
+
+    &-update-date {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 26px; /* 185.714% */
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--colors-heading, #1E0E62);
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    &-title {
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 52px; /* 123.81% */
+        letter-spacing: -0.4px;
+        color: #1E0E62;
+        text-align: center;
+    }
+    &-paragraphs {
+        padding-left: 20px;
+
+        &-item {
+            &__title {
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 26px; /* 185.714% */
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                color: var(--colors-heading, #1E0E62);
+                margin-bottom: 20px;
+                margin-top: 20px;
+            }
+
+            &-text {
+                padding-left: 20px;
+            }
+        }
+    }
+}

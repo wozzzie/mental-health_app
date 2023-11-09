@@ -3,6 +3,8 @@ const ROUTES = {
   SIGN_UP: "/auth/sign-up",
   WELCOME: "/",
   APP: "/app",
+  POLICY: "/policy",
+  TERMS: "/terms"
 };
 
 export default ROUTES;
