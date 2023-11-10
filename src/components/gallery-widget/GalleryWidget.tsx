@@ -57,6 +57,7 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   const handleImageClick = (imageSource: string) => {
+    console.log(imageSource)
     dispatch(changeWallpaper(imageSource));
   };
 
@@ -77,7 +78,7 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
         formData.append("uid", user);
       }
 
-      const response = await fetch("http://localhost:3001/api/images/upload", {
+      const response = await fetch("http://localhost:3001/api/images/uploads", {
         method: "POST",
         body: formData,
       });
@@ -113,18 +114,21 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
       <div id="gallery__container" className={styles["gallery__container"]}>
         {images.map((imageData, index) => {
           console.log("imageData:", imageData.image);
+
+          const imgSrc = (imageData.isDefault
+          ? imageData.image 
+          : `http://localhost:3001/${imageData.image}`)
+          .replace(/\\/,"/")
           return (
             <Image
               width={268}
               height={126}
               key={index}
               src={
-                imageData.isDefault
-                  ? imageData.image 
-                  : `/${imageData.image}`
+                imgSrc
               } 
               alt={`Image ${index}`}
-              onClick={() => handleImageClick(imageData.image)}
+              onClick={() => handleImageClick(imgSrc)}
               className={styles["gallery__image"]}
             />
           );
