@@ -50,7 +50,6 @@ const QuotesWidget: React.FC = () => {
         body: JSON.stringify(quoteData),
       });
 
-      console.log("response", response);
       if (response.status === 201) {
         console.log("Quote saved to the server successfully");
       } else {
@@ -63,7 +62,6 @@ const QuotesWidget: React.FC = () => {
 
   useEffect(() => {
     fetchRandomQuote();
-    console.log("Component render method called.");
   }, []);
 
   return (

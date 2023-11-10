@@ -5,7 +5,7 @@ import styles from "./style.module.scss";
 import { changeWallpaper } from "../screen/ScreenSlice";
 import { useDispatch } from "react-redux";
 import DragNDrop from "../drag-n-drop/DragNDrop";
-import { auth, firebase } from "@/firebase/firebaseClient";
+import { auth } from "@/firebase/firebaseClient";
 
 type ImageData = {
   image: string;
@@ -15,16 +15,12 @@ type ImageData = {
 type GalleryWidgetProps = {};
 const allowedExtensions = ["jpeg", "jpg", "png"];
 
-// const fileTypes: ("JPG" | "PNG" | "JPEG")[] = ["JPG", "PNG", "JPEG"];
-
 const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
   const dispatch = useDispatch();
   const user = auth.currentUser?.uid;
-  console.log("user-->", user);
-  // console.log(typeof user)
 
   const handleAddBg = (file: File) => {
     const allowedExtensions = ["jpeg", "jpg", "png"];
@@ -37,7 +33,6 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
     }
   };
 
-  // не трогать
   const getBgFromServer = async () => {
     try {
       const response = await fetch(
@@ -57,7 +52,6 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   const handleImageClick = (imageSource: string) => {
-    console.log(imageSource)
     dispatch(changeWallpaper(imageSource));
   };
 
@@ -102,7 +96,6 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
       const newImages = images.concat({
         image: URL.createObjectURL(droppedFiles),
       });
-      console.log(droppedFiles);
       postBgToServer(droppedFiles);
       setImages(newImages);
       setDroppedFiles(null);
@@ -113,20 +106,17 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
     <>
       <div id="gallery__container" className={styles["gallery__container"]}>
         {images.map((imageData, index) => {
-          console.log("imageData:", imageData.image);
-
-          const imgSrc = (imageData.isDefault
-          ? imageData.image 
-          : `http://localhost:3001/${imageData.image}`)
-          .replace(/\\/,"/")
+          const imgSrc = (
+            imageData.isDefault
+              ? imageData.image
+              : `http://localhost:3001/${imageData.image}`
+          ).replace(/\\/, "/");
           return (
             <Image
               width={268}
               height={126}
               key={index}
-              src={
-                imgSrc
-              } 
+              src={imgSrc}
               alt={`Image ${index}`}
               onClick={() => handleImageClick(imgSrc)}
               className={styles["gallery__image"]}
