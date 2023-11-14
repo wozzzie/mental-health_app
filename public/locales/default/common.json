@@ -82,6 +82,8 @@
   },
   "drag-n-drop": {
     "drop": "Drag & Drop your files here or ",
-    "choose": "choose a file"
+    "choose": "choose a file",
+    "max-size": "100MB max file size.",
+    "type-error": "File type is not supported. Please use JPG/JPEG/PNG types."
   }
 }

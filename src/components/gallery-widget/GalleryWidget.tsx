@@ -1,21 +1,14 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { auth } from "@/firebase/firebaseClient";
+import { useDispatch } from "react-redux";
+import { changeWallpaper } from "../screen/ScreenSlice";
+import DragNDrop from "../drag-n-drop/DragNDrop";
+import { ImageData } from "@/types/types";
 
 import styles from "./style.module.scss";
-import { changeWallpaper } from "../screen/ScreenSlice";
-import { useDispatch } from "react-redux";
-import DragNDrop from "../drag-n-drop/DragNDrop";
-import { auth } from "@/firebase/firebaseClient";
 
-type ImageData = {
-  image: string;
-  isDefault?: boolean;
-};
-
-type GalleryWidgetProps = {};
-const allowedExtensions = ["jpeg", "jpg", "png"];
-
-const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
+const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
@@ -23,14 +16,14 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   const user = auth.currentUser?.uid;
 
   const handleAddBg = (file: File) => {
-    const allowedExtensions = ["jpeg", "jpg", "png"];
+    const allowedExtensions: string[] = ["jpeg", "jpg", "png"];
     const extension = file.name.split(".").pop()?.toLowerCase();
-
     if (allowedExtensions.includes(extension || "")) {
       setDroppedFiles(file);
     } else {
       alert("Invalid format");
     }
+    setShowDragNDrop(false);
   };
 
   const getBgFromServer = async () => {
@@ -79,6 +72,9 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
 
       if (response.status === 200) {
         console.log("Image saved to the server successfully");
+        const responseData = await response.json();
+        const serverImageUrl = responseData.image;
+        setImages((prevImages) => [...prevImages, { image: serverImageUrl }]);
       } else {
         console.error(
           "Failed to save image to the server. Response details:",
@@ -92,14 +88,14 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   useEffect(() => {
-    if (droppedFiles) {
-      const newImages = images.concat({
-        image: URL.createObjectURL(droppedFiles),
-      });
-      postBgToServer(droppedFiles);
-      setImages(newImages);
-      setDroppedFiles(null);
-    }
+    const uploadImage = async () => {
+      if (droppedFiles) {
+        await postBgToServer(droppedFiles);
+        setDroppedFiles(null);
+      }
+    };
+
+    uploadImage();
   }, [droppedFiles]);
 
   return (
