@@ -11,7 +11,9 @@ import Image from "next/image";
 import { useEffect } from "react";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
-import Tarot from "../tarot/Tarot";
+import TarotWidget from "../tarot-widget/TarotWidget";
+import useWallpaper from "@/hooks/wallpaper.hook";
+import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
 
 const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
   const dispatch = useDispatch();
@@ -25,7 +27,7 @@ const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
       {
         // сюда вставлять виджеты
         type === "gif" ? (
-          <Tarot />
+          <></>
         ) : type === "meditation" ? (
           <>meditation</>
         ) : type === "music" ? (
@@ -33,7 +35,9 @@ const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
             <MusicWidget />
           </>
         ) : type === "news" ? (
-          <>news</>
+          <>
+            <TarotWidget />
+          </>
         ) : type === "quote" ? (
           <>
             <QuotesWidget />
@@ -110,11 +114,18 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
     [widgets]
   );
 
+  const { backgroundStyle, setWallpaper } = useWallpaper();
+
+  useEffect(() => {
+    setWallpaper(wallpaper);
+  }, [wallpaper]);
+
   return (
     <div
       className={classes}
       style={{
-        backgroundImage: `url(${wallpaper})`,
+        transition: "0.5s background-image",
+        ...backgroundStyle,
       }}
     >
       {children}

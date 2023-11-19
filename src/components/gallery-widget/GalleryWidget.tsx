@@ -57,7 +57,7 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   const handleImageClick = (imageSource: string) => {
-    console.log(imageSource)
+    console.log(imageSource);
     dispatch(changeWallpaper(imageSource));
   };
 
@@ -99,10 +99,12 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
 
   useEffect(() => {
     if (droppedFiles) {
-      const newImages = images.concat({
-        image: URL.createObjectURL(droppedFiles),
-      });
-      console.log(droppedFiles);
+      const newImages = images.concat([
+        {
+          image: URL.createObjectURL(droppedFiles),
+        },
+      ]);
+      console.log(URL.createObjectURL(droppedFiles));
       postBgToServer(droppedFiles);
       setImages(newImages);
       setDroppedFiles(null);
@@ -115,18 +117,17 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
         {images.map((imageData, index) => {
           console.log("imageData:", imageData.image);
 
-          const imgSrc = (imageData.isDefault
-          ? imageData.image 
-          : `http://localhost:3001/${imageData.image}`)
-          .replace(/\\/,"/")
+          const imgSrc = (
+            imageData.isDefault
+              ? imageData.image
+              : `http://localhost:3001/${imageData.image}`
+          ).replace(/\\/, "/");
           return (
             <Image
               width={268}
               height={126}
               key={index}
-              src={
-                imgSrc
-              } 
+              src={imgSrc}
               alt={`Image ${index}`}
               onClick={() => handleImageClick(imgSrc)}
               className={styles["gallery__image"]}
