@@ -26,6 +26,33 @@ const GalleryWidget = () => {
     setShowDragNDrop(false);
   };
 
+  const getWallpaper = async (userId: string) => {
+    if (!userId) {
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/wallpaper?userId=${userId}`
+      );
+      const data = await response.json();
+
+      if (response.status === 200) {
+        console.log("Wallpaper get successfully");
+      } else {
+        console.error(
+          "Failed to get wallpaper:",
+          response.status,
+          response.statusText
+        );
+      }
+      return data;
+    } catch (error) {
+      console.error("Error getting wallpaper:", error);
+    }
+  };
+  getWallpaper(user as string).then(console.log);
+
   const getBgFromServer = async () => {
     try {
       const response = await fetch(
@@ -44,8 +71,29 @@ const GalleryWidget = () => {
     }
   };
 
-  const handleImageClick = (imageSource: string) => {
-    dispatch(changeWallpaper(imageSource));
+  const handleImageClick = async (imageId: string, imageSource: string) => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/wallpaper`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: user, imageId }),
+      });
+      dispatch(changeWallpaper(imageSource));
+
+      if (response.status === 200) {
+        console.log("Wallpaper set successfully");
+      } else {
+        console.error(
+          "Failed to set wallpaper:",
+          response.status,
+          response.statusText
+        );
+      }
+    } catch (error) {
+      console.error("Error setting wallpaper:", error);
+    }
   };
 
   const handleAddImage = () => {
@@ -114,7 +162,7 @@ const GalleryWidget = () => {
               key={index}
               src={imgSrc}
               alt={`Image ${index}`}
-              onClick={() => handleImageClick(imgSrc)}
+              onClick={() => handleImageClick(imageData._id as string, imgSrc)}
               className={styles["gallery__image"]}
             />
           );

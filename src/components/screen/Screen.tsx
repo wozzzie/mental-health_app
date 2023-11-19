@@ -1,17 +1,17 @@
+import { useLayoutEffect, useMemo, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./style.module.scss";
 import { DraggableData, Rnd } from "react-rnd";
+import Image from "next/image";
 import { WidgetAbstraction, WidgetType, closeWidget } from "./ScreenSlice";
-import { useLayoutEffect, useMemo, useRef } from "react";
 import { openWidget, raiseWidget, changeWidgetPosition } from "./ScreenSlice";
 import QuotesWidget from "../quotes-widget/QuotesWidget";
 import MusicWidget from "../music-widget/MusicWidget";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
-import Image from "next/image";
-import { useEffect } from "react";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
 import Tarot from "../tarot/Tarot";
+
+import styles from "./style.module.scss";
 
 const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
   const dispatch = useDispatch();
@@ -82,9 +82,7 @@ type ScreenProps = {
 
 const Screen: React.FC<ScreenProps> = ({ children, className }) => {
   const classes = [styles["screen"], className].join(" ");
-
   const widgets = useSelector((state: any) => state.screen.widgets);
-
   const wallpaper = useSelector((s: any) => s.screen.wallpaper);
 
   const wallpaperWindowActive = useSelector(
