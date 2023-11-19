@@ -29,14 +29,14 @@ const Widgetbar = () => {
       <div className={styles["widget__block_main"]}>
         <div className={styles["widget__gallery"]} onClick={()=>dispatch(toggleWallpaperWindow())}>
           <Image
-            src="/gallery.svg"
+            src="/wallpaper.svg"
             width={24}
             height={24}
             alt="Backgrounds gallery"
           />
         </div>
         <div className={styles["widget__music"]} onClick={()=>dispatch(toggleWidget("music"))}>
-          <Image src="/play.svg" width={13.22} height={16} alt="Play" />
+          <Image src="/music.svg" width={24} height={24} alt="Play" />
         </div>
         <div className={styles["widget__breath"]}>
           <Image src="/breath.svg" width={24} height={24} alt="Breath" />
@@ -46,21 +46,21 @@ const Widgetbar = () => {
         </div>
         <div className={styles["widget__meditation"]} onClick={()=>dispatch(toggleWidget("meditation"))}>
           <Image
-            src="/meditation-app.svg"
+            src="/meditation.svg"
             width={24}
             height={24}
             alt="Meditation"
           />
         </div>
         <div className={styles["widget__news"]} onClick={()=>dispatch(toggleWidget("news"))}>
-          <Image src="/news.svg" width={18} height={18} alt="News" />
+          <Image src="/news.svg" width={24} height={24} alt="News" />
         </div>
       </div>
       <div className={styles["widget__block_additional"]} >
         <div className={styles["widget__gif"]} onClick={()=>dispatch(toggleWidget("gif"))}>
           <Image
             src="/gif-widget.svg"
-            width={19.2}
+            width={24}
             height={24}
             alt="Gif widget"
           />

@@ -8,8 +8,10 @@
   height: 64px;
   transition: 0.5s all;
   overflow: hidden;
+  border-radius: 32px!important;
   &_active {
     height: 85vh;
+    border-radius: 22px!important;
   }
 
   &__menu {
