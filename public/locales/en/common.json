@@ -82,7 +82,9 @@
   },
   "drag-n-drop": {
     "drop": "Drag & Drop your files here or ",
-    "choose": "choose a file"
+    "choose": "choose a file",
+    "max-size": "100MB max file size.",
+    "type-error": "File type is not supported. Please use JPG/JPEG/PNG types."
   },
   "policy": {
     "title": "Privacy Policy for Balance Vista",
@@ -90,12 +92,14 @@
     "paragraphs": [
       {
         "title": "Introduction",
-        "text": ["This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act."]
+        "text": [
+          "This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act."
+        ]
       },
       {
         "title": "Information We Collect",
         "text": [
-          "a. Personal Information: We may collect personal information, such as your name, email address, postal address, and phone number, when you provide it voluntarily, for example, when you contact us or create an account.", 
+          "a. Personal Information: We may collect personal information, such as your name, email address, postal address, and phone number, when you provide it voluntarily, for example, when you contact us or create an account.",
           "b. Automatically Collected Information: We may also automatically collect certain information, including your IP address, browser type, device type, and operating system, when you visit Balance Vista. This information helps us improve our website and services."
         ]
       },

@@ -1,43 +1,31 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { auth } from "@/firebase/firebaseClient";
+import { useDispatch } from "react-redux";
+import { changeWallpaper } from "../screen/ScreenSlice";
+import DragNDrop from "../drag-n-drop/DragNDrop";
+import { ImageData } from "@/types/types";
 
 import styles from "./style.module.scss";
-import { changeWallpaper } from "../screen/ScreenSlice";
-import { useDispatch } from "react-redux";
-import DragNDrop from "../drag-n-drop/DragNDrop";
-import { auth, firebase } from "@/firebase/firebaseClient";
 
-type ImageData = {
-  image: string;
-  isDefault?: boolean;
-};
-
-type GalleryWidgetProps = {};
-const allowedExtensions = ["jpeg", "jpg", "png"];
-
-// const fileTypes: ("JPG" | "PNG" | "JPEG")[] = ["JPG", "PNG", "JPEG"];
-
-const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
+const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
   const dispatch = useDispatch();
   const user = auth.currentUser?.uid;
-  console.log("user-->", user);
-  // console.log(typeof user)
 
   const handleAddBg = (file: File) => {
-    const allowedExtensions = ["jpeg", "jpg", "png"];
+    const allowedExtensions: string[] = ["jpeg", "jpg", "png"];
     const extension = file.name.split(".").pop()?.toLowerCase();
-
     if (allowedExtensions.includes(extension || "")) {
       setDroppedFiles(file);
     } else {
       alert("Invalid format");
     }
+    setShowDragNDrop(false);
   };
 
-  // не трогать
   const getBgFromServer = async () => {
     try {
       const response = await fetch(
@@ -57,7 +45,6 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   const handleImageClick = (imageSource: string) => {
-    console.log(imageSource);
     dispatch(changeWallpaper(imageSource));
   };
 
@@ -85,6 +72,9 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
 
       if (response.status === 200) {
         console.log("Image saved to the server successfully");
+        const responseData = await response.json();
+        const serverImageUrl = responseData.image;
+        setImages((prevImages) => [...prevImages, { image: serverImageUrl }]);
       } else {
         console.error(
           "Failed to save image to the server. Response details:",
@@ -98,25 +88,20 @@ const GalleryWidget: React.FC<GalleryWidgetProps> = ({}) => {
   };
 
   useEffect(() => {
-    if (droppedFiles) {
-      const newImages = images.concat([
-        {
-          image: URL.createObjectURL(droppedFiles),
-        },
-      ]);
-      console.log(URL.createObjectURL(droppedFiles));
-      postBgToServer(droppedFiles);
-      setImages(newImages);
-      setDroppedFiles(null);
-    }
+    const uploadImage = async () => {
+      if (droppedFiles) {
+        await postBgToServer(droppedFiles);
+        setDroppedFiles(null);
+      }
+    };
+
+    uploadImage();
   }, [droppedFiles]);
 
   return (
     <>
       <div id="gallery__container" className={styles["gallery__container"]}>
         {images.map((imageData, index) => {
-          console.log("imageData:", imageData.image);
-
           const imgSrc = (
             imageData.isDefault
               ? imageData.image

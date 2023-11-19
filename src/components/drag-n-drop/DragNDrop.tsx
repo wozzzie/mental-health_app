@@ -2,10 +2,11 @@ import ReactDOM from "react-dom";
 import { useState } from "react";
 import { FileUploader } from "react-drag-drop-files";
 import { useTranslation } from "next-i18next";
+import Image from "next/image";
 
 import styles from "./style.module.scss";
 
-const fileTypes: ("JPEG" | "PNG" | "JPG")[] = ["JPEG", "PNG", "JPG"];
+const fileTypes: ("jpeg" | "png" | "jpg")[] = ["jpeg", "png", "jpg"];
 
 interface DragNDropProps {
   isOpen: boolean;
@@ -21,27 +22,43 @@ const DragNDrop: React.FC<DragNDropProps> = ({
   name,
 }) => {
   const { t } = useTranslation();
+  const [isError, setIsError] = useState(false);
+
   if (!isOpen) return null;
 
-  //   const [file, setFile] = useState(null);
-  //   const handleChange = (file: any) => {
-  //     setFile(file);
-  //   };
   return ReactDOM.createPortal(
     <div className={styles["drag-n-drop__overlay"]} onClick={onClose}>
       <div className={styles["drag-n-drop__centered"]}>
-        <div className={styles["drag-n-drop__block"]}>
-          <FileUploader
-            // multiple={true}
-            handleChange={handleChange}
-            name={name}
-            types={fileTypes}
-          >
+        <FileUploader
+          handleChange={handleChange}
+          name={name}
+          types={fileTypes}
+          classes={styles["drag-n-drop__block"]}
+          onTypeError={() => {
+            setIsError(true);
+          }}
+        >
+          <Image
+            src="/drag-drop-img.svg"
+            width={39}
+            height={29}
+            alt="drop-img"
+          />
+          <p className={styles["drag-n-drop__text"]}>
             {t("drag-n-drop.drop")}
-            <p>{t("drag-n-drop.choose")}</p>
-          </FileUploader>
-          {/* <p>{file ? `File name: ${file[0].name}` : "no files uploaded yet"}</p> */}
-        </div>
+            <span className={styles["drag-n-drop__choose"]}>
+              {t("drag-n-drop.choose")}
+            </span>
+          </p>
+          {isError ? (
+            <p className={styles["drag-n-drop__text"]}>
+              {t("drag-n-drop.type-error")}
+            </p>
+          ) : null}
+          <p className={styles["drag-n-drop__maxSize"]}>
+            {t("drag-n-drop.max-size")}
+          </p>
+        </FileUploader>
       </div>
     </div>,
     document.body
