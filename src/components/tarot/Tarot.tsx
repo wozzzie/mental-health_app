@@ -60,6 +60,7 @@ const Tarot: React.FC = () => {
       "tarotData",
       tarotData ? Object.entries(tarotData).map((el) => el[1].cards) : "ss"
     );
+    //eslint-disable-next-line
   }, []);
 
   return (

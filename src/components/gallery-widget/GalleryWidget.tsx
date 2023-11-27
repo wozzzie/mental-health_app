@@ -7,6 +7,7 @@ import DragNDrop from "../drag-n-drop/DragNDrop";
 import { ImageData } from "@/types/types";
 
 import styles from "./style.module.scss";
+import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
 
 const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
@@ -14,6 +15,7 @@ const GalleryWidget = () => {
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
   const dispatch = useDispatch();
   const user = auth.currentUser?.uid;
+  const { changeActiveWallpaper } = useActiveWallpaper(user as string);
 
   const handleAddBg = (file: File) => {
     const allowedExtensions: string[] = ["jpeg", "jpg", "png"];
@@ -44,8 +46,10 @@ const GalleryWidget = () => {
     }
   };
 
-  const handleImageClick = (imageSource: string) => {
+  const handleImageClick = (imageSource: string, imageId: string) => {
+    console.log(images);
     dispatch(changeWallpaper(imageSource));
+    changeActiveWallpaper(imageId);
   };
 
   const handleAddImage = () => {
@@ -54,6 +58,7 @@ const GalleryWidget = () => {
 
   useEffect(() => {
     getBgFromServer();
+    //eslint-disable-next-line
   }, [user]);
 
   const postBgToServer = async (file: File) => {
@@ -96,6 +101,8 @@ const GalleryWidget = () => {
     };
 
     uploadImage();
+
+    //eslint-disable-next-line
   }, [droppedFiles]);
 
   return (
@@ -114,7 +121,7 @@ const GalleryWidget = () => {
               key={index}
               src={imgSrc}
               alt={`Image ${index}`}
-              onClick={() => handleImageClick(imgSrc)}
+              onClick={() => handleImageClick(imgSrc, imageData._id as string)}
               className={styles["gallery__image"]}
             />
           );

@@ -7,7 +7,10 @@ const PolicyText = () => {
 
   const { t } = useTranslation();
 
-  console.log(t("policy.paragraphs)", { returnObjects: true }));
+  interface PolicyParagraph {
+    title: string;
+    text: string[];
+  }
 
   return (
     <PageContainer>
@@ -17,27 +20,27 @@ const PolicyText = () => {
           {t("policy.date")} <span>{UPDATE_DATE}</span>
         </div>
         <ul className={styles["policy-paragraphs"]}>
-          {t("policy.paragraphs", { returnObjects: true }).map(
-            ({ title, text }, i) => {
-              return (
-                <li key={i} className={styles["policy-paragraphs-item"]}>
-                  <h2 className={styles["policy-paragraphs-item__title"]}>
-                    {title}
-                  </h2>
-                  <ul>
-                    {text.map((item, i) => (
-                      <li
-                        key={i}
-                        className={styles["policy-paragraphs-item-text"]}
-                      >
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              );
-            }
-          )}
+          {(
+            t("policy.paragraphs", { returnObjects: true }) as PolicyParagraph[]
+          ).map(({ title, text }, i) => {
+            return (
+              <li key={i} className={styles["policy-paragraphs-item"]}>
+                <h2 className={styles["policy-paragraphs-item__title"]}>
+                  {title}
+                </h2>
+                <ul>
+                  {text.map((item, i) => (
+                    <li
+                      key={i}
+                      className={styles["policy-paragraphs-item-text"]}
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </li>
+            );
+          })}
         </ul>
       </div>
     </PageContainer>
