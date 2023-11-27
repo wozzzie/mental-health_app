@@ -1,83 +1,18 @@
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./style.module.scss";
-import { DraggableData, Rnd } from "react-rnd";
-import { WidgetAbstraction, WidgetType, closeWidget } from "./ScreenSlice";
-import { useLayoutEffect, useMemo, useRef } from "react";
-import { openWidget, raiseWidget, changeWidgetPosition } from "./ScreenSlice";
-import QuotesWidget from "../quotes-widget/QuotesWidget";
-import MusicWidget from "../music-widget/MusicWidget";
-import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
-import Image from "next/image";
+import { createRef, useMemo, useRef } from "react";
 import { useEffect } from "react";
+import { Transition, TransitionGroup } from "react-transition-group";
+
+import { WidgetAbstraction } from "./ScreenSlice";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
-import TarotWidget from "../tarot-widget/TarotWidget";
 import useWallpaper from "@/hooks/wallpaper.hook";
 import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
+import { useAuth } from "../auth/authProvider";
+import { RootState } from "@/store/store";
+import WidgetView from "../widget-view/WidgetView";
 
-const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
-  const dispatch = useDispatch();
-
-  const savePosition = (type: WidgetType, d: DraggableData) => {
-    dispatch(changeWidgetPosition({ type, x: d.x, y: d.y }));
-  };
-
-  const child = (
-    <>
-      {
-        // сюда вставлять виджеты
-        type === "gif" ? (
-          <></>
-        ) : type === "meditation" ? (
-          <>meditation</>
-        ) : type === "music" ? (
-          <>
-            <MusicWidget />
-          </>
-        ) : type === "news" ? (
-          <>
-            <TarotWidget />
-          </>
-        ) : type === "quote" ? (
-          <>
-            <QuotesWidget />
-          </>
-        ) : (
-          <>default</>
-        )
-      }
-    </>
-  );
-
-  return (
-    <Rnd
-      default={{
-        x: x,
-        y: y,
-      }}
-      bounds="parent"
-      onDragStop={(e, d) => savePosition(type, d)}
-      style={{
-        overflow: "hidden",
-      }}
-      enableResizing={false}
-    >
-      <div
-        className={styles["autofill-block"]}
-        onMouseDown={() => dispatch(raiseWidget(type))}
-      >
-        <WidgetWrapper className={styles["widget-wrapper"]}>
-          <div className={styles["widget-control"]}>
-            <button onClick={() => dispatch(closeWidget(type))}>
-              <Image src="/close.svg" alt="close" width={15} height={15} />
-            </button>
-          </div>
-          {child}
-        </WidgetWrapper>
-      </div>
-    </Rnd>
-  );
-};
+import styles from "./style.module.scss";
 
 type ScreenProps = {
   children: React.ReactNode;
@@ -87,12 +22,25 @@ type ScreenProps = {
 const Screen: React.FC<ScreenProps> = ({ children, className }) => {
   const classes = [styles["screen"], className].join(" ");
 
-  const widgets = useSelector((state: any) => state.screen.widgets);
+  const { user } = useAuth();
 
-  const wallpaper = useSelector((s: any) => s.screen.wallpaper);
+  const widgets = useSelector((s: RootState) => s.screen.widgets);
+
+  const wallpaper = useSelector((s: RootState) => s.screen.wallpaper);
+
+  const { activeWallpaper } = useActiveWallpaper(user?.uid as string);
+
+  useEffect(() => {
+    if (activeWallpaper) {
+      setWallpaper(activeWallpaper);
+    } else {
+      setWallpaper("app-bg.jpeg");
+    }
+    //eslint-disable-next-line
+  }, [activeWallpaper]);
 
   const wallpaperWindowActive = useSelector(
-    (s) => s.screen.wallpaperWindowActive
+    (s: RootState) => s.screen.wallpaperWindowActive
   );
 
   const dispatch = useDispatch();
@@ -101,16 +49,18 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
     () =>
       widgets
         .filter((i: WidgetAbstraction) => i.active)
-        .map((i: WidgetAbstraction) => (
-          <WidgetView
-            key={i.id}
-            x={i.x}
-            y={i.y}
-            id={i.id}
-            active={i.active}
-            type={i.type}
-          />
-        )),
+        .map((i: WidgetAbstraction) => {
+          return (
+            <WidgetView
+              key={i.id}
+              x={i.x}
+              y={i.y}
+              id={i.id}
+              active={i.active}
+              type={i.type}
+            />
+          );
+        }),
     [widgets]
   );
 
@@ -118,6 +68,7 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
 
   useEffect(() => {
     setWallpaper(wallpaper);
+    //eslint-disable-next-line
   }, [wallpaper]);
 
   return (

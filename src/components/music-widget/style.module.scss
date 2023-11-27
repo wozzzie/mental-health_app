@@ -1,62 +1,57 @@
 @mixin embed-placeholder {
-    height: 100px;
-    background-color: #ccc;
+  height: 100px;
+  background-color: #ccc;
 
-    border-radius: 10px;
-    padding: 20px;
-    display: flex;
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
 
-    &-title {
-        color: black;
-        margin: auto;
-        text-align: center;
-    }
-    
+  &-title {
+    color: black;
+    margin: auto;
+    text-align: center;
+  }
 }
 
 .music-widget {
-
-    .music-link {
-        opacity: 0;
-        transition: 0.5s all;
-        display: flex;
-        justify-items: space-around;
-        gap: 10px;
-        margin-top: 10px;
-        max-height: 0;
-        &-input {
-            border-radius: 10px;
-            border: none;
-            display:block;
-            width: 200px;
-            height:30px;
-            padding: 10px;
-        }
-
-        &-btn {
-            display: block;
-            width: 100px;
-            border-radius: 10px;
-            border: none;
-        }
+  .music-link {
+    opacity: 0;
+    transition: 0.5s all;
+    display: flex;
+    justify-items: space-around;
+    gap: 10px;
+    margin-top: 10px;
+    max-height: 0;
+    &-input {
+      border-radius: 10px;
+      border: none;
+      display: block;
+      width: calc(100% - 110px);
+      height: 30px;
+      padding: 10px;
     }
 
-    &:hover .music-link {
-        opacity: 1;
-        max-height: 100px;
+    &-btn {
+      display: block;
+      width: 100px;
+      border-radius: 10px;
+      border: none;
     }
+  }
 
-    .wrong-url-message {
-        @include embed-placeholder;
-        &-title {
-            color: #850404;
-        }
-    }
+  &:hover .music-link {
+    opacity: 1;
+    max-height: 100px;
+  }
 
-    .start-message {
-        @include embed-placeholder;
+  .wrong-url-message {
+    @include embed-placeholder;
+    &-title {
+      color: #850404;
     }
+  }
+
+  .start-message {
+    @include embed-placeholder;
+  }
 }
-
-
-

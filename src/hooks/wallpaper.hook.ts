@@ -4,7 +4,7 @@ export interface BackgroundStyle {
   backgroundImage: string;
 }
 
-const WHITE_BG = "/white.png";
+const WHITE_BG = "/white.svg";
 
 const useWallpaper = () => {
   const [wallpaper, setWallpaper] = useState<string | null>(null);

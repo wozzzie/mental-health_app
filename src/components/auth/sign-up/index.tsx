@@ -11,7 +11,7 @@ import { getAuthError } from "../../../utils/helpers";
 import PageContainer from "../../page-container/pageContainer";
 import { ErrorBoundaryWithMessage } from "../../error-boundary/errorBoundary";
 import LandingButton from "../../landing-button/LandingButton";
-import Divider from "../../divider/divider";
+import Divider from "../../divider/Divider";
 import { RingLoader } from "react-spinners";
 
 import styles from "../style.module.scss";
@@ -67,7 +67,6 @@ const SignUpController = ({ authCallback, page }: Props) => {
       setAuthError("Passwords do not match");
       return;
     }
-
 
     setLoading(true);
     try {
