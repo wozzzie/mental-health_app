@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createRef, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useEffect } from "react";
 import { Transition, TransitionGroup } from "react-transition-group";
 
@@ -50,15 +50,26 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
       widgets
         .filter((i: WidgetAbstraction) => i.active)
         .map((i: WidgetAbstraction) => {
+          const TRANSITION_TIMEOUT = 250;
           return (
-            <WidgetView
+            <Transition
               key={i.id}
-              x={i.x}
-              y={i.y}
-              id={i.id}
-              active={i.active}
-              type={i.type}
-            />
+              mountOnEnter
+              unmountOnExit
+              timeout={TRANSITION_TIMEOUT}
+            >
+              {(s) => (
+                <WidgetView
+                  x={i.x}
+                  y={i.y}
+                  id={i.id}
+                  active={i.active}
+                  type={i.type}
+                  transitionState={s}
+                  transitionTimeout={TRANSITION_TIMEOUT}
+                />
+              )}
+            </Transition>
           );
         }),
     [widgets]
@@ -87,7 +98,9 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
         </WallpaperWindow>
       )}
 
-      <div className={styles["widgets-container"]}>{widgetRender}</div>
+      <div className={styles["widgets-container"]}>
+        <TransitionGroup component={null}>{widgetRender}</TransitionGroup>
+      </div>
     </div>
   );
 };

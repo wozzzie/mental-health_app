@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { DraggableData, Rnd } from "react-rnd";
 import Image from "next/image";
-import { useRef } from "react";
 
 import {
   WidgetAbstraction,
@@ -17,8 +16,20 @@ import QuotesWidget from "../quotes-widget/QuotesWidget";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 
 import styles from "./style.module.scss";
+import { Transition } from "react-transition-group";
 
-const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
+type IncludesTransitionState = {
+  transitionState: string;
+  transitionTimeout: number;
+};
+
+const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
+  x,
+  y,
+  type,
+  transitionState: s,
+  transitionTimeout,
+}) => {
   const dispatch = useDispatch();
 
   const savePosition = (type: WidgetType, d: DraggableData) => {
@@ -62,6 +73,8 @@ const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
       onDragStop={(e, d) => savePosition(type, d)}
       style={{
         overflow: "hidden",
+        transition: `${transitionTimeout}ms opacity`,
+        opacity: s === "entered" || s === "entering" ? 1 : 0,
       }}
       enableResizing={false}
     >
