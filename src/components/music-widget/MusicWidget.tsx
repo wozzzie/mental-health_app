@@ -8,6 +8,7 @@ import { useCallback, useMemo } from "react";
 import { setLink } from "./musicSlice";
 import { useTranslation } from "next-i18next";
 import { RootState } from "../../store/store";
+import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
 
 const MusicWidget = () => {
   const link = useSelector((s: RootState) => s.music.link);
@@ -36,59 +37,61 @@ const MusicWidget = () => {
 
   return (
     <div className={styles["music-widget"]}>
-      {validatedType === "apple" ? (
-        <iframe
-          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-          frameBorder="0"
-          height="175"
-          style={{
-            maxWidth: "660px",
-            width: "100%",
-            overflow: "hidden",
-            borderRadius: "10px",
-          }}
-          scrolling="no"
-          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-          src={(link as string).replace("music", "embed.music")}
-          className={styles["iframe-apple"]}
-        />
-      ) : validatedType === "iheart" ? (
-        <iframe
-          allow="autoplay"
-          width="100%"
-          style={{
-            maxWidth: 660,
-          }}
-          height="300"
-          src={link + "?embed=true"}
-        ></iframe>
-      ) : validatedType === "spotify" ? (
-        <iframe
-          src={
-            (link as string).replace(".com/", ".com/embed/") +
-            "&utm_source=generator&theme=0"
-          }
-          width="100%"
-          height="352"
-          frameBorder="0"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-          loading="lazy"
-        ></iframe>
-      ) : validatedType === "start" ? (
-        <div className={styles["start-message"]}>
-          <h3 className={styles["start-message-title"]}>
-            {t("music.input-placeholder")}
-          </h3>
-        </div>
-      ) : validatedType === "wrong" ? (
-        <div className={styles["wrong-url-message"]}>
-          <h3 className={styles["wrong-url-message-title"]}>
-            {t("music.wrong-url-message-title")}
-          </h3>
-        </div>
-      ) : (
-        ""
-      )}
+      <SmoothResizeBlock>
+        {validatedType === "apple" ? (
+          <iframe
+            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+            frameBorder="0"
+            height="175"
+            style={{
+              maxWidth: "660px",
+              width: "100%",
+              overflow: "hidden",
+              borderRadius: "10px",
+            }}
+            scrolling="no"
+            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+            src={(link as string).replace("music", "embed.music")}
+            className={styles["iframe-apple"]}
+          />
+        ) : validatedType === "iheart" ? (
+          <iframe
+            allow="autoplay"
+            width="100%"
+            style={{
+              maxWidth: 660,
+            }}
+            height="300"
+            src={link + "?embed=true"}
+          ></iframe>
+        ) : validatedType === "spotify" ? (
+          <iframe
+            src={
+              (link as string).replace(".com/", ".com/embed/") +
+              "&utm_source=generator&theme=0"
+            }
+            width="100%"
+            height="352"
+            frameBorder="0"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        ) : validatedType === "start" ? (
+          <div className={styles["start-message"]}>
+            <h3 className={styles["start-message-title"]}>
+              {t("music.input-placeholder")}
+            </h3>
+          </div>
+        ) : validatedType === "wrong" ? (
+          <div className={styles["wrong-url-message"]}>
+            <h3 className={styles["wrong-url-message-title"]}>
+              {t("music.wrong-url-message-title")}
+            </h3>
+          </div>
+        ) : (
+          ""
+        )}
+      </SmoothResizeBlock>
       <div className={styles["music-link"]}>
         <input
           className={styles["music-link-input"]}

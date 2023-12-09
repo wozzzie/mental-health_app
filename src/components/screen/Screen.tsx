@@ -1,9 +1,13 @@
 import { useDispatch, useSelector } from "react-redux";
-import { createRef, useMemo, useRef } from "react";
+import { useMemo } from "react";
 import { useEffect } from "react";
 import { Transition, TransitionGroup } from "react-transition-group";
 
-import { WidgetAbstraction } from "./ScreenSlice";
+import {
+  WidgetAbstraction,
+  toggleWallpaperWindow,
+  toggleWidget,
+} from "./ScreenSlice";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
 import useWallpaper from "@/hooks/wallpaper.hook";
@@ -11,28 +15,27 @@ import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
 import { useAuth } from "../auth/authProvider";
 import { RootState } from "@/store/store";
 import WidgetView from "../widget-view/WidgetView";
-
+import { useGetActiveWallpaperQuery } from "@/apis/active-wallpaper.api";
 import styles from "./style.module.scss";
+import Widgetbar from "../widgetbar/Widgetbar";
 
 type ScreenProps = {
-  children: React.ReactNode;
   className?: string;
 };
 
-const Screen: React.FC<ScreenProps> = ({ children, className }) => {
+const Screen: React.FC<ScreenProps> = ({ className }) => {
   const classes = [styles["screen"], className].join(" ");
 
   const { user } = useAuth();
 
   const widgets = useSelector((s: RootState) => s.screen.widgets);
-
-  const wallpaper = useSelector((s: RootState) => s.screen.wallpaper);
-
-  const { activeWallpaper } = useActiveWallpaper(user?.uid as string);
+  const { data: activeWallpaper } = useGetActiveWallpaperQuery(
+    user?.uid as string
+  );
 
   useEffect(() => {
     if (activeWallpaper) {
-      setWallpaper(activeWallpaper);
+      setWallpaper(activeWallpaper[0].image);
     } else {
       setWallpaper("app-bg.jpeg");
     }
@@ -50,15 +53,22 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
       widgets
         .filter((i: WidgetAbstraction) => i.active)
         .map((i: WidgetAbstraction) => {
+          const TRANSITION_TIMEOUT = 250;
           return (
-            <WidgetView
+            <Transition
               key={i.id}
-              x={i.x}
-              y={i.y}
-              id={i.id}
-              active={i.active}
-              type={i.type}
-            />
+              mountOnEnter
+              unmountOnExit
+              timeout={TRANSITION_TIMEOUT}
+            >
+              {(s) => (
+                <WidgetView
+                  {...i}
+                  transitionState={s}
+                  transitionTimeout={TRANSITION_TIMEOUT}
+                />
+              )}
+            </Transition>
           );
         }),
     [widgets]
@@ -66,10 +76,8 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
 
   const { backgroundStyle, setWallpaper } = useWallpaper();
 
-  useEffect(() => {
-    setWallpaper(wallpaper);
-    //eslint-disable-next-line
-  }, [wallpaper]);
+  const comp = (a: WidgetAbstraction, b: WidgetAbstraction) =>
+    a.type > b.type ? 1 : a.type < b.type ? -1 : 0;
 
   return (
     <div
@@ -79,15 +87,41 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
         ...backgroundStyle,
       }}
     >
-      {children}
+      <Widgetbar
+        buttons={[
+          ...[...widgets].sort(comp).map((i: WidgetAbstraction) => ({
+            img: i.icon,
+            action: () => dispatch(toggleWidget(i.type)),
+            key: i.type,
+            active: i.active,
+          })),
+          {
+            img: {
+              src: "/wallpaper.svg",
+              alt: "Wallpapers",
+            },
+            action: () => dispatch(toggleWallpaperWindow()),
+            key: "wallpaper",
+            active: wallpaperWindowActive,
+          },
+        ]}
+      />
+      <Transition
+        in={wallpaperWindowActive}
+        timeout={250}
+        mountOnEnter
+        unmountOnExit
+      >
+        {(s) => (
+          <WallpaperWindow transitionState={s}>
+            <GalleryWidget />
+          </WallpaperWindow>
+        )}
+      </Transition>
 
-      {wallpaperWindowActive && (
-        <WallpaperWindow>
-          <GalleryWidget />
-        </WallpaperWindow>
-      )}
-
-      <div className={styles["widgets-container"]}>{widgetRender}</div>
+      <div className={styles["widgets-container"]}>
+        <TransitionGroup component={null}>{widgetRender}</TransitionGroup>
+      </div>
     </div>
   );
 };

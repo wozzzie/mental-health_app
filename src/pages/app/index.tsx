@@ -34,12 +34,9 @@ const AppPage = ({
         }
       `}</style>
       <div className={styles["app"]}>
-        <Screen>
-          <Widgetbar />
-        </Screen>
+        <Screen />
       </div>
     </>
-    
   );
 };
 
