@@ -1,6 +1,12 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 
-export type WidgetType = "gif" | "music" | "meditation" | "quote" | "news";
+export type WidgetType =
+  | "gif"
+  | "music"
+  | "meditation"
+  | "quote"
+  | "news"
+  | "tarot";
 
 export type WidgetAbstraction = {
   id: string;
@@ -8,6 +14,10 @@ export type WidgetAbstraction = {
   y: number;
   type: WidgetType;
   active: boolean;
+  icon: {
+    src: string;
+    alt: string; // to be used in useTranslation, i.e. locale path (e.g. "tarot.widget-title", not "Tarot widget")
+  };
 };
 
 interface IDInPayload {
@@ -28,7 +38,6 @@ interface WidgetAbstractionInPayload {
 type InitialStateType = {
   widgets: Array<WidgetAbstraction>;
   wallpaperWindowActive: boolean;
-  wallpaper: string;
 };
 
 const initialState: InitialStateType = {
@@ -39,6 +48,10 @@ const initialState: InitialStateType = {
       y: 0,
       type: "music",
       active: false,
+      icon: {
+        src: "/music.svg",
+        alt: "Music",
+      },
     },
     {
       id: "2",
@@ -46,6 +59,10 @@ const initialState: InitialStateType = {
       y: 0,
       type: "meditation",
       active: false,
+      icon: {
+        src: "/meditation.svg",
+        alt: "Meditation",
+      },
     },
     {
       id: "3",
@@ -53,6 +70,10 @@ const initialState: InitialStateType = {
       y: 0,
       type: "gif",
       active: false,
+      icon: {
+        src: "/gif-widget.svg",
+        alt: "Kittens",
+      },
     },
     {
       id: "4",
@@ -60,6 +81,10 @@ const initialState: InitialStateType = {
       y: 0,
       type: "quote",
       active: false,
+      icon: {
+        src: "/quotes.svg",
+        alt: "Daily Quote",
+      },
     },
     {
       id: "5",
@@ -67,11 +92,25 @@ const initialState: InitialStateType = {
       y: 0,
       type: "news",
       active: false,
+      icon: {
+        src: "/news.svg",
+        alt: "News",
+      },
+    },
+    {
+      id: "6",
+      x: 0,
+      y: 0,
+      type: "tarot",
+      active: false,
+      icon: {
+        src: "/tarot.svg",
+        alt: "Tarot",
+      },
     },
   ],
 
   wallpaperWindowActive: false,
-  wallpaper: "",
 };
 
 type WidgetMutatorInPayload = {
@@ -94,7 +133,6 @@ export const screenSlice = createSlice({
     },
 
     raiseWidget: (state, action: TypeInPayload) => {
-      if (state.widgets.length !== 5) throw new Error("raise");
       const widgetToRaise = state.widgets.find(
         (i) => i.type === action.payload
       );
@@ -107,7 +145,6 @@ export const screenSlice = createSlice({
     },
 
     openWidget: (state, action: TypeInPayload) => {
-      if (state.widgets.length !== 5) throw new Error("open");
       const w = state.widgets.find((i) => i.type === action.payload);
       if (w) w.active = true;
       else console.log("open: widget not found");
@@ -127,10 +164,6 @@ export const screenSlice = createSlice({
         widgetToMutate.x = action.payload.x;
         widgetToMutate.y = action.payload.y;
       }
-    },
-
-    changeWallpaper: (s, action: StringInPayload) => {
-      s.wallpaper = action.payload;
     },
 
     openWallpaperWindow: (s) => {
@@ -153,7 +186,6 @@ export const {
   openWidget,
   changeWidgetPosition,
   toggleWidget,
-  changeWallpaper,
   openWallpaperWindow,
   closeWallpaperWindow,
   toggleWallpaperWindow,
