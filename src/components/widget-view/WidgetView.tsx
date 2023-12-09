@@ -17,6 +17,7 @@ import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 
 import styles from "./style.module.scss";
 import { Transition } from "react-transition-group";
+import TarotCard from "../tarot-card/TarotCard";
 
 type IncludesTransitionState = {
   transitionState: string;
@@ -29,6 +30,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
   type,
   transitionState: s,
   transitionTimeout,
+  icon,
 }) => {
   const dispatch = useDispatch();
 
@@ -48,7 +50,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
           <>
             <MusicWidget />
           </>
-        ) : type === "news" ? (
+        ) : type === "tarot" ? (
           <>
             <TarotWidget />
           </>
@@ -56,6 +58,8 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
           <>
             <QuotesWidget />
           </>
+        ) : type === "news" ? (
+          <>news</>
         ) : (
           <>default</>
         )
@@ -84,6 +88,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       >
         <WidgetWrapper className={styles["widget-wrapper"]}>
           <div className={styles["widget-control"]}>
+            <Image src={icon.src} alt={icon.alt} width={20} height={20} />
             <button onClick={() => dispatch(closeWidget(type))}>
               <Image src="/close.svg" alt="close" width={15} height={15} />
             </button>
