@@ -7,7 +7,7 @@ const useActiveWallpaper = (userId: string) => {
   const getActiveWallpaper = async (userId: string) => {
     try {
       const res = await fetch(
-        `http://localhost:3001/api/wallpaper?userId=${userId}`
+        `http://localhost:3001/api/wallpaper?userid=${userId}`
       );
       if (!res.ok) {
         throw new Error(await res.text());
