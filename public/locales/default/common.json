@@ -85,5 +85,12 @@
     "choose": "choose a file",
     "max-size": "100MB max file size.",
     "type-error": "File type is not supported. Please use JPG/JPEG/PNG types."
+  },
+  "tarot-widget": {
+    "start-title": "Curious to discover the answer to your question?",
+    "start-text": "Let the Tarot cards weave their magic and reveal the secrets you seek!",
+    "input": "Enter your question",
+    "card-reversed": "(Reversed)",
+    "meanings": "Meanings:"
   }
 }
