@@ -2,20 +2,19 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { auth } from "@/firebase/firebaseClient";
 import { useDispatch } from "react-redux";
-import { changeWallpaper } from "../screen/ScreenSlice";
 import DragNDrop from "../drag-n-drop/DragNDrop";
 import { ImageData } from "@/types/types";
 
 import styles from "./style.module.scss";
 import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
-
+import { useChangeActiveWallpaperMutation } from "@/apis/active-wallpaper.api";
+import { useAuth } from "../auth/authProvider";
 const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
-  const dispatch = useDispatch();
-  const user = auth.currentUser?.uid;
-  const { changeActiveWallpaper } = useActiveWallpaper(user as string);
+  const { user } = useAuth();
+  const [changeActiveWallpaper, result] = useChangeActiveWallpaperMutation();
 
   const handleAddBg = (file: File) => {
     const allowedExtensions: string[] = ["jpeg", "jpg", "png"];
@@ -48,8 +47,7 @@ const GalleryWidget = () => {
 
   const handleImageClick = (imageSource: string, imageId: string) => {
     console.log(images);
-    dispatch(changeWallpaper(imageSource));
-    changeActiveWallpaper(imageId);
+    changeActiveWallpaper({ imageId, userId: user?.uid as string });
   };
 
   const handleAddImage = () => {
