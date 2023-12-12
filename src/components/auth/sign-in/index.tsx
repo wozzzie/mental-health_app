@@ -13,7 +13,7 @@ import PageContainer from "../../page-container/pageContainer";
 import { ErrorBoundaryWithMessage } from "../../error-boundary/errorBoundary";
 import Checkbox from "../../checkbox/Checkbox";
 import LandingButton from "../../landing-button/LandingButton";
-import Divider from "../../divider/Divider";
+import Divider from "@/components/divider/Divider";
 
 import styles from "../style.module.scss";
 
