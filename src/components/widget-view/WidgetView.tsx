@@ -72,6 +72,8 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       default={{
         x: x,
         y: y,
+        width: "auto",
+        height: "auto",
       }}
       bounds="parent"
       onDragStop={(e, d) => savePosition(type, d)}
@@ -88,7 +90,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       >
         <WidgetWrapper className={styles["widget-wrapper"]}>
           <div className={styles["widget-control"]}>
-            <Image src={icon.src} alt={icon.alt} width={20} height={20} />
+            <Image src={icon.src} alt={icon.alt} width={18} height={18} />
             <button onClick={() => dispatch(closeWidget(type))}>
               <Image src="/close.svg" alt="close" width={15} height={15} />
             </button>

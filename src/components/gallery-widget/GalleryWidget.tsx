@@ -65,7 +65,7 @@ const GalleryWidget = () => {
       formData.append("image", file);
 
       if (user) {
-        formData.append("uid", user);
+        formData.append("uid", user.uid);
       }
 
       const response = await fetch("http://localhost:3001/api/images/uploads", {
