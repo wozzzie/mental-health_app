@@ -15,7 +15,7 @@ type WidgetButton = {
     src: string;
     alt: string;
   };
-  action: Function;
+  action: () => void;
   key: any;
   active: boolean;
 };
@@ -30,24 +30,20 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
 
   const [overflow, setOverflow] = useState<boolean>(false);
 
-  const timeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const disableTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleButtonMouseOver = () => {
-    if (timeout.current !== null) clearTimeout(timeout.current);
+    if (disableTimeout.current !== null) clearTimeout(disableTimeout.current);
     if (wrapperActive) setOverflow(true);
   };
 
   const handleButtonMouseOut = () => {
-    timeout.current = setTimeout(() => {
+    disableTimeout.current = setTimeout(() => {
       setOverflow(false);
-      timeout.current = null;
+      disableTimeout.current = null;
       console.log("time");
     }, 500);
   };
-
-  useEffect(() => {
-    console.log("overflow ", overflow);
-  }, [overflow]);
 
   const wrapperClasses = useMemo(
     () =>
@@ -148,7 +144,7 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                 styles["widget-button"] +
                 (i.active ? " " + styles["widget-button_active"] : "")
               }
-              onMouseOver={handleButtonMouseOver}
+              onMouseOver={() => (!i.active ? handleButtonMouseOver() : null)}
               onMouseOut={handleButtonMouseOut}
             >
               <Image
@@ -158,7 +154,20 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                 height={24}
                 title={i.img.alt}
               />
-              <div className={styles["widget-button__title"]}>{i.img.alt}</div>
+              <div
+                className={styles["widget-button__title"]}
+                style={
+                  i.active
+                    ? {
+                        opacity: 0,
+                        visibility: "hidden",
+                        transition: "none",
+                      }
+                    : {}
+                }
+              >
+                {i.img.alt}
+              </div>
             </div>
           ))}
         </div>

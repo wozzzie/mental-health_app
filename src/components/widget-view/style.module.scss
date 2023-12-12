@@ -43,6 +43,9 @@
     position: relative;
     display: flex;
     justify-items: space-between;
+    & + * {
+      margin: auto;
+    }
     button {
       background: none;
       border: none;

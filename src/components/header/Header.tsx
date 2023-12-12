@@ -9,7 +9,7 @@ import Logo from "./logo.svg";
 import Button from "../button/Button";
 import LandingButton from "../landing-button/LandingButton";
 import PageContainer from "../page-container/pageContainer";
-import Divider from "../divider/divider";
+import Divider from "../divider/Divider";
 import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
 import { ErrorBoundaryWithMessage } from "../error-boundary/errorBoundary";
 import { logout } from "../../firebase/firebaseClient";
@@ -36,8 +36,8 @@ const Header = () => {
   };
 
   const handlePushToApp = () => {
-    router.push(ROUTES.APP)
-  }
+    router.push(ROUTES.APP);
+  };
 
   return (
     // <div
@@ -89,33 +89,37 @@ const Header = () => {
     // </div>
     <>
       <header className={styles["top-navigation"]}>
-            <PageContainer flex classes={styles["top-navigation-wrapper"]}>
-            <Logo className={styles["top-navigation__logo"]}/>
-            <nav className={styles["top-navigation-menu"]}>
-              <Link href={ROUTES.WELCOME+"#home"} text={t("header.link-home")}/>
-              <Link href={ROUTES.WELCOME+"#features"} text={t("header.link-features")}/>
-              <Link href={ROUTES.WELCOME+"#"} text={t("header.link-blog")}/>
-              <ErrorBoundaryWithMessage >
-                <LanguageSwitcher />
-              </ErrorBoundaryWithMessage>
-            </nav>
-            <nav className={styles["sign-buttons"]}>
-              <LandingButton
-                text={user ? t("header.btn-signout") : t("header.btn-signin")}
-                variant="text"
-                onClick={user ? handleSignOut : handleSignIn}
-              
-                />
-                <LandingButton
-                text={user ? t("header.btn-app-page") : t("header.btn-signup")}
-                onClick={user ? handlePushToApp :handleSignUp}
-              
-                />
-            </nav>
-            </PageContainer> 
-            <PageContainer>
-              <Divider/> 
-            </PageContainer>   
+        <PageContainer flex classes={styles["top-navigation-wrapper"]}>
+          <Logo className={styles["top-navigation__logo"]} />
+          <nav className={styles["top-navigation-menu"]}>
+            <Link
+              href={ROUTES.WELCOME + "#home"}
+              text={t("header.link-home")}
+            />
+            <Link
+              href={ROUTES.WELCOME + "#features"}
+              text={t("header.link-features")}
+            />
+            <Link href={ROUTES.WELCOME + "#"} text={t("header.link-blog")} />
+            <ErrorBoundaryWithMessage>
+              <LanguageSwitcher />
+            </ErrorBoundaryWithMessage>
+          </nav>
+          <nav className={styles["sign-buttons"]}>
+            <LandingButton
+              text={user ? t("header.btn-signout") : t("header.btn-signin")}
+              variant="text"
+              onClick={user ? handleSignOut : handleSignIn}
+            />
+            <LandingButton
+              text={user ? t("header.btn-app-page") : t("header.btn-signup")}
+              onClick={user ? handlePushToApp : handleSignUp}
+            />
+          </nav>
+        </PageContainer>
+        <PageContainer>
+          <Divider />
+        </PageContainer>
       </header>
     </>
   );
