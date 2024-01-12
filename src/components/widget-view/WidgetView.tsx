@@ -88,9 +88,8 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
         className={styles["autofill-block"]}
         onMouseDown={() => dispatch(raiseWidget(type))}
       >
-        <WidgetWrapper className={styles["widget-wrapper"]}>
+        <WidgetWrapper hideOnBlur className={styles["widget-wrapper"]}>
           <div className={styles["widget-control"]}>
-            <Image src={icon.src} alt={icon.alt} width={18} height={18} />
             <button onClick={() => dispatch(closeWidget(type))}>
               <Image src="/close.svg" alt="close" width={15} height={15} />
             </button>
