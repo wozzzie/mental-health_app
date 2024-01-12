@@ -10,6 +10,7 @@ import {
 } from "@/apis/tarot.api";
 import { SwitchTransition, Transition } from "react-transition-group";
 import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
+import WidgetInput from "../widget-input/WidgetInput";
 
 const TarotWidget = () => {
   const TRANSITION_TIMEOUT = 300;
@@ -82,8 +83,7 @@ const TarotWidget = () => {
                     onSubmit={handleSubmit}
                     className={styles["tarot-widget-start-form"]}
                   >
-                    <input
-                      type="text"
+                    <WidgetInput
                       name="tarot-widget-start__form-input"
                       className={styles["tarot-widget-start__form-input"]}
                       placeholder={t("tarot-widget.input")}

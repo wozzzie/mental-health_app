@@ -9,6 +9,8 @@ import { setLink } from "./musicSlice";
 import { useTranslation } from "next-i18next";
 import { RootState } from "../../store/store";
 import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
+import WidgetInput from "../widget-input/WidgetInput";
+import { SwitchTransition, CSSTransition } from "react-transition-group";
 
 const MusicWidget = () => {
   const link = useSelector((s: RootState) => s.music.link);
@@ -18,6 +20,7 @@ const MusicWidget = () => {
   const dispatch = useDispatch();
 
   const { t } = useTranslation();
+  const transitionRef = useRef(null);
 
   const validatedType = useMemo<
     "start" | "apple" | "spotify" | "iheart" | "wrong"
@@ -38,65 +41,99 @@ const MusicWidget = () => {
   return (
     <div className={styles["music-widget"]}>
       <SmoothResizeBlock>
-        {validatedType === "apple" ? (
-          <iframe
-            allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-            frameBorder="0"
-            height="175"
-            style={{
-              maxWidth: "660px",
-              width: "100%",
-              overflow: "hidden",
-              borderRadius: "10px",
+        <SwitchTransition>
+          <CSSTransition
+            key={validatedType}
+            timeout={300}
+            classNames={{
+              enter: styles["transit-screen-enter"],
+              enterActive: styles["transit-screen-enter-active"],
+              exit: styles["transit-screen-exit"],
+              exitActive: styles["transit-screen-exit-active"],
             }}
-            scrolling="no"
-            sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
-            src={(link as string).replace("music", "embed.music")}
-            className={styles["iframe-apple"]}
-          />
-        ) : validatedType === "iheart" ? (
-          <iframe
-            allow="autoplay"
-            width="100%"
-            style={{
-              maxWidth: 660,
-            }}
-            height="300"
-            src={link + "?embed=true"}
-          ></iframe>
-        ) : validatedType === "spotify" ? (
-          <iframe
-            src={
-              (link as string).replace(".com/", ".com/embed/") +
-              "&utm_source=generator&theme=0"
-            }
-            width="100%"
-            height="352"
-            frameBorder="0"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            loading="lazy"
-          ></iframe>
-        ) : validatedType === "start" ? (
-          <div className={styles["start-message"]}>
-            <h3 className={styles["start-message-title"]}>
-              {t("music.input-placeholder")}
-            </h3>
-          </div>
-        ) : validatedType === "wrong" ? (
-          <div className={styles["wrong-url-message"]}>
-            <h3 className={styles["wrong-url-message-title"]}>
-              {t("music.wrong-url-message-title")}
-            </h3>
-          </div>
-        ) : (
-          ""
-        )}
+            mountOnEnter
+            unmountOnExit
+            nodeRef={transitionRef}
+          >
+            {validatedType === "apple" ? (
+              <iframe
+                allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+                frameBorder="0"
+                height="175"
+                style={{
+                  maxWidth: "660px",
+                  width: "100%",
+                  overflow: "hidden",
+                  borderRadius: "10px",
+                }}
+                scrolling="no"
+                sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+                src={(link as string).replace("music", "embed.music")}
+                className={
+                  styles["iframe-apple"] + " " + styles["transit-screen"]
+                }
+                ref={transitionRef}
+              />
+            ) : validatedType === "iheart" ? (
+              <iframe
+                allow="autoplay"
+                width="100%"
+                style={{
+                  maxWidth: 660,
+                }}
+                height="300"
+                src={link + "?embed=true"}
+                className={styles["transit-screen"]}
+                ref={transitionRef}
+              ></iframe>
+            ) : validatedType === "spotify" ? (
+              <iframe
+                src={
+                  (link as string).replace(".com/", ".com/embed/") +
+                  "&utm_source=generator&theme=0"
+                }
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className={styles["transit-screen"]}
+                ref={transitionRef}
+              ></iframe>
+            ) : validatedType === "start" ? (
+              <div
+                className={
+                  styles["start-message"] + " " + styles["transit-screen"]
+                }
+                ref={transitionRef}
+              >
+                <h3 className={styles["start-message-title"]}>
+                  {t("music.input-placeholder")}
+                </h3>
+              </div>
+            ) : validatedType === "wrong" ? (
+              <div
+                className={
+                  styles["wrong-url-message"] + " " + styles["transit-screen"]
+                }
+                ref={transitionRef}
+              >
+                <h3 className={styles["wrong-url-message-title"]}>
+                  {t("music.wrong-url-message-title")}
+                </h3>
+              </div>
+            ) : (
+              <></>
+            )}
+          </CSSTransition>
+        </SwitchTransition>
       </SmoothResizeBlock>
       <div className={styles["music-link"]}>
-        <input
+        <WidgetInput
           className={styles["music-link-input"]}
           placeholder={"URL"}
-          ref={inputRef}
+          elementRef={inputRef}
+          name="music-link-input"
         />
         <button
           className={styles["music-link-btn"]}

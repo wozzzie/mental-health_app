@@ -1,7 +1,9 @@
 import styles from "./style.module.scss";
 import Image from "next/image";
 import useCardAnimation from "@/hooks/cardAnimation.hook";
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import useWallpaper from "@/hooks/wallpaper.hook";
+import Skeleton from "./tarot-skeleton.svg";
 type Props = {
   img: {
     src: string;
@@ -20,6 +22,12 @@ const TarotCard = ({ img, className, reversed = false }: Props) => {
 
   useCardAnimation(tarotRef, hoverRef);
 
+  const [imageLoaded, setImageLoaded] = useState<boolean>(false);
+
+  const handleLoad = () => {
+    console.log("7788");
+    setImageLoaded(true);
+  };
   const rotatedStyles = useMemo<string>(
     () => (reversed ? " " + styles["tarot-card_rotated"] : ""),
     [reversed]
@@ -41,7 +49,18 @@ const TarotCard = ({ img, className, reversed = false }: Props) => {
           width={100}
           height={171}
           className={styles["tarot-card-front"] + rotatedStyles}
+          style={
+            imageLoaded
+              ? {}
+              : {
+                  visibility: "hidden",
+                  position: "absolute",
+                  zIndex: -30498034,
+                }
+          }
+          onLoadingComplete={handleLoad}
         />
+        {!imageLoaded && <Skeleton width={100} height={171} />}
         <Image
           src={tarotBack}
           alt={"tarot-card-back"}
