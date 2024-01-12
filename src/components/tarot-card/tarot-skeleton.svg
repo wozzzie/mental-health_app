@@ -9,7 +9,7 @@
    id="svg1"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
-   fill="#fff">
+   >
 <defs
    id="defs1" />
 <defs>
@@ -76,6 +76,12 @@
       }
       .stop3 {
          stop-color: #ffffff00;
+      }
+
+      #svg1 {
+         overflow: hidden;
+         fill:#000000;
+         background-color:#bbb;
       }
    </style>
 
