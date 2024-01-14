@@ -16,7 +16,7 @@ const LanguageSwitcher: React.FC = () => {
   const dropdownOptions: Option[] =
     otherLocales?.map((locale) => ({
       value: locale,
-      label: locale === "En" ? "English" : locale === "Ru" ? "Russian" : locale,
+      label: locale === "en" ? "English" : locale === "ru" ? "Russian" : locale,
     })) ?? [];
 
   const handleLanguageChange = (selected: Option) => {
@@ -30,7 +30,7 @@ const LanguageSwitcher: React.FC = () => {
     <Dropdown
       options={dropdownOptions}
       onChange={handleLanguageChange}
-      value={activeLocale}
+      value={activeLocale?.toUpperCase()}
       placeholder="Select Language"
       className={classes["dropdown-root"]}
       menuClassName={classes["dropdown-menu"]}

@@ -4,16 +4,16 @@ import { GetStaticProps, GetStaticPropsContext } from "next";
 import Header from "@/components/header/Header";
 import Footer from "@/components/footer/Footer";
 import { ErrorBoundaryWithMessage } from "@/components/error-boundary/errorBoundary";
-import TermsWrapper from "@/components/terms-wrapper/TermsWrapper";
+import PolicyWrapper from "@/components/policy-wrapper/PolicyWrapper";
 
-const TermsPage = () => {
+const PolicyPage = () => {
   return (
     <>
       <ErrorBoundaryWithMessage>
         <Header />
       </ErrorBoundaryWithMessage>
       <ErrorBoundaryWithMessage>
-        <TermsWrapper />
+        <PolicyWrapper />
       </ErrorBoundaryWithMessage>
       <ErrorBoundaryWithMessage>
         <Footer />
@@ -35,4 +35,4 @@ export const getStaticProps: GetStaticProps = async (
   };
 };
 
-export default TermsPage;
+export default PolicyPage;
