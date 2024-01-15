@@ -39,7 +39,16 @@ const MusicWidget = () => {
   );
 
   return (
-    <div className={styles["music-widget"]}>
+    <div
+      className={styles["music-widget"]}
+      style={
+        validatedType === "start"
+          ? {
+              maxWidth: 393,
+            }
+          : {}
+      }
+    >
       <SmoothResizeBlock>
         <SwitchTransition>
           <CSSTransition
@@ -58,7 +67,6 @@ const MusicWidget = () => {
             {validatedType === "apple" ? (
               <iframe
                 allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
-                frameBorder="0"
                 height="175"
                 style={{
                   maxWidth: "660px",
@@ -66,7 +74,6 @@ const MusicWidget = () => {
                   overflow: "hidden",
                   borderRadius: "10px",
                 }}
-                scrolling="no"
                 sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
                 src={(link as string).replace("music", "embed.music")}
                 className={
@@ -94,7 +101,6 @@ const MusicWidget = () => {
                 }
                 width="100%"
                 height="352"
-                frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
                 loading="lazy"
                 className={styles["transit-screen"]}
@@ -133,6 +139,7 @@ const MusicWidget = () => {
           className={styles["music-link-input"]}
           placeholder={"URL"}
           elementRef={inputRef}
+          small={false}
           name="music-link-input"
         />
         <button
