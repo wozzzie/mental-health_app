@@ -5,9 +5,14 @@ import styles from "./style.module.scss";
 type Props = {
   children: ReactNode;
   timeout?: number;
+  classNames?: string;
 };
 
-const SmoothResizeBlock: FC<Props> = ({ children, timeout = 300 }) => {
+const SmoothResizeBlock: FC<Props> = ({
+  children,
+  timeout = 300,
+  classNames = "",
+}) => {
   const divRef = useRef<HTMLDivElement>(null);
   const innerDivRef = useRef<HTMLDivElement>(null);
 
@@ -39,11 +44,11 @@ const SmoothResizeBlock: FC<Props> = ({ children, timeout = 300 }) => {
       subtree: true,
     });
     return () => resizeObserver.disconnect();
-  }, []);
+  }, [divRef.current]);
 
   return (
     <div
-      className={styles["smooth-resize-block"]}
+      className={styles["smooth-resize-block"] + " " + classNames}
       ref={divRef}
       style={{
         transition: `${timeout}ms height, ${timeout}ms width`,
