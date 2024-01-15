@@ -275,6 +275,23 @@
       }
     ]
   },
+  "clock": {
+    "greeting": "Hi, ",
+    "months": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ]
+  },
   "tarot-widget": {
     "start-title": "Curious to discover the answer to your question?",
     "start-text": "Let the Tarot cards weave their magic and reveal the secrets you seek!",

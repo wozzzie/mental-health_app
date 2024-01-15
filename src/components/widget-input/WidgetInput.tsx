@@ -19,7 +19,7 @@ const WidgetInput: FC<Props> = ({
 }) => {
   return (
     <input
-      {...{ ...props, onChange, small }}
+      {...{ ...props, onChange }}
       type="text"
       className={
         styles["widget-input"] +
