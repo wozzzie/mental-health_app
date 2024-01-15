@@ -1,7 +1,7 @@
 .widget {
   display: grid;
   grid-template-rows: 0.5fr 2fr 0.5fr;
-  position: static;
+  position: relative;
   width: 64px;
   max-height: 872px;
   max-width: 64px;
