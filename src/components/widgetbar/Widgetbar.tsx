@@ -147,13 +147,7 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
               onMouseOver={() => (!i.active ? handleButtonMouseOver() : null)}
               onMouseOut={handleButtonMouseOut}
             >
-              <Image
-                src={i.img.src}
-                alt={i.img.alt}
-                width={24}
-                height={24}
-                title={i.img.alt}
-              />
+              <Image src={i.img.src} alt={i.img.alt} width={24} height={24} />
               <div
                 className={styles["widget-button__title"]}
                 style={
