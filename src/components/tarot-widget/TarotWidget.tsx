@@ -22,6 +22,7 @@ const TarotWidget = () => {
     error,
     isLoading,
     isSuccess,
+    isError,
   } = useGetAllCardsQuery();
 
   const cards = useMemo<TarotCardType[] | null>(
@@ -40,7 +41,9 @@ const TarotWidget = () => {
     }
   }, [cards]);
 
-  const [widgetState, setWidgetState] = useState<"start" | "card">("start");
+  const [widgetState, setWidgetState] = useState<"start" | "card" | "error">(
+    "start"
+  );
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
@@ -51,6 +54,12 @@ const TarotWidget = () => {
       console.log(randomCard);
     }
   }, [randomCard]);
+
+  useEffect(() => {
+    if (isError) {
+      setWidgetState("error");
+    }
+  }, [isError]);
 
   return (
     <WidgetWrapper>
@@ -132,6 +141,19 @@ const TarotWidget = () => {
                       ))}
                     </ul>
                   </div>
+                </div>
+              ) : widgetState === "error" ? (
+                <div
+                  className={
+                    styles["tarot-widget-error"] + " " + styles["tarot-widget"]
+                  }
+                >
+                  <h2 className={styles["tarot-widget-error__title"]}>
+                    {t("tarot-widget.error.title")}
+                  </h2>
+                  <h3 className={styles["tarot-widget-error__subtitle"]}>
+                    {t("tarot-widget.error.subtitle")}
+                  </h3>
                 </div>
               ) : (
                 ""

@@ -297,6 +297,10 @@
     "start-text": "Let the Tarot cards weave their magic and reveal the secrets you seek!",
     "input": "Enter your question",
     "card-reversed": "(Reversed)",
-    "meanings": "Meanings:"
+    "meanings": "Meanings:",
+    "error": {
+      "title": "Uh-oh! Tarot server on vacation!",
+      "subtitle": "Try again when the stars align!"
+    }
   }
 }

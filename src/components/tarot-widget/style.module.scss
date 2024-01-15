@@ -80,4 +80,11 @@
       margin-left: 30px;
     }
   }
+
+  &-error {
+    &__title {
+      font-size: 30px;
+      color: #7a0202;
+    }
+  }
 }
