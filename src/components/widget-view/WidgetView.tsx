@@ -18,6 +18,7 @@ import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import styles from "./style.module.scss";
 import { Transition } from "react-transition-group";
 import TarotCard from "../tarot-card/TarotCard";
+import ClockWidget from "../clock-widget/ClockWidget";
 
 type IncludesTransitionState = {
   transitionState: string;
@@ -43,7 +44,9 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       {
         // сюда вставлять виджеты
         type === "gif" ? (
-          <></>
+          <>
+            <ClockWidget />
+          </>
         ) : type === "meditation" ? (
           <>meditation</>
         ) : type === "music" ? (
