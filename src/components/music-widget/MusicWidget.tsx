@@ -39,17 +39,8 @@ const MusicWidget = () => {
   );
 
   return (
-    <div
-      className={styles["music-widget"]}
-      style={
-        validatedType === "start"
-          ? {
-              maxWidth: 393,
-            }
-          : {}
-      }
-    >
-      <SmoothResizeBlock>
+    <div className={styles["music-widget"]}>
+      <SmoothResizeBlock classNames={styles["content-block"]}>
         <SwitchTransition>
           <CSSTransition
             key={validatedType}
@@ -135,13 +126,15 @@ const MusicWidget = () => {
         </SwitchTransition>
       </SmoothResizeBlock>
       <div className={styles["music-link"]}>
-        <WidgetInput
-          className={styles["music-link-input"]}
-          placeholder={"URL"}
-          elementRef={inputRef}
-          small={false}
-          name="music-link-input"
-        />
+        <div className={styles["music-link__wrapper"]}>
+          <WidgetInput
+            className={styles["music-link-input"]}
+            placeholder={"URL"}
+            elementRef={inputRef}
+            small={false}
+            name="music-link-input"
+          />
+        </div>
         <button
           className={styles["music-link-btn"]}
           onClick={() => dispatch(setLink(inputRef?.current?.value || ""))}
