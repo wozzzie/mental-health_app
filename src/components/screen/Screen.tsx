@@ -14,6 +14,7 @@ import GalleryWidget from "../gallery-widget/GalleryWidget";
 import TarotWidget from "../tarot-widget/TarotWidget";
 import useWallpaper from "@/hooks/wallpaper.hook";
 import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
+import HoroscopeWidget from "../horoscope-widget/Horoscope";
 
 const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
       {
         // сюда вставлять виджеты
         type === "gif" ? (
-          <></>
+          <HoroscopeWidget />
         ) : type === "meditation" ? (
           <>meditation</>
         ) : type === "music" ? (

@@ -18,6 +18,12 @@ const nextConfig = {
         port: "3001",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "newastro.vercel.app",
+        port: "",
+        pathname: "/**",
+      },
     ],
   },
   i18n,
