@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
-import { auth } from "@/firebase/firebaseClient";
 import { ZodiacSignData } from "@/types/types";
 import ChooseSignWindow from "./ChooseSignWindow";
 
 import styles from "./style.module.scss";
+import { useAuth } from "../auth/authProvider";
 
 const HoroscopeWidget: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
   const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
   const [zodiacSigns, setZodiacSigns] = useState<string[]>([]);
   const [data, setData] = useState<ZodiacSignData | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
+  const [loading, setLoading] = useState<boolean>(true);
   const [userSelected, setUserSelected] = useState<boolean>(false);
   const [initialRender, setInitialRender] = useState<boolean>(true);
 
-  const user = auth.currentUser?.uid;
+  const { user } = useAuth();
+  const userUid = user?.uid;
 
   const checkUserSign = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/horoscope/check-user-sign?uid=${user}`,
+        `http://localhost:3001/api/horoscope/check-user-sign?uid=${userUid}`,
         { method: "GET" }
       );
 
@@ -42,7 +43,7 @@ const HoroscopeWidget: React.FC = () => {
 
   const saveZodiacSign = async (sign: string) => {
     try {
-      const signData = { sign, user };
+      const signData = { sign, userUid };
 
       const response = await fetch(
         "http://localhost:3001/api/horoscope/zodiac-sign",
@@ -64,7 +65,7 @@ const HoroscopeWidget: React.FC = () => {
   const getHoroscope = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3001/api/horoscope/get-horoscope?uid=${user}`,
+        `http://localhost:3001/api/horoscope/get-horoscope?uid=${userUid}`,
         { method: "GET" }
       );
 
@@ -121,7 +122,7 @@ const HoroscopeWidget: React.FC = () => {
 
   return (
     <WidgetWrapper className={styles["widget__wrapper"]}>
-      {selectedZodiac || userSelected ? (
+      {selectedZodiac || userSelected || loading ? (
         <>
           {loading ? (
             <div className={styles["horoscope__loading"]}>
