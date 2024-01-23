@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="100"
+   height="171"
+   viewBox="0 0 26.458333 45.24375"
+   version="1.1"
+   id="svg1"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   >
+<defs
+   id="defs1" />
+<defs>
+   <linearGradient id="Gradient1">
+      <stop class="stop1" offset="0%" />
+      <stop class="stop2" offset="50%" />
+      <stop class="stop3" offset="100%" />
+   </linearGradient>
+</defs>
+<g
+   id="layer1">
+   <grid-template-rows
+      style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+      id="rect1"
+      width="26.458332"
+      height="45.243748"
+      x="5.0395579e-07"
+      y="5.0395579e-07" />
+   <rect
+      style="fill:#000000;fill-opacity:0.33333334;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+      id="rect2"
+      width="21.166666"
+      height="33.072918"
+      x="2.6458337"
+      y="2.6458337"
+      rx="2.6458333"
+      ry="2.6458333" />
+   <rect
+      style="fill:#000000;fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+      id="rect2-6"
+      width="21.166666"
+      height="5.2916665"
+      x="2.6458337"
+      y="37.041668"
+      rx="2.6458333"
+      ry="2.6458333" ></rect>
+   <rect
+      style="fill:#000000;fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+      id="path2"
+      transform="matrix(0.97849409,0,0,0.97777009,5.7095436,11.472797)" />
+   </g>
+   <rect class="anim-rect"></rect>
+   <style>
+      @keyframes skeleton {
+         from {
+            transform:translateX(-100px);
+         }
+         to {
+            transform: translateX(50px);
+         }
+      }
+      .anim-rect {
+         fill: url(#Gradient1);
+         transform: translateX(-100px);
+         animation: skeleton 1s infinite;
+         width: 100px;
+         height: 100px;
+      }
+      .stop1 {
+         stop-color: #ffffff00;
+      }
+      .stop2 {
+         stop-color: #ffffff55;
+      }
+      .stop3 {
+         stop-color: #ffffff00;
+      }
+
+      #svg1 {
+         overflow: hidden;
+         fill:#000000;
+         background-color:#bbb;
+      }
+   </style>
+
+</svg>

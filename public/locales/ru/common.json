@@ -77,7 +77,7 @@
   },
   "music": {
     "wrong-url-message-title": "Введена неверная ссылка",
-    "input-placeholder": "Введите ссылку Spotify или Apple Music",
+    "input-placeholder": "Введите ссылку Spotify, IHeart или Apple Music",
     "start-message-title": "Музыкальный виджет"
   },
   "drag-n-drop": {
@@ -85,5 +85,222 @@
     "choose": "выберите файл",
     "max-size": "100MB макстимальный размер файла.",
     "type-error": "Тип файла не поддерживается. Используйте JPG/JPEG/PNG формат."
+  },
+  "policy": {
+    "title": "Privacy Policy for Balance Vista",
+    "date": "Last Updated:",
+    "paragraphs": [
+      {
+        "title": "Introduction",
+        "text": [
+          "This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act.",
+          {"src":"111", "text":"111"}
+        ]
+      },
+      {
+        "title": "Information We Collect",
+        "text": [
+          "a. Personal Information: We may collect personal information, such as your name, email address, postal address, and phone number, when you provide it voluntarily, for example, when you contact us or create an account.",
+          "b. Automatically Collected Information: We may also automatically collect certain information, including your IP address, browser type, device type, and operating system, when you visit Balance Vista. This information helps us improve our website and services."
+        ]
+      },
+      {
+        "title": "Use of Your Information",
+        "text": [
+          "a. We collect and use your personal information for the following purposes:",
+          {
+            "title": "",
+            "text": [
+              "i. To provide and personalize our services to you.",
+              "ii. To process your transactions.",
+              "iii. To communicate with you, respond to your inquiries, and provide customer support.",
+              "iv. To improve our website and services",
+              "v. To send you promotional and marketing materials if you have consented.",
+              "vi. To comply with legal obligations."
+            ]
+          },
+          "b. We will not use your personal information for purposes other than those outlined in this Privacy Policy without your consent."
+        ]
+      },
+      {
+        "title": "Data Sharing and Disclosure",
+        "text": [
+          "a. We may share your personal information with:",
+          {
+            "title": "",
+            "text": [
+              "i. Service providers who assist us in providing our services.",
+              "ii. Law enforcement or other government authorities in response to a legal request.",
+              "iii. Affiliates or business partners when you have given us your consent."
+            ]
+          },
+          "b. We will not sell, trade, or otherwise transfer your personal information to third parties without your consent."
+        ]
+      },
+      {
+        "title": "Cookies and Tracking Technologies",
+        "text": [
+          "We may use cookies and similar tracking technologies to collect information about your browsing activity on our website. You can manage your cookie preferences through your browser settings."
+        ]
+      },
+      {
+        "title": "Data Security",
+        "text": [
+          "We take reasonable measures to protect your personal information from unauthorized access, disclosure, or alteration. However, please be aware that no data transmission over the Internet can be entirely secure, and we cannot guarantee the security of your information."
+        ]
+      },
+      {
+        "title": "Your Rights",
+        "text": [
+          "a. You have the right to:",
+          {
+            "title": "",
+            "text": [
+              "i. Access your personal information.",
+              "ii. Rectify inaccuracies in your personal information.",
+              "iii. Delete your personal information.",
+              "iv. Withdraw your consent for data processing.",
+              "v. Object to the processing of your personal information."
+            ]
+          },
+          "b. To exercise your rights or if you have questions about your personal data, please contact us at hello.webmarvels@gmail.com"
+        ]
+      },
+      {
+        "title": "Changes to this Privacy Policy",
+        "text": [
+          "We may update this Privacy Policy occasionally to reflect changes in our practices or for legal reasons. The most recent version will be posted on our website."
+        ]
+      },
+      {
+        "title": "Contact Information",
+        "text": [
+          "If you have any questions or concerns about this Privacy Policy or our data practices, please contact us at hello.webmarvels@gmail.com."
+        ]
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms and Conditions for Balance Vista",
+    "date": "Last Updated:",
+    "paragraphs": [
+      {
+        "title": "1. Acceptance of Terms",
+        "text": [
+          "By accessing or using ​​Balance Vista, you agree to comply with and be bound by these Terms and Conditions, Privacy Policy, and any other legal notices or guidelines posted on this website. If you do not agree with these terms, please do not use this website."
+        ]
+      },
+      {
+        "title": "2. Changes to Terms",
+        "text": [
+          "Balance Vista reserves the right to update, change, or revise these Terms and Conditions without prior notice. Your continued website use after such changes will constitute your acceptance of the new terms."
+        ]
+      },
+      {
+        "title": "3. Privacy Policy",
+        "text": [
+          ["Your use of this website is also governed by our Privacy Policy, which can be found ", {"src":"/policy", "text":"here"}],
+          "Using this website, you agree to the practices described in the Privacy Policy."
+        ]
+      },
+      {
+        "title": "4. Intellectual Property",
+        "text": [
+          "a. All content on this website, including but not limited to text, images, graphics, logos, and software, is the property of Balance Vista and is protected by copyright and other intellectual property laws.",
+          "b. You may not reproduce, distribute, or otherwise use the content on this website without our express written permission."
+        ]
+      },
+      {
+        "title": "5. User Conduct",
+        "text": [
+          "You agree to use this website only for lawful purposes and in a manner that does not infringe upon the rights of others or inhibit their use and enjoyment of the website. Prohibited actions include, but are not limited to:",
+          {
+            "title": "",
+            "text": [
+              "a. Uploading or transmitting any content that is unlawful, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or invasive of another's privacy.",
+              "b. Attempting to gain unauthorized access to any part of the website or its services."
+            ]
+          }
+        ]
+      },
+      {
+        "title": "6. Limitation of Liability",
+        "text": [
+          "Balance Vista is not liable for any direct, indirect, incidental, special, or consequential damages that result from your use of, or inability to use, this website. This includes, but is not limited to, damages for lost profits, business interruption, or loss of programs or information."
+        ]
+      },
+      {
+        "title": "7. Links to Third-Party Websites",
+        "text": [
+          "This website may contain links to third-party websites. These links are provided for your convenience, and Balance Vista is not responsible for the content or functionality of these third-party websites."
+        ]
+      },
+      {
+        "title": "8. Termination",
+        "text": [
+          "Balance Vista reserves the right to terminate or suspend your access to the website without notice for any reason, including violation of these Terms and Conditions."
+        ]
+      },
+      {
+        "title": "9. Governing Law",
+        "text": [
+          "These Terms and Conditions are governed by and construed by the laws of Poland. Any dispute arising under or in connection with these Terms and Conditions shall be subject to the exclusive jurisdiction of the courts located in Poland."
+        ]
+      },
+      {
+        "title": "10. Contact Information",
+        "text": [
+          "If you have any questions or concerns about these Terms and Conditions, please contact us at hello.webmarvels@gmail.com."
+        ]
+      },
+      {
+        "title": "11. User-Generated Content and User Accounts",
+        "text": [
+          "a. User Accounts: If you choose to create an account on Balance Vista, you are responsible for maintaining the confidentiality of your account information and for all activities that occur under your account. You agree to provide accurate and complete information during the registration process and update it to keep it current.",
+          "b. User-Generated Content: Balance Vista may allow users to submit, post, or make available content, such as text, images, or comments. By doing so, you acknowledge and agree to the following:",
+          {
+            "title": "",
+            "text": [
+              "i. You are solely responsible for the content you submit, and you affirm that you have all necessary rights and permissions to post such content.",
+              "ii. You grant Balance Vista a non-exclusive, transferable, sub-licensable, royalty-free, worldwide license to use, modify, reproduce, display, and distribute the content you submit on Balance Vista and affiliated platforms. This license is granted to operate, promote, and improve Balance Vista.",
+              "iii. Balance Vista reserves the right to remove or edit any user-generated content that violates these Terms and Conditions or is otherwise objectionable without prior notice."
+            ]
+          },
+          "c. Monitoring and Moderation: Balance Vista may, but is not obligated to, monitor user-generated content and user accounts. We may remove or restrict access to content that violates these Terms and Conditions, our policies, or is deemed inappropriate without prior notice.",
+          "d. User Obligations: You agree not to use your account or post user-generated content that is in violation of any applicable laws, infringes upon intellectual property rights, contains viruses or spam, or is harmful to other users.",
+          "e. Disclaimer: Balance Vista is not responsible for the accuracy, completeness, or usefulness of user-generated content. We do not endorse any opinions expressed by users on this website.",
+          "f. Termination of User Accounts: Balance Vista reserves the right to terminate or suspend user accounts that are in violation of these Terms and Conditions or for any other reason without prior notice.",
+          "g. Data Security: While we take measures to protect your data and privacy, the security of your account and content cannot be guaranteed. You are responsible for taking appropriate measures to secure your account."
+        ]
+      }
+    ]
+  },
+  "clock": {
+    "greeting": "Привет, ",
+    "months": [
+      "января",
+      "февраля",
+      "марта",
+      "апреля",
+      "мая",
+      "июня",
+      "июля",
+      "августа",
+      "сентября",
+      "октября",
+      "ноября",
+      "декабря"
+    ]
+  },
+  "tarot-widget": {
+    "start-title": "Curious to discover the answer to your question?",
+    "start-text": "Let the Tarot cards weave their magic and reveal the secrets you seek!",
+    "input": "Enter your question",
+    "card-reversed": "(Reversed)",
+    "meanings": "Meanings:",
+    "error": {
+      "title": "Uh-oh! Tarot server on vacation!",
+      "subtitle": "Try again when the stars align!"
+    }
   }
 }

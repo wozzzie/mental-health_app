@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
+import { auth } from "@/firebase/firebaseClient";
+import { ImageData } from "@/types/types";
 
 const useActiveWallpaper = (userId: string) => {
   const [activeWallpaper, setActiveWallpaper] = useState<string | null>(null);
-  const getActiveWallpaper = async () => {
+  const getActiveWallpaper = async (userId: string) => {
     try {
       const res = await fetch(
-        `http://localhost:3001/api/wallpaper?userId=${userId}`
+        `http://localhost:3001/api/wallpaper?userid=${userId}`
       );
       if (!res.ok) {
         throw new Error(await res.text());
       }
-      const data = await res.json();
+      const data = (await res.json()) as ImageData[];
       setActiveWallpaper(data[0].image);
     } catch (e) {
       console.error("useActiveWallpaper error");
@@ -33,8 +35,6 @@ const useActiveWallpaper = (userId: string) => {
       if (!res.ok) {
         throw new Error(await res.text());
       }
-      const data = await res.json();
-      setActiveWallpaper(data[0].image);
     } catch (e) {
       console.error("useActiveWallpaper error");
       console.error(e);
@@ -42,8 +42,8 @@ const useActiveWallpaper = (userId: string) => {
   };
 
   useEffect(() => {
-    getActiveWallpaper();
-  }, []);
+    if (userId) getActiveWallpaper(userId);
+  }, [userId]);
 
   return {
     changeActiveWallpaper,

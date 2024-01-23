@@ -1,0 +1,39 @@
+.autofill-block {
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.widget {
+  &-wrapper {
+    padding: 10px;
+  }
+
+  &-wrapper:hover &-control {
+    opacity: 1;
+  }
+
+  &-control {
+    opacity: 0;
+    margin-bottom: 10px;
+    height: 15px;
+    position: relative;
+    display: flex;
+    justify-items: space-between;
+    transition: 0.5s opacity;
+    & + * {
+      margin: auto;
+    }
+    button {
+      background: none;
+      border: none;
+      position: absolute;
+      right: 0;
+      display: block;
+      padding: 0;
+      img {
+        display: block;
+      }
+    }
+  }
+}

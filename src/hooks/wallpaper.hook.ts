@@ -4,14 +4,19 @@ export interface BackgroundStyle {
   backgroundImage: string;
 }
 
-const WHITE_BG = "/white.png";
+const WHITE_BG = "/white.svg";
 
-const useWallpaper = () => {
+const useWallpaper = (placeholderBG: string = WHITE_BG) => {
   const [wallpaper, setWallpaper] = useState<string | null>(null);
 
   const [backgroundStyle, setBackgroundStyle] = useState<BackgroundStyle>({
-    backgroundImage: `url(${WHITE_BG})`,
+    backgroundImage: `url(${placeholderBG})`,
   });
+
+  const wallpaperUrl = useMemo<string>(
+    () => wallpaper || placeholderBG,
+    [backgroundStyle]
+  );
 
   const newWallpaper = useRef<HTMLImageElement | null>(null);
 
@@ -36,6 +41,7 @@ const useWallpaper = () => {
   return {
     backgroundStyle,
     setWallpaper,
+    wallpaperUrl,
   };
 };
 

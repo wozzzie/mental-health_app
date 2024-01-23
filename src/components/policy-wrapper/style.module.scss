@@ -1,0 +1,25 @@
+.policy {
+  padding: 100px 50px;
+
+  &-update-date {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 26px; /* 185.714% */
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--colors-heading, #1e0e62);
+    margin-bottom: 20px;
+    text-align: center;
+  }
+
+  &-title {
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 52px; /* 123.81% */
+    letter-spacing: -0.4px;
+    color: #1e0e62;
+    text-align: center;
+  }
+}

@@ -1,4 +1,90 @@
-.tarot-widget-card-wrapper {
-    perspective: 400px;
-    padding: 40px;
+// .tarot-widget {
+//   &-card-wrapper {
+//     perspective: 400px;
+//     padding: 40px;
+//     overflow: visible;
+//     * {
+//       overflow: visible;
+//     }
+//   }
+// }
+
+.tarot-widget {
+  &-start {
+    min-width: 469px;
+    &__title {
+      color: #000;
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.3px;
+    }
+    &__text {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.3px;
+      margin-top: 12px;
+    }
+
+    &-form {
+      margin-top: 25px;
+    }
+
+    &__submit-btn {
+      position: absolute;
+      visibility: hidden;
+    }
+  }
+  &-card {
+    min-width: 452px;
+    display: flex;
+    &-wrapper {
+      perspective: 400px;
+      padding: 20px;
+      margin: auto;
+      box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.15);
+      border-radius: 20px;
+      background: fff;
+    }
+    &__title {
+      color: #000;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      margin-bottom: 40px 20px;
+    }
+
+    &__subtitle {
+      margin-top: 10px;
+      margin-bottom: 5px;
+    }
+
+    &__description {
+      color: #000;
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      letter-spacing: -0.3px;
+      li {
+        list-style: upper-roman inside;
+        margin-bottom: 5px;
+      }
+    }
+    &-text {
+      margin-left: 30px;
+    }
+  }
+
+  &-error {
+    &__title {
+      font-size: 28px;
+      color: #7a0202;
+    }
+  }
 }

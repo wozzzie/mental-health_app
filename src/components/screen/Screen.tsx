@@ -1,99 +1,50 @@
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./style.module.scss";
-import { DraggableData, Rnd } from "react-rnd";
-import { WidgetAbstraction, WidgetType, closeWidget } from "./ScreenSlice";
-import { useLayoutEffect, useMemo, useRef } from "react";
-import { openWidget, raiseWidget, changeWidgetPosition } from "./ScreenSlice";
-import QuotesWidget from "../quotes-widget/QuotesWidget";
-import MusicWidget from "../music-widget/MusicWidget";
-import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
-import Image from "next/image";
+import { useMemo } from "react";
 import { useEffect } from "react";
+import { Transition, TransitionGroup } from "react-transition-group";
+
+import {
+  WidgetAbstraction,
+  toggleWallpaperWindow,
+  toggleWidget,
+} from "./ScreenSlice";
 import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
-import TarotWidget from "../tarot-widget/TarotWidget";
 import useWallpaper from "@/hooks/wallpaper.hook";
 import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
 import HoroscopeWidget from "../horoscope-widget/Horoscope";
-
-const WidgetView: React.FC<WidgetAbstraction> = ({ x, y, type }) => {
-  const dispatch = useDispatch();
-
-  const savePosition = (type: WidgetType, d: DraggableData) => {
-    dispatch(changeWidgetPosition({ type, x: d.x, y: d.y }));
-  };
-
-  const child = (
-    <>
-      {
-        // сюда вставлять виджеты
-        type === "gif" ? (
-          <HoroscopeWidget />
-        ) : type === "meditation" ? (
-          <>meditation</>
-        ) : type === "music" ? (
-          <>
-            <MusicWidget />
-          </>
-        ) : type === "news" ? (
-          <>
-            <TarotWidget />
-          </>
-        ) : type === "quote" ? (
-          <>
-            <QuotesWidget />
-          </>
-        ) : (
-          <>default</>
-        )
-      }
-    </>
-  );
-
-  return (
-    <Rnd
-      default={{
-        x: x,
-        y: y,
-      }}
-      bounds="parent"
-      onDragStop={(e, d) => savePosition(type, d)}
-      style={{
-        overflow: "hidden",
-      }}
-      enableResizing={false}
-    >
-      <div
-        className={styles["autofill-block"]}
-        onMouseDown={() => dispatch(raiseWidget(type))}
-      >
-        <WidgetWrapper className={styles["widget-wrapper"]}>
-          <div className={styles["widget-control"]}>
-            <button onClick={() => dispatch(closeWidget(type))}>
-              <Image src="/close.svg" alt="close" width={15} height={15} />
-            </button>
-          </div>
-          {child}
-        </WidgetWrapper>
-      </div>
-    </Rnd>
-  );
-};
+import { useAuth } from "../auth/authProvider";
+import { RootState } from "@/store/store";
+import WidgetView from "../widget-view/WidgetView";
+import { useGetActiveWallpaperQuery } from "@/apis/active-wallpaper.api";
+import styles from "./style.module.scss";
+import Widgetbar from "../widgetbar/Widgetbar";
 
 type ScreenProps = {
-  children: React.ReactNode;
   className?: string;
 };
 
-const Screen: React.FC<ScreenProps> = ({ children, className }) => {
+const Screen: React.FC<ScreenProps> = ({ className }) => {
   const classes = [styles["screen"], className].join(" ");
 
-  const widgets = useSelector((state: any) => state.screen.widgets);
+  const { user } = useAuth();
 
-  const wallpaper = useSelector((s: any) => s.screen.wallpaper);
+  const widgets = useSelector((s: RootState) => s.screen.widgets);
+  const { data: activeWallpaper } = useGetActiveWallpaperQuery(
+    user?.uid as string
+  );
+
+  useEffect(() => {
+    if (activeWallpaper) {
+      setWallpaper(activeWallpaper[0].image);
+    } else {
+      setWallpaper("app-bg.jpeg");
+    }
+    //eslint-disable-next-line
+  }, [activeWallpaper]);
 
   const wallpaperWindowActive = useSelector(
-    (s) => s.screen.wallpaperWindowActive
+    (s: RootState) => s.screen.wallpaperWindowActive
   );
 
   const dispatch = useDispatch();
@@ -102,24 +53,32 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
     () =>
       widgets
         .filter((i: WidgetAbstraction) => i.active)
-        .map((i: WidgetAbstraction) => (
-          <WidgetView
-            key={i.id}
-            x={i.x}
-            y={i.y}
-            id={i.id}
-            active={i.active}
-            type={i.type}
-          />
-        )),
+        .map((i: WidgetAbstraction) => {
+          const TRANSITION_TIMEOUT = 250;
+          return (
+            <Transition
+              key={i.id}
+              mountOnEnter
+              unmountOnExit
+              timeout={TRANSITION_TIMEOUT}
+            >
+              {(s) => (
+                <WidgetView
+                  {...i}
+                  transitionState={s}
+                  transitionTimeout={TRANSITION_TIMEOUT}
+                />
+              )}
+            </Transition>
+          );
+        }),
     [widgets]
   );
 
   const { backgroundStyle, setWallpaper } = useWallpaper();
 
-  useEffect(() => {
-    setWallpaper(wallpaper);
-  }, [wallpaper]);
+  const comp = (a: WidgetAbstraction, b: WidgetAbstraction) =>
+    a.type > b.type ? 1 : a.type < b.type ? -1 : 0;
 
   return (
     <div
@@ -129,15 +88,41 @@ const Screen: React.FC<ScreenProps> = ({ children, className }) => {
         ...backgroundStyle,
       }}
     >
-      {children}
+      <Widgetbar
+        buttons={[
+          ...[...widgets].sort(comp).map((i: WidgetAbstraction) => ({
+            img: i.icon,
+            action: () => dispatch(toggleWidget(i.type)),
+            key: i.type,
+            active: i.active,
+          })),
+          {
+            img: {
+              src: "/wallpaper.svg",
+              alt: "Wallpapers",
+            },
+            action: () => dispatch(toggleWallpaperWindow()),
+            key: "wallpaper",
+            active: wallpaperWindowActive,
+          },
+        ]}
+      />
+      <Transition
+        in={wallpaperWindowActive}
+        timeout={250}
+        mountOnEnter
+        unmountOnExit
+      >
+        {(s) => (
+          <WallpaperWindow transitionState={s}>
+            <GalleryWidget />
+          </WallpaperWindow>
+        )}
+      </Transition>
 
-      {wallpaperWindowActive && (
-        <WallpaperWindow>
-          <GalleryWidget />
-        </WallpaperWindow>
-      )}
-
-      <div className={styles["widgets-container"]}>{widgetRender}</div>
+      <div className={styles["widgets-container"]}>
+        <TransitionGroup component={null}>{widgetRender}</TransitionGroup>
+      </div>
     </div>
   );
 };

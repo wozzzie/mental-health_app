@@ -5,6 +5,11 @@
   max-height: 872px;
   position: relative;
   z-index: 1;
+  opacity: 1;
+  transition: 250ms opacity;
+  &_exit {
+    opacity: 0;
+  }
 }
 
 .widget-wrapper {

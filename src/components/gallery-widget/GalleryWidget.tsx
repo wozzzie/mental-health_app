@@ -2,18 +2,19 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { auth } from "@/firebase/firebaseClient";
 import { useDispatch } from "react-redux";
-import { changeWallpaper } from "../screen/ScreenSlice";
 import DragNDrop from "../drag-n-drop/DragNDrop";
 import { ImageData } from "@/types/types";
 
 import styles from "./style.module.scss";
-
+import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
+import { useChangeActiveWallpaperMutation } from "@/apis/active-wallpaper.api";
+import { useAuth } from "../auth/authProvider";
 const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
   const [droppedFiles, setDroppedFiles] = useState<File | null>(null);
-  const dispatch = useDispatch();
-  const user = auth.currentUser?.uid;
+  const { user } = useAuth();
+  const [changeActiveWallpaper, result] = useChangeActiveWallpaperMutation();
 
   const handleAddBg = (file: File) => {
     const allowedExtensions: string[] = ["jpeg", "jpg", "png"];
@@ -44,8 +45,9 @@ const GalleryWidget = () => {
     }
   };
 
-  const handleImageClick = (imageSource: string) => {
-    dispatch(changeWallpaper(imageSource));
+  const handleImageClick = (imageSource: string, imageId: string) => {
+    console.log(images);
+    changeActiveWallpaper({ imageId, userId: user?.uid as string });
   };
 
   const handleAddImage = () => {
@@ -54,6 +56,7 @@ const GalleryWidget = () => {
 
   useEffect(() => {
     getBgFromServer();
+    //eslint-disable-next-line
   }, [user]);
 
   const postBgToServer = async (file: File) => {
@@ -62,7 +65,7 @@ const GalleryWidget = () => {
       formData.append("image", file);
 
       if (user) {
-        formData.append("uid", user);
+        formData.append("uid", user.uid);
       }
 
       const response = await fetch("http://localhost:3001/api/images/uploads", {
@@ -96,6 +99,8 @@ const GalleryWidget = () => {
     };
 
     uploadImage();
+
+    //eslint-disable-next-line
   }, [droppedFiles]);
 
   return (
@@ -114,7 +119,7 @@ const GalleryWidget = () => {
               key={index}
               src={imgSrc}
               alt={`Image ${index}`}
-              onClick={() => handleImageClick(imgSrc)}
+              onClick={() => handleImageClick(imgSrc, imageData._id as string)}
               className={styles["gallery__image"]}
             />
           );
