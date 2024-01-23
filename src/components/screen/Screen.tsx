@@ -12,6 +12,7 @@ import WallpaperWindow from "../wallpaper-window/WallpaperWindow";
 import GalleryWidget from "../gallery-widget/GalleryWidget";
 import useWallpaper from "@/hooks/wallpaper.hook";
 import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
+import HoroscopeWidget from "../horoscope-widget/Horoscope";
 import { useAuth } from "../auth/authProvider";
 import { RootState } from "@/store/store";
 import WidgetView from "../widget-view/WidgetView";
