@@ -15,7 +15,9 @@ const store = configureStore({
     [activeWallpaperApi.reducerPath]: activeWallpaperApi.reducer,
   },
   middleware: (g) =>
-    g().concat(tarotApi.middleware).concat(activeWallpaperApi.middleware),
+    g({ serializableCheck: false })
+      .concat(tarotApi.middleware)
+      .concat(activeWallpaperApi.middleware),
 });
 
 setupListeners(store.dispatch);
