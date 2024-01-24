@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ImageData } from "@/types/types";
+import serverURL from "@/constants/serverURL";
 
 type ChangeActiveWallpaperArgs = {
   uid: string;
@@ -18,7 +19,7 @@ interface PostRequest {
 
 export const activeWallpaperApi = createApi({
   reducerPath: "activeWallpaperApi",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:3001/api/wallpaper" }),
+  baseQuery: fetchBaseQuery({ baseUrl: serverURL + "/api/wallpaper" }),
   tagTypes: ["wallpaper"],
   endpoints: (builder) => ({
     getActiveWallpaper: builder.query<ImageData[], string>({
