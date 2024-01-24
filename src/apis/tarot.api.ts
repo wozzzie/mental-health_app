@@ -1,3 +1,4 @@
+import serverURL from "@/constants/serverURL";
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
 export interface TarotData {
@@ -30,7 +31,7 @@ export interface TarotCardType {
 export const tarotApi = createApi({
   reducerPath: "tarotApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://localhost:3001/api/tarotcards",
+    baseUrl: serverURL + "/api/tarotcards",
   }),
   endpoints: (builder) => ({
     getAllCards: builder.query<TarotData[], void>({

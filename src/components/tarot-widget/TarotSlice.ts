@@ -1,3 +1,4 @@
+import serverURL from "@/constants/serverURL";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 export interface TarotData {
@@ -28,7 +29,7 @@ export interface TarotCardType {
 }
 
 export const fetchCards = createAsyncThunk("tarot/fetchCards", async () => {
-  const response = await fetch("http://localhost:3001/api/tarotcards", {
+  const response = await fetch(serverURL + "/api/tarotcards", {
     method: "GET",
   });
   return response.json();

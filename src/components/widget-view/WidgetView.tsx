@@ -5,7 +5,6 @@ import Image from "next/image";
 
 import {
   WidgetAbstraction,
-  WidgetType,
   changeWidgetPosition,
   raiseWidget,
   closeWidget,
@@ -28,47 +27,17 @@ type IncludesTransitionState = {
 const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
   x,
   y,
-  type,
+  component,
   transitionState: s,
   transitionTimeout,
   icon,
+  id,
 }) => {
   const dispatch = useDispatch();
 
-  const savePosition = (type: WidgetType, d: DraggableData) => {
-    dispatch(changeWidgetPosition({ type, x: d.x, y: d.y }));
+  const savePosition = (id: string, d: DraggableData) => {
+    dispatch(changeWidgetPosition({ id, x: d.x, y: d.y }));
   };
-
-  const child = (
-    <>
-      {
-        // сюда вставлять виджеты
-        type === "gif" ? (
-          <>
-            <ClockWidget />
-          </>
-        ) : type === "meditation" ? (
-          <>meditation</>
-        ) : type === "music" ? (
-          <>
-            <MusicWidget />
-          </>
-        ) : type === "tarot" ? (
-          <>
-            <TarotWidget />
-          </>
-        ) : type === "quote" ? (
-          <>
-            <QuotesWidget />
-          </>
-        ) : type === "news" ? (
-          <>news</>
-        ) : (
-          <>default</>
-        )
-      }
-    </>
-  );
 
   return (
     <Rnd
@@ -79,7 +48,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
         height: "auto",
       }}
       bounds="parent"
-      onDragStop={(e, d) => savePosition(type, d)}
+      onDragStop={(e, d) => savePosition(id, d)}
       style={{
         overflow: "hidden",
         transition: `${transitionTimeout}ms opacity`,
@@ -89,15 +58,15 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
     >
       <div
         className={styles["autofill-block"]}
-        onMouseDown={() => dispatch(raiseWidget(type))}
+        onMouseDown={() => dispatch(raiseWidget(id))}
       >
         <WidgetWrapper hideOnBlur className={styles["widget-wrapper"]}>
           <div className={styles["widget-control"]}>
-            <button onClick={() => dispatch(closeWidget(type))}>
+            <button onClick={() => dispatch(closeWidget(id))}>
               <Image src="/close.svg" alt="close" width={15} height={15} />
             </button>
           </div>
-          {child}
+          {component}
         </WidgetWrapper>
       </div>
     </Rnd>

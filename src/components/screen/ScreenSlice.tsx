@@ -1,18 +1,16 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
-
-export type WidgetType =
-  | "gif"
-  | "music"
-  | "meditation"
-  | "quote"
-  | "news"
-  | "tarot";
+import { ReactNode } from "react";
+import MusicWidget from "../music-widget/MusicWidget";
+import QuotesWidget from "../quotes-widget/QuotesWidget";
+import TarotWidget from "../tarot-widget/TarotWidget";
+import HoroscopeWidget from "../horoscope-widget/Horoscope";
+import ClockWidget from "../clock-widget/ClockWidget";
 
 export type WidgetAbstraction = {
   id: string;
   x: number;
   y: number;
-  type: WidgetType;
+  component: ReactNode;
   active: boolean;
   icon: {
     src: string;
@@ -28,9 +26,6 @@ interface StringInPayload {
   payload: string;
 }
 
-interface TypeInPayload {
-  payload: WidgetType;
-}
 interface WidgetAbstractionInPayload {
   payload: WidgetAbstraction;
 }
@@ -46,7 +41,7 @@ const initialState: InitialStateType = {
       id: "1",
       x: 0,
       y: 0,
-      type: "music",
+      component: <MusicWidget />,
       active: false,
       icon: {
         src: "/music.svg",
@@ -57,7 +52,7 @@ const initialState: InitialStateType = {
       id: "2",
       x: 0,
       y: 0,
-      type: "meditation",
+      component: <>meditation</>,
       active: false,
       icon: {
         src: "/meditation.svg",
@@ -68,7 +63,7 @@ const initialState: InitialStateType = {
       id: "3",
       x: 0,
       y: 0,
-      type: "gif",
+      component: <></>,
       active: false,
       icon: {
         src: "/gif-widget.svg",
@@ -79,7 +74,7 @@ const initialState: InitialStateType = {
       id: "4",
       x: 0,
       y: 0,
-      type: "quote",
+      component: <QuotesWidget />,
       active: false,
       icon: {
         src: "/quotes.svg",
@@ -90,7 +85,7 @@ const initialState: InitialStateType = {
       id: "5",
       x: 0,
       y: 0,
-      type: "news",
+      component: <>News</>,
       active: false,
       icon: {
         src: "/news.svg",
@@ -101,11 +96,33 @@ const initialState: InitialStateType = {
       id: "6",
       x: 0,
       y: 0,
-      type: "tarot",
+      component: <TarotWidget />,
       active: false,
       icon: {
         src: "/tarot.svg",
         alt: "Tarot",
+      },
+    },
+    {
+      id: "7",
+      x: 0,
+      y: 0,
+      component: <HoroscopeWidget />,
+      active: false,
+      icon: {
+        src: "/tarot.svg",
+        alt: "Horoscope",
+      },
+    },
+    {
+      id: "8",
+      x: 0,
+      y: 0,
+      component: <ClockWidget />,
+      active: false,
+      icon: {
+        src: "/tarot.svg",
+        alt: "Clock",
       },
     },
   ],
@@ -117,7 +134,7 @@ type WidgetMutatorInPayload = {
   payload: {
     x: number;
     y: number;
-    type: WidgetType;
+    id: string;
   };
 };
 
@@ -125,40 +142,38 @@ export const screenSlice = createSlice({
   name: "screen",
   initialState: initialState,
   reducers: {
-    closeWidget: (state, action: TypeInPayload) => {
+    closeWidget: (state, action: IDInPayload) => {
       // delete by ID
-      const w = state.widgets.find((i) => i.type === action.payload);
+      const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = false;
       else console.log("close: widget not found");
     },
 
-    raiseWidget: (state, action: TypeInPayload) => {
-      const widgetToRaise = state.widgets.find(
-        (i) => i.type === action.payload
-      );
+    raiseWidget: (state, action: IDInPayload) => {
+      const widgetToRaise = state.widgets.find((i) => i.id === action.payload);
       if (widgetToRaise !== undefined) {
-        state.widgets = state.widgets.filter((i) => i.type !== action.payload);
+        state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, widgetToRaise];
       } else {
         console.log("raise: widget not found ");
       }
     },
 
-    openWidget: (state, action: TypeInPayload) => {
-      const w = state.widgets.find((i) => i.type === action.payload);
+    openWidget: (state, action: IDInPayload) => {
+      const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = true;
       else console.log("open: widget not found");
     },
 
-    toggleWidget: (state, action: TypeInPayload) => {
-      const w = state.widgets.find((i) => i.type === action.payload);
+    toggleWidget: (state, action: IDInPayload) => {
+      const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = !w.active;
       else console.log("toggle: widget not found");
     },
 
     changeWidgetPosition: (state, action: WidgetMutatorInPayload) => {
       const widgetToMutate = state.widgets.find(
-        (i) => i.type === action.payload.type
+        (i) => i.id === action.payload.id
       );
       if (widgetToMutate) {
         widgetToMutate.x = action.payload.x;

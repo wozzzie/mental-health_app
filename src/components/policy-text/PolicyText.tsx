@@ -2,6 +2,7 @@ import { useTranslation } from "next-i18next";
 import styles from "./style.module.scss";
 import PageContainer from "../page-container/pageContainer";
 import { FC, Fragment, useMemo } from "react";
+import { useRouter } from "next/router";
 
 type PolicyLink = {
   src: string;
@@ -36,6 +37,13 @@ const isString = (a: any) => {
 };
 
 const PolicyText: FC<Props> = ({ paragraph = null }) => {
+  const { locale } = useRouter();
+
+  const localeRoute = useMemo(
+    () => (locale === "en" || locale === "default" ? "" : "/" + locale),
+    [locale]
+  );
+
   const { t } = useTranslation();
 
   const paragraphs = useMemo(
@@ -75,7 +83,7 @@ const PolicyText: FC<Props> = ({ paragraph = null }) => {
                         <Fragment key={el as string}>{el as string}</Fragment>
                       ) : isPolicyLink(el) ? (
                         <a
-                          href={(el as PolicyLink).src}
+                          href={localeRoute + (el as PolicyLink).src}
                           key={(el as PolicyLink).text}
                         >
                           {(el as PolicyLink).text}

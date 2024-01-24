@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import serverURL from "@/constants/serverURL";
 
 interface TarotData {
   _id: string;
@@ -32,7 +33,7 @@ const Tarot: React.FC = () => {
 
   const getTarotFromServer = async () => {
     try {
-      const response = await fetch("http://localhost:3001/api/tarotcards", {
+      const response = await fetch(serverURL + "/api/tarotcards", {
         method: "GET",
       });
 

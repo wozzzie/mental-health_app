@@ -1,14 +1,13 @@
 import { useState, useEffect } from "react";
 import { auth } from "@/firebase/firebaseClient";
 import { ImageData } from "@/types/types";
+import serverURL from "@/constants/serverURL";
 
 const useActiveWallpaper = (userId: string) => {
   const [activeWallpaper, setActiveWallpaper] = useState<string | null>(null);
   const getActiveWallpaper = async (userId: string) => {
     try {
-      const res = await fetch(
-        `http://localhost:3001/api/wallpaper?userid=${userId}`
-      );
+      const res = await fetch(`${serverURL}/api/wallpaper?userid=${userId}`);
       if (!res.ok) {
         throw new Error(await res.text());
       }
@@ -22,7 +21,7 @@ const useActiveWallpaper = (userId: string) => {
 
   const changeActiveWallpaper = async (imageId: string) => {
     try {
-      const res = await fetch(`http://localhost:3001/api/wallpaper`, {
+      const res = await fetch(`${serverURL}/api/wallpaper`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

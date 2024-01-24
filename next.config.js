@@ -24,6 +24,12 @@ const nextConfig = {
         port: "",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "mental-health-app-server.vercel.app",
+        port: "",
+        pathname: "/**"
+      }
     ],
   },
   i18n,

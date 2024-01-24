@@ -77,8 +77,7 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
 
   const { backgroundStyle, setWallpaper } = useWallpaper();
 
-  const comp = (a: WidgetAbstraction, b: WidgetAbstraction) =>
-    a.type > b.type ? 1 : a.type < b.type ? -1 : 0;
+  const comp = (a: WidgetAbstraction, b: WidgetAbstraction) => +a.id - +b.id;
 
   return (
     <div
@@ -92,8 +91,8 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
         buttons={[
           ...[...widgets].sort(comp).map((i: WidgetAbstraction) => ({
             img: i.icon,
-            action: () => dispatch(toggleWidget(i.type)),
-            key: i.type,
+            action: () => dispatch(toggleWidget(i.id)),
+            key: i.id,
             active: i.active,
           })),
           {
