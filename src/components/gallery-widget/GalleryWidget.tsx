@@ -4,11 +4,12 @@ import { auth } from "@/firebase/firebaseClient";
 import { useDispatch } from "react-redux";
 import DragNDrop from "../drag-n-drop/DragNDrop";
 import { ImageData } from "@/types/types";
-
-import styles from "./style.module.scss";
-import useActiveWallpaper from "@/hooks/activeWallpaper.hook";
 import { useChangeActiveWallpaperMutation } from "@/apis/active-wallpaper.api";
 import { useAuth } from "../auth/authProvider";
+import serverURL from "@/constants/serverURL";
+
+import styles from "./style.module.scss";
+
 const GalleryWidget = () => {
   const [images, setImages] = useState<ImageData[]>([]);
   const [showDragNDrop, setShowDragNDrop] = useState(false);
@@ -29,10 +30,9 @@ const GalleryWidget = () => {
 
   const getBgFromServer = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/images?uid=${user}`,
-        { method: "GET" }
-      );
+      const response = await fetch(`${serverURL}/api/images?uid=${user}`, {
+        method: "GET",
+      });
       if (response.ok) {
         const imageList = await response.json();
         setImages(imageList);
@@ -68,7 +68,7 @@ const GalleryWidget = () => {
         formData.append("uid", user.uid);
       }
 
-      const response = await fetch("http://localhost:3001/api/images/uploads", {
+      const response = await fetch(`${serverURL}/api/images/uploads`, {
         method: "POST",
         body: formData,
       });
@@ -110,7 +110,7 @@ const GalleryWidget = () => {
           const imgSrc = (
             imageData.isDefault
               ? imageData.image
-              : `http://localhost:3001/${imageData.image}`
+              : `${serverURL}/${imageData.image}`
           ).replace(/\\/, "/");
           return (
             <Image

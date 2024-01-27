@@ -50,7 +50,7 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       bounds="parent"
       onDragStop={(e, d) => savePosition(id, d)}
       style={{
-        overflow: "hidden",
+        overflow: "visible",
         transition: `${transitionTimeout}ms opacity`,
         opacity: s === "entered" || s === "entering" ? 1 : 0,
       }}

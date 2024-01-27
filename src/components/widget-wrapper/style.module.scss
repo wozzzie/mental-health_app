@@ -16,7 +16,7 @@
     background: transparent;
     backdrop-filter: none;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
 
     &::before {
       @include whiteBG;
@@ -30,6 +30,7 @@
       z-index: -1;
       opacity: 0;
       transition: 0.5s opacity;
+      border-radius: 22px;
     }
 
     &:hover::before {

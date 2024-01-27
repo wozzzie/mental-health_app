@@ -17,7 +17,11 @@ import { RingLoader } from "react-spinners";
 import styles from "../style.module.scss";
 
 interface Props {
-  authCallback: (email: string, password: string) => Promise<UserCredential>;
+  authCallback: (
+    email: string,
+    password: string,
+    name: string
+  ) => Promise<UserCredential>;
   page: "SIGN_UP";
 }
 
@@ -33,6 +37,14 @@ const SignUpController = ({ authCallback, page }: Props) => {
   }, [user]);
 
   const schema = Yup.object().shape({
+    name: Yup.string()
+      .required(t("validation.required") || "")
+      .matches(
+        /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/,
+        t("validation.name")
+      )
+      .min(2, t("validation.name-min"))
+      .max(12, t("validation.name-max")),
     email: Yup.string()
       .required(t("validation.required") || "")
       .matches(
@@ -62,25 +74,23 @@ const SignUpController = ({ authCallback, page }: Props) => {
   const [loading, setLoading] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
 
-  const onSubmit = handleSubmit(async ({ email, password, passwordRepeat }) => {
-    if (password !== passwordRepeat) {
-      setAuthError("Passwords do not match");
-      return;
-    }
+  const onSubmit = handleSubmit(
+    async ({ email, password, passwordRepeat, name }) => {
+      if (password !== passwordRepeat) {
+        setAuthError("Passwords do not match");
+        return;
+      }
 
-    setLoading(true);
-    try {
-      await authCallback(email, password);
-    } catch (e) {
-      const err = getAuthError(e);
-      setAuthError(err);
-      setLoading(false);
+      setLoading(true);
+      try {
+        await authCallback(email, password, name);
+      } catch (e) {
+        const err = getAuthError(e);
+        setAuthError(err);
+        setLoading(false);
+      }
     }
-  });
-
-  const handleCheckboxChange = (newChecked: boolean) => {
-    setIsChecked(newChecked);
-  };
+  );
 
   return (
     <PageContainer>
@@ -108,6 +118,25 @@ const SignUpController = ({ authCallback, page }: Props) => {
               </p>
             )}
             <div className={styles["form__controls"]}>
+              <label className={styles["form__label"]}>
+                {t("sign.label-name")}
+              </label>
+
+              <div className={styles["form__item"]}>
+                <input
+                  className={styles["form__input"]}
+                  id="name"
+                  type="text"
+                  {...register("name")}
+                  placeholder={t("sign.name") || ""}
+                />
+                {errors.name?.message && (
+                  <p className={styles["form__error"]} data-testid="auth-error">
+                    {errors.name?.message}
+                  </p>
+                )}
+              </div>
+
               <label className={styles["form__label"]}>
                 {t("sign.label-email")}
               </label>

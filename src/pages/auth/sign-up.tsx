@@ -7,6 +7,7 @@ import { firebaseAdmin } from "../../firebase/firebaseAdmin";
 import ROUTES from "../../constants/routes";
 import { ErrorBoundaryWithMessage } from "../../components/error-boundary/errorBoundary";
 import SignUpController from "../../components/auth/sign-up";
+import { updateProfile } from "firebase/auth";
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   try {
@@ -35,10 +36,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 };
 
 const SignUp = () => {
-  const onSignUp = async (email: string, password: string) => {
+  const onSignUp = async (email: string, password: string, name: string) => {
     console.log("authCallback called with", email);
     try {
-      const result = await registerWithEmailAndPassword(email, password);
+      const result = await registerWithEmailAndPassword(email, password, name);
+
       console.log("Registration success:", result);
       return result;
     } catch (error) {
