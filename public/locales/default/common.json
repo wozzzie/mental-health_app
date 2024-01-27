@@ -310,5 +310,9 @@
       "title": "Uh-oh! Tarot server on vacation!",
       "subtitle": "Try again when the stars align!"
     }
+  },
+  "horoscope": {
+    "select-option": "Select an option",
+    "search": "Search"
   }
 }

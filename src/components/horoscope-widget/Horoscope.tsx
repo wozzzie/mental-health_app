@@ -161,7 +161,6 @@ const HoroscopeWidget: React.FC = () => {
                 inputValue={inputValue}
                 handleZodiacChange={handleZodiacChange}
                 handleSaveClick={handleSaveClick}
-                zodiacSigns={zodiacSigns}
               />
             )}
           </>
