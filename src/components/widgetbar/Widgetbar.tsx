@@ -42,7 +42,7 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
       setOverflow(false);
       disableTimeout.current = null;
       console.log("time");
-    }, 500);
+    }, 300);
   };
 
   const wrapperClasses = useMemo(
@@ -139,7 +139,6 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
           {buttons.map((i: WidgetButton) => (
             <div
               key={i.key}
-              onClick={i.action}
               className={
                 styles["widget-button"] +
                 (i.active ? " " + styles["widget-button_active"] : "")
@@ -147,7 +146,13 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
               onMouseOver={() => (!i.active ? handleButtonMouseOver() : null)}
               onMouseOut={handleButtonMouseOut}
             >
-              <Image src={i.img.src} alt={i.img.alt} width={24} height={24} />
+              <Image
+                src={i.img.src}
+                alt={i.img.alt}
+                width={24}
+                height={24}
+                onClick={i.action}
+              />
               <div
                 className={styles["widget-button__title"]}
                 style={
