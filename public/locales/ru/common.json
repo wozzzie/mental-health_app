@@ -99,7 +99,7 @@
         "title": "Introduction",
         "text": [
           "This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act.",
-          {"src":"111", "text":"111"}
+          { "src": "111", "text": "111" }
         ]
       },
       {
@@ -204,7 +204,10 @@
       {
         "title": "3. Privacy Policy",
         "text": [
-          ["Your use of this website is also governed by our Privacy Policy, which can be found ", {"src":"/policy", "text":"here"}],
+          [
+            "Your use of this website is also governed by our Privacy Policy, which can be found ",
+            { "src": "/policy", "text": "here" }
+          ],
           "Using this website, you agree to the practices described in the Privacy Policy."
         ]
       },
@@ -307,5 +310,9 @@
       "title": "Uh-oh! Tarot server on vacation!",
       "subtitle": "Try again when the stars align!"
     }
+  },
+  "horoscope": {
+    "select-option": "Выберите опцию",
+    "search": "Искать"
   }
 }
