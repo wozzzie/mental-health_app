@@ -20,6 +20,7 @@ const HoroscopeWidget: React.FC = () => {
 
   const { user } = useAuth();
   const userUid = user?.uid;
+  console.log(user)
 
   const checkUserSign = async () => {
     try {

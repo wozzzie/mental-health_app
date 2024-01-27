@@ -40,6 +40,9 @@
   },
   "validation": {
     "required": "Required field!",
+    "name": "Write correct name",
+    "name-min": "Min 2 symbols",
+    "name-max": "Max 12 symbols",
     "email": "Write correct email!",
     "password": "Min 8 symbols, one letter, one digit, one special character!",
     "passwordRepeat": "Min 8 symbols, one letter, one digit, one special character!",
@@ -51,12 +54,14 @@
   "sign": {
     "sign-up": "Sign Up",
     "sign-in": "Sign  In Now",
+    "name": "Nickname",
     "email": "Your email",
     "password": "Your password",
     "password-only": "Password",
     "repeat-password": "Repeate",
     "agree": "I agree to the Terms of Service.",
     "terms": "By signing up, you agree to the Terms of Service.",
+    "label-name": "YOUR NICKNAME",
     "label-email": "E-MAIL",
     "label-password": "PASSWORD",
     "account-signin": "Sign In",
@@ -94,7 +99,7 @@
         "title": "Introduction",
         "text": [
           "This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act.",
-          {"src":"111", "text":"111"}
+          { "src": "111", "text": "111" }
         ]
       },
       {
@@ -199,7 +204,10 @@
       {
         "title": "3. Privacy Policy",
         "text": [
-          ["Your use of this website is also governed by our Privacy Policy, which can be found ", {"src":"/policy", "text":"here"}],
+          [
+            "Your use of this website is also governed by our Privacy Policy, which can be found ",
+            { "src": "/policy", "text": "here" }
+          ],
           "Using this website, you agree to the practices described in the Privacy Policy."
         ]
       },

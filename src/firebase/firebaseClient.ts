@@ -7,6 +7,7 @@ import {
   signOut,
   setPersistence,
   browserSessionPersistence,
+  updateProfile,
 } from "firebase/auth";
 
 export type UserData = {
@@ -37,10 +38,13 @@ const auth = getAuth(firebase);
 
 const registerWithEmailAndPassword = async (
   email: string,
-  password: string
+  password: string,
+  name: string
 ) => {
   return await createUserWithEmailAndPassword(auth, email, password).then(
     async (res) => {
+      await updateProfile(res.user, { displayName: name });
+
       await addDoc(collection(db, "users"), {
         id: res.user.uid,
         email,
