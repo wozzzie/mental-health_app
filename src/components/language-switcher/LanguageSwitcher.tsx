@@ -4,6 +4,7 @@ import Image from "next/image";
 import Dropdown, { Option } from "react-dropdown";
 
 import classes from "./style.module.scss";
+import languageNames from "@/constants/languageNames";
 
 const LanguageSwitcher: React.FC = () => {
   const router = useRouter();
@@ -16,7 +17,7 @@ const LanguageSwitcher: React.FC = () => {
   const dropdownOptions: Option[] =
     otherLocales?.map((locale) => ({
       value: locale,
-      label: locale === "en" ? "English" : locale === "ru" ? "Russian" : locale,
+      label: languageNames.get(locale) || locale,
     })) ?? [];
 
   const handleLanguageChange = (selected: Option) => {
