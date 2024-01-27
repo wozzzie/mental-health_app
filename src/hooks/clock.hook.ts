@@ -81,7 +81,7 @@ const useClock: useClockType = ({
   );
   const stringDate = useMemo(
     () =>
-      locale === "ru"
+      locale === "ru" || locale === "ua"
         ? `${date?.day} ${months[date?.month as number]} ${date?.year}`
         : `${months[date?.month as number]} ${date?.day}, ${date?.year}`,
     [date, locale]
