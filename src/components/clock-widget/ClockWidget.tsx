@@ -2,9 +2,11 @@ import useClock from "@/hooks/clock.hook";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import styles from "./style.module.scss";
 import { useTranslation } from "next-i18next";
+import { useAuth } from "../auth/authProvider";
 
 const ClockWidget = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
 
   const use24HourFormat: boolean = true;
   const showSeconds: boolean = false;
@@ -14,7 +16,7 @@ const ClockWidget = () => {
     showSeconds,
   });
 
-  const userName: string = "Aboba";
+  const userName: string = user?.displayName as string;
 
   return (
     <WidgetWrapper>
