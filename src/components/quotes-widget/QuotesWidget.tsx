@@ -5,6 +5,7 @@ import { AppDispatch } from "../../store/store";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 
 import styles from "./style.module.scss";
+import serverURL from "@/constants/serverURL";
 
 const QuotesWidget: React.FC = () => {
   const router = useRouter();
@@ -42,7 +43,7 @@ const QuotesWidget: React.FC = () => {
   const saveQuoteToServer = async (quote: string) => {
     try {
       const quoteData = { content: quote };
-      const response = await fetch("http://localhost:3001/api/quotes", {
+      const response = await fetch(`${serverURL}/api/quotes`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

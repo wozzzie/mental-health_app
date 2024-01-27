@@ -1,4 +1,10 @@
 .horoscope {
+  &__wrapper {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+  }
+
   &__loading {
     display: flex;
     justify-content: center;
@@ -38,5 +44,14 @@
     font-weight: 400;
     line-height: 16px;
     width: 396px;
+  }
+
+  &_smooth {
+    max-height: 57px;
+    overflow: visible;
+  }
+
+  &_hidden {
+    overflow: hidden;
   }
 }
