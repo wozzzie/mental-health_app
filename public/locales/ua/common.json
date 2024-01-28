@@ -78,7 +78,8 @@
   "music": {
     "wrong-url-message-title": "Введено неправильне посилання",
     "input-placeholder": "Введіть посилання Spotify, IHeart або Apple Music",
-    "start-message-title": "Музичний віджет"
+    "start-message-title": "Музичний віджет",
+    "open-btn": "Відкрити"
   },
   "drag-n-drop": {
     "drop": "Перетягніть файли сюди або",

@@ -83,7 +83,8 @@
   "music": {
     "wrong-url-message-title": "Wrong URL entered",
     "input-placeholder": "Enter Spotify, IHeart or Apple Music URL",
-    "start-message-title": "Music widget"
+    "start-message-title": "Music widget",
+    "open-btn": "Open"
   },
   "drag-n-drop": {
     "drop": "Drag & Drop your files here or ",
