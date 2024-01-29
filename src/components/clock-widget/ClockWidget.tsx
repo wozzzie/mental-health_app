@@ -3,13 +3,13 @@ import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import styles from "./style.module.scss";
 import { useTranslation } from "next-i18next";
 import { useAuth } from "../auth/authProvider";
+import { useClockSettings } from "../settings/settingsProvider";
 
 const ClockWidget = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
 
-  const use24HourFormat: boolean = true;
-  const showSeconds: boolean = false;
+  const { use24HourFormat, showSeconds } = useClockSettings();
 
   const { time, date, PMOrAM } = useClock({
     use24HourFormat,
