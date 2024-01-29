@@ -5,10 +5,15 @@ interface Props {
   onClick?: () => void;
   children: ReactNode;
   className?: string;
-  type: "button" | "submit" | "reset" | undefined;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
-const AppButton: FC<Props> = ({ onClick, children, className, type }) => {
+const AppButton: FC<Props> = ({
+  onClick,
+  children,
+  className,
+  type = undefined,
+}) => {
   return (
     <button
       type={type}

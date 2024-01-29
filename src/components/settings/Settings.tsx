@@ -15,11 +15,15 @@ import WidgetInput from "../widget-input/WidgetInput";
 import AppButton from "../app-button/AppButton";
 import { updateProfile } from "firebase/auth";
 import { useAuth } from "../auth/authProvider";
-import { SwitchTransition, Transition } from "react-transition-group";
+import {
+  SwitchTransition,
+  Transition,
+  TransitionStatus,
+} from "react-transition-group";
 import SettingsForm from "./SettingsForm";
 
 type Props = {
-  transitionState: "entered" | "entering" | "exited" | "exiting";
+  transitionState: TransitionStatus;
 };
 
 const Settings: FC<Props> = ({ transitionState }) => {
