@@ -33,6 +33,7 @@ interface WidgetAbstractionInPayload {
 type InitialStateType = {
   widgets: Array<WidgetAbstraction>;
   wallpaperWindowActive: boolean;
+  settingsWindowActive: boolean;
 };
 
 const initialState: InitialStateType = {
@@ -128,6 +129,7 @@ const initialState: InitialStateType = {
   ],
 
   wallpaperWindowActive: false,
+  settingsWindowActive: false,
 };
 
 type WidgetMutatorInPayload = {
@@ -183,6 +185,7 @@ export const screenSlice = createSlice({
 
     openWallpaperWindow: (s) => {
       s.wallpaperWindowActive = true;
+      s.settingsWindowActive = false;
     },
 
     closeWallpaperWindow: (s) => {
@@ -191,6 +194,25 @@ export const screenSlice = createSlice({
 
     toggleWallpaperWindow: (s) => {
       s.wallpaperWindowActive = !s.wallpaperWindowActive;
+      s.settingsWindowActive = s.wallpaperWindowActive
+        ? false
+        : s.settingsWindowActive;
+    },
+
+    openSettingsWindow: (s) => {
+      s.settingsWindowActive = true;
+      s.wallpaperWindowActive = false;
+    },
+
+    closeSettingsWindow: (s) => {
+      s.settingsWindowActive = false;
+    },
+
+    toggleSettingsWindow: (s) => {
+      s.settingsWindowActive = !s.settingsWindowActive;
+      s.wallpaperWindowActive = s.settingsWindowActive
+        ? false
+        : s.wallpaperWindowActive;
     },
   },
 });
@@ -204,6 +226,9 @@ export const {
   openWallpaperWindow,
   closeWallpaperWindow,
   toggleWallpaperWindow,
+  toggleSettingsWindow,
+  openSettingsWindow,
+  closeSettingsWindow,
 } = screenSlice.actions;
 
 export default screenSlice.reducer;
