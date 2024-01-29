@@ -8,6 +8,7 @@ import serverURL from "@/constants/serverURL";
 
 import styles from "./style.module.scss";
 import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
+import Skeleton from "../skeleton/Skeleton";
 
 const HoroscopeWidget: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -129,8 +130,10 @@ const HoroscopeWidget: React.FC = () => {
         {selectedZodiac || userSelected || loading ? (
           <>
             {loading ? (
-              <div className={styles["horoscope__loading"]}>
-                <span>Loading...</span>
+              <div className={styles["horoscope__skeleton"]}>
+                <Skeleton className={styles["horoscope__skeleton_title"]}/>
+                <div className={styles["horoscope__divider"]}></div>
+                <Skeleton className={styles["horoscope__skeleton_content"]}/>
               </div>
             ) : (
               <>
