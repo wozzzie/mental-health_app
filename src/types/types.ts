@@ -14,3 +14,19 @@ export interface ZodiacSignData {
   };
   success: boolean;
 }
+
+export interface QuotesData {
+  content: string;
+  Id: number;
+  language_code: string;
+  originator: {
+    description: string;
+    id: number;
+    language_code: string;
+    master_id: number;
+    name: string;
+    url: string;
+  };
+  tags: string[];
+  url: string;
+}
