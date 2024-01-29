@@ -7,6 +7,7 @@
   padding: 2px;
   background-color: var(--Fills-Secondary, rgba(120, 120, 128, 0.16));
   transition: 0.3s background-color;
+  cursor: pointer;
 
   &_active {
     background-color: var(--Colors-Green, #34c759);
