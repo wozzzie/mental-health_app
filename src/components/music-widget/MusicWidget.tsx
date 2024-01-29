@@ -11,6 +11,7 @@ import { RootState } from "../../store/store";
 import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
 import WidgetInput from "../widget-input/WidgetInput";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
+import AppButton from "../app-button/AppButton";
 
 const MusicWidget = () => {
   const link = useSelector((s: RootState) => s.music.link);
@@ -135,12 +136,12 @@ const MusicWidget = () => {
             name="music-link-input"
           />
         </div>
-        <button
-          className={styles["music-link-btn"]}
+        <AppButton
           onClick={() => dispatch(setLink(inputRef?.current?.value || ""))}
+          className={styles["music-link__btn"]}
         >
-          Open
-        </button>
+          {t("music.open-btn")}
+        </AppButton>
       </div>
     </div>
   );

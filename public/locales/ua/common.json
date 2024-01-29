@@ -41,6 +41,9 @@
   "validation": {
     "required": "Поле обов'язкове для заповнення!",
     "email": "Введено некоректний email!",
+    "name-min": "Min 2 symbols",
+    "name-max": "Max 12 symbols",
+    "name-success": "Username has been successfully changed",
     "password": "Щонайменше 8 символів, одна літера, одна цифра, один спеціальний символ!",
     "passwordRepeat": "Щонайменше 8 символів, одна література, одна цифра, один спеціальний символ!",
     "password-match": "Паролі не співпадають"
@@ -78,7 +81,8 @@
   "music": {
     "wrong-url-message-title": "Введено неправильне посилання",
     "input-placeholder": "Введіть посилання Spotify, IHeart або Apple Music",
-    "start-message-title": "Музичний віджет"
+    "start-message-title": "Музичний віджет",
+    "open-btn": "Відкрити"
   },
   "drag-n-drop": {
     "drop": "Перетягніть файли сюди або",
@@ -301,6 +305,25 @@
     "error": {
       "title": "Uh-oh! Tarot server on vacation!",
       "subtitle": "Try again when the stars align!"
+    }
+  },
+  "settings": {
+    "settings": "Settings",
+    "select-default": "Choose value",
+    "change": "Change",
+    "user": {
+      "group-name": "User",
+      "change-language": "Change language",
+      "change-username": "Change username"
+    },
+    "clock": {
+      "group-name": "Clock",
+      "24-hour-format": "Use 24 hour format",
+      "show-seconds": "Show seconds"
+    },
+    "horoscope": {
+      "group-name": "Horoscope",
+      "choose-zodiac-sign": "Choose zodiac sign"
     }
   }
 }

@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useMemo } from "react";
 import { useEffect } from "react";
-import { Transition, TransitionGroup } from "react-transition-group";
+import {
+  SwitchTransition,
+  Transition,
+  TransitionGroup,
+} from "react-transition-group";
 
 import {
   WidgetAbstraction,
+  toggleSettingsWindow,
   toggleWallpaperWindow,
   toggleWidget,
 } from "./ScreenSlice";
@@ -19,6 +24,7 @@ import WidgetView from "../widget-view/WidgetView";
 import { useGetActiveWallpaperQuery } from "@/apis/active-wallpaper.api";
 import styles from "./style.module.scss";
 import Widgetbar from "../widgetbar/Widgetbar";
+import Settings from "../settings/Settings";
 
 type ScreenProps = {
   className?: string;
@@ -45,6 +51,10 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
 
   const wallpaperWindowActive = useSelector(
     (s: RootState) => s.screen.wallpaperWindowActive
+  );
+
+  const settingsWindowActive = useSelector(
+    (s: RootState) => s.screen.settingsWindowActive
   );
 
   const dispatch = useDispatch();
@@ -104,20 +114,44 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
             key: "wallpaper",
             active: wallpaperWindowActive,
           },
+          {
+            img: {
+              src: "/wallpaper.svg",
+              alt: "Wallpapers",
+            },
+            action: () => dispatch(toggleSettingsWindow()),
+            key: "settings",
+            active: settingsWindowActive,
+          },
         ]}
       />
-      <Transition
-        in={wallpaperWindowActive}
-        timeout={250}
-        mountOnEnter
-        unmountOnExit
-      >
-        {(s) => (
-          <WallpaperWindow transitionState={s}>
-            <GalleryWidget />
-          </WallpaperWindow>
-        )}
-      </Transition>
+      <SwitchTransition>
+        <Transition
+          in={wallpaperWindowActive}
+          timeout={250}
+          mountOnEnter
+          unmountOnExit
+          key={
+            wallpaperWindowActive
+              ? "wallpaper"
+              : settingsWindowActive
+              ? "settings"
+              : "none"
+          }
+        >
+          {wallpaperWindowActive ? (
+            (s) => (
+              <WallpaperWindow transitionState={s}>
+                <GalleryWidget />
+              </WallpaperWindow>
+            )
+          ) : settingsWindowActive ? (
+            (s) => <Settings transitionState={s} />
+          ) : (
+            <></>
+          )}
+        </Transition>
+      </SwitchTransition>
 
       <div className={styles["widgets-container"]}>
         <TransitionGroup component={null}>{widgetRender}</TransitionGroup>

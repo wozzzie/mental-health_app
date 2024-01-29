@@ -1,0 +1,36 @@
+.switch {
+  position: relative;
+  display: block;
+  width: 51px;
+  height: 31px;
+  border-radius: 15.5px;
+  padding: 2px;
+  background-color: var(--Fills-Secondary, rgba(120, 120, 128, 0.16));
+  transition: 0.3s background-color;
+  cursor: pointer;
+
+  &_active {
+    background-color: var(--Colors-Green, #34c759);
+    & .switch__toggle {
+      transform: translateX(20px);
+    }
+  }
+
+  &__checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    position: absolute;
+  }
+
+  &__toggle {
+    width: 27px;
+    height: 27px;
+    border-radius: 100%;
+    background-color: #fff;
+    box-shadow: 0px 3px 1px 0px rgba(0, 0, 0, 0.06),
+      0px 3px 8px 0px rgba(0, 0, 0, 0.15), 0px 0px 0px 1px rgba(0, 0, 0, 0.04);
+    transition: 0.3s all;
+    display: block;
+  }
+}

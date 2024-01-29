@@ -43,6 +43,7 @@
     "name": "Write correct name",
     "name-min": "Min 2 symbols",
     "name-max": "Max 12 symbols",
+    "name-success": "Username has been successfully changed",
     "email": "Write correct email!",
     "password": "Min 8 symbols, one letter, one digit, one special character!",
     "passwordRepeat": "Min 8 symbols, one letter, one digit, one special character!",
@@ -58,7 +59,7 @@
     "email": "Your email",
     "password": "Your password",
     "password-only": "Password",
-    "repeat-password": "Repeate",
+    "repeat-password": "Repeat",
     "agree": "I agree to the Terms of Service.",
     "terms": "By signing up, you agree to the Terms of Service.",
     "label-name": "USERNAME",
@@ -309,6 +310,25 @@
     "error": {
       "title": "Uh-oh! Tarot server on vacation!",
       "subtitle": "Try again when the stars align!"
+    }
+  },
+  "settings": {
+    "settings": "Settings",
+    "select-default": "Choose value",
+    "change": "Change",
+    "user": {
+      "group-name": "User",
+      "change-language": "Change language",
+      "change-username": "Change username"
+    },
+    "clock": {
+      "group-name": "Clock",
+      "24-hour-format": "Use 24 hour format",
+      "show-seconds": "Show seconds"
+    },
+    "horoscope": {
+      "group-name": "Horoscope",
+      "choose-zodiac-sign": "Choose zodiac sign"
     }
   },
   "horoscope": {

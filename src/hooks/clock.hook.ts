@@ -68,7 +68,7 @@ const useClock: useClockType = ({
 
   const months = useMemo<string[]>(
     () => t("clock.months", { returnObjects: true }) as string[],
-    []
+    [t]
   );
 
   const stringTime = useMemo(

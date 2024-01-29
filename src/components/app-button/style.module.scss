@@ -1,0 +1,13 @@
+.app-btn {
+  display: block;
+  width: 100%;
+  height: 47px;
+  border-radius: 20px;
+  border: none;
+  background-color: #fff;
+  box-shadow: 0px 0px 14px rgba(0, 0, 0, 0.1);
+  transition: 0.2s background-color;
+  &:active {
+    background-color: #bbb;
+  }
+}

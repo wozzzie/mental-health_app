@@ -10,6 +10,7 @@ import Widgetbar from "../../components/widgetbar/Widgetbar";
 import Screen from "../../components/screen/Screen";
 
 import styles from "./style.module.scss";
+import SettingsProvider from "@/components/settings/settingsProvider";
 
 const AppPage = ({
   exp: expTime,
@@ -33,9 +34,11 @@ const AppPage = ({
           overflow: hidden;
         }
       `}</style>
-      <div className={styles["app"]}>
-        <Screen />
-      </div>
+      <SettingsProvider>
+        <div className={styles["app"]}>
+          <Screen />
+        </div>
+      </SettingsProvider>
     </>
   );
 };
