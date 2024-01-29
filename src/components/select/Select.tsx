@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./style.module.scss";
 import { Transition, TransitionStatus } from "react-transition-group";
+import { useTranslation } from "react-i18next";
 
 type SelectProps = {
   onChange: (option: string) => void;
@@ -10,6 +11,7 @@ type SelectProps = {
 
 const Select = ({ onChange, inputValue, options }: SelectProps) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+  const { t } = useTranslation();
 
   const handleSelectToggle = () => {
     setIsOptionsVisible(!isOptionsVisible);
@@ -37,7 +39,7 @@ const Select = ({ onChange, inputValue, options }: SelectProps) => {
         }
         onClick={handleSelectToggle}
       >
-        {inputValue || "Select an option"}
+        {inputValue || t("horoscope.select-option")}
       </div>
 
       <Transition

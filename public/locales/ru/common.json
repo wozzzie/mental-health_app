@@ -55,14 +55,14 @@
   "sign": {
     "sign-up": "Зарегистрироваться",
     "sign-in": "Войти",
-    "name": "Никнейм",
+    "name": "Имя пользователя",
     "email": "Электронная почта",
     "password": "Ваш пароль",
     "password-only": "Пароль",
     "repeat-password": "Повторить пароль",
     "agree": "Я согласен с условиями пользования.",
     "terms": "Регистрируясь, вы соглашаетесь с Условиями пользования.",
-    "label-name": "Ваш никнейм",
+    "label-name": "Имя пользователя",
     "label-email": "Электронная почта",
     "label-password": "Пароль",
     "account-signin": "Войти",
@@ -101,7 +101,7 @@
         "title": "Introduction",
         "text": [
           "This Privacy Policy explains how Balance Vista collects, uses, and protects your personal information when you visit and use Balance Vista. We are committed to ensuring your privacy and protecting your personal data in compliance with the applicable data protection laws, including the General Data Protection Regulation (GDPR) and the Polish Data Protection Act.",
-          {"src":"111", "text":"111"}
+          { "src": "111", "text": "111" }
         ]
       },
       {
@@ -206,7 +206,10 @@
       {
         "title": "3. Privacy Policy",
         "text": [
-          ["Your use of this website is also governed by our Privacy Policy, which can be found ", {"src":"/policy", "text":"here"}],
+          [
+            "Your use of this website is also governed by our Privacy Policy, which can be found ",
+            { "src": "/policy", "text": "here" }
+          ],
           "Using this website, you agree to the practices described in the Privacy Policy."
         ]
       },
@@ -328,5 +331,9 @@
       "group-name": "Horoscope",
       "choose-zodiac-sign": "Choose zodiac sign"
     }
+  },
+  "horoscope": {
+    "select-option": "Выберите опцию",
+    "search": "Искать"
   }
 }
