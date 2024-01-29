@@ -1,0 +1,101 @@
+.settings {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-items: center;
+  align-items: flex-start;
+  min-height: 429px;
+  min-width: 1000px;
+  padding-bottom: 37px;
+  padding-right: 0;
+
+  gap: 20px;
+
+  &__wrapper {
+    margin: auto;
+    position: relative;
+    z-index: 10;
+    opacity: 0;
+    transition: 250ms opacity;
+    background-color: #fffffff0;
+    &_visible {
+      opacity: 1;
+    }
+  }
+  &__groups {
+    width: 215px;
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    gap: 1px;
+    flex-direction: column;
+    background-color: rgba(17, 17, 17, 0.25);
+    margin-top: 20px;
+    box-shadow: 0px 0px 32px 0px rgba(0, 0, 0, 0.2);
+  }
+  &__chosen {
+    width: 500px;
+    display: flex;
+    gap: 20px;
+    overflow: scroll;
+    flex-direction: column;
+    align-self: stretch;
+    overflow-x: visible;
+    flex: 1;
+    padding-right: 20px;
+    padding-top: 20px;
+    &::-webkit-scrollbar {
+      width: 2px;
+    }
+  }
+
+  &__element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  &__group {
+    height: 44px;
+    overflow: hidden;
+    background: #fff;
+    line-height: 44px;
+    padding-left: 10px;
+    transition: 0.3s all;
+    cursor: pointer;
+    &_active {
+      background-color: #e6e4e4;
+    }
+  }
+
+  &__divider {
+    width: 1px;
+    background: rgba(60, 60, 67, 0.36);
+    min-height: 100%;
+    align-self: stretch;
+  }
+
+  &__input__form {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: 400px;
+  }
+
+  &__form__btn {
+    width: 160px;
+    overflow: hidden;
+  }
+  &__select {
+    width: 300px;
+  }
+
+  &__header {
+    font-size: 40px;
+    margin-bottom: 20px;
+  }
+  &__validation {
+    margin-left: 20px;
+    margin-top: 10px;
+    color: rgb(143, 0, 0);
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,85 @@
+import { useAuth } from "@/components/auth/authProvider";
+import { User, updateProfile } from "firebase/auth";
+import { useRouter } from "next/router";
+import { useEffect, useMemo, useState } from "react";
+import { settingsGroup } from "../settingsProvider";
+
+const useUserSettingsCategory = () => {
+  const { user } = useAuth();
+  const router = useRouter();
+  const [dep, update] = useState<boolean>(false);
+  const updateUserName = (newName: string) => {
+    if (user)
+      updateProfile(user, { displayName: newName }).then(() =>
+        update((s) => !s)
+      );
+    else throw new Error("No user detected for profile update");
+  };
+
+  const validateUserName = (s: string) => {
+    if (s.length < 2)
+      return {
+        isOk: false,
+        message: "name-min",
+      };
+    else if (s.length > 12)
+      return {
+        isOk: false,
+        message: "name-max",
+      };
+    else
+      return {
+        isOk: true,
+        message: "name-success",
+      };
+  };
+
+  const changeLanguage = (locale: string) => {
+    const { pathname, query } = router;
+
+    router.push({ pathname, query }, undefined, { locale });
+  };
+
+  useEffect(() => {
+    console.log("update");
+  }, [user?.displayName]);
+
+  const category = useMemo<settingsGroup>(() => {
+    const username = user?.displayName as string;
+    return {
+      name: "user",
+      settings: [
+        {
+          name: "change-username",
+          type: "form",
+          defaultValue: username,
+          callback: updateUserName,
+          validate: validateUserName,
+        },
+        {
+          name: "change-language",
+          type: "select-form",
+          selectedValue: router.locale as string,
+          // languageNames.get(locale as string) || (locale as string),
+          valueVariants: router.locales
+            ?.filter((l) => l !== "default")
+            .map(
+              (locale) => locale
+              //languageNames.get(locale as string) || (locale as string)
+            ) as string[],
+          callback: changeLanguage,
+        },
+      ],
+    };
+  }, [router.locale, user?.displayName as string, user, dep]);
+
+  return {
+    category,
+    hook: {
+      updateUserName,
+      changeLanguage,
+    },
+  };
+};
+
+export default useUserSettingsCategory;
