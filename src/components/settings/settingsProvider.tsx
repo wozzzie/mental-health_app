@@ -126,13 +126,13 @@ export const useAppSettings = () => {
 };
 
 export const useClockSettings = () => {
-  return useContext(SettingsContext)?.hooks?.clock;
+  return (useContext(SettingsContext) as settingsContextType).hooks.clock;
 };
 
 export const useHoroscopeSettings = () => {
-  return useContext(SettingsContext)?.hooks?.horoscope;
+  return (useContext(SettingsContext) as settingsContextType).hooks.horoscope;
 };
 
 export const useUserSettings = () => {
-  return useContext(SettingsContext)?.hooks?.user;
+  return (useContext(SettingsContext) as settingsContextType).hooks.user;
 };
