@@ -14,3 +14,10 @@ export interface ZodiacSignData {
   };
   success: boolean;
 }
+
+export type ImageType = {
+  src: string;
+  alt: string;
+};
+
+export type LoadingStatus = "pending" | "fetched" | "error" | "start";
