@@ -15,7 +15,7 @@ const QuotesWidget: React.FC = () => {
   const { locale: activeLocale } = router;
 
   const fetchRandomQuote = async () => {
-    const languageCode = activeLocale === "En" ? "en" : "ru";
+    const languageCode = activeLocale === "en" ? "en" : "ru";
     const url = `https://quotes15.p.rapidapi.com/quotes/random/?language_code=${languageCode}`;
     const options = {
       method: "GET",
