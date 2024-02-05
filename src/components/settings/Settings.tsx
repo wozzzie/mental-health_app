@@ -126,6 +126,8 @@ const Settings: FC<Props> = ({ transitionState }) => {
                         </div>
                       ) : item.type === "form" ? (
                         <SettingsForm formSetting={item} />
+                      ) : item.type === "controlled" ? (
+                        item.component
                       ) : (
                         ""
                       )}

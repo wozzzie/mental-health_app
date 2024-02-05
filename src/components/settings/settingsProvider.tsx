@@ -19,13 +19,6 @@ import useHoroscopeSettingsCategory, {
 } from "./categories/horoscopeSettingsCategory.hook";
 import useUserSettingsCategory from "./categories/userSettingsCategory.hook";
 
-export type selectSetting = {
-  type: "select";
-  selectedValue: string | null;
-  valueVariants: string[];
-  name: string;
-};
-
 export type LoadingStatus = "pending" | "fetched" | "error" | "start";
 
 export type selectFormSetting = {
@@ -34,12 +27,6 @@ export type selectFormSetting = {
   valueVariants: string[];
   name: string;
   callback: (option: string) => void;
-};
-
-export type inputSetting = {
-  type: "input";
-  value: string;
-  name: string;
 };
 
 export type inputFormSetting = {
@@ -57,14 +44,19 @@ export type switchSetting = {
   callback: (isActive: boolean) => void;
 };
 
+type controlledSetting = {
+  type: "controlled";
+  component: ReactNode;
+  name: string;
+};
+
 export type settingsGroup = {
   name: string;
   settings: (
     | switchSetting
-    | inputSetting
-    | selectSetting
     | inputFormSetting
     | selectFormSetting
+    | controlledSetting
   )[];
 };
 
