@@ -55,7 +55,7 @@ const useHoroscopeSettingsCategory = () => {
 
   const postZodiacSign = async (sign: ZodiacSign) => {
     try {
-      const signData = { sign, userUid: uid};
+      const signData = { sign, uid };
       await fetch(`${serverURL}/api/horoscope/zodiac-sign`, {
         method: "POST",
         headers: {
