@@ -23,9 +23,52 @@ const useHoroscopeSettingsCategory = () => {
 
   const uid = useAuth().user?.uid;
 
-  const getZodiacSignFromServer = async () => {};
+  const getZodiacSignFromServer = async () => {
+    try {
+      setStatus("pending")
 
-  const postZodiacSign = (sign: ZodiacSign) => {};
+      const response = await fetch(
+        `${serverURL}/api/horoscope/get-horoscope?uid=${uid}`,
+        { method: "GET" }
+      );
+    
+      if(response.ok || response.status === 404) {
+        setStatus("fetched")
+      } 
+
+      const data = await response.json();
+      console.log(data)
+      if (data.success) {
+        setZodiacSign(data.horoscope.sign)
+      }
+
+      if (!response.ok && response.status !== 404) {
+        throw new Error("Failed to fetch horoscope");
+      }
+
+    } catch (error: any) {
+      setStatus('error')
+      console.log(error)
+      console.error("Error getting horoscope:", error.message);
+    }
+  };
+
+  const postZodiacSign = async (sign: ZodiacSign) => {
+    try {
+      const signData = { sign, userUid: uid};
+      await fetch(`${serverURL}/api/horoscope/zodiac-sign`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(signData),
+      });
+
+    } catch (error: any) {
+      console.error("Error saving zodiac sign:", error.message);
+    }
+  
+  };
 
   const updateZodiacSign = (option: string) => {
     const sign = option as ZodiacSign;
@@ -34,8 +77,10 @@ const useHoroscopeSettingsCategory = () => {
   };
 
   useEffect(() => {
-    getZodiacSignFromServer();
-  }, []);
+    if(uid){
+      getZodiacSignFromServer();
+    }
+  }, [uid]);
 
   const category = useMemo<settingsGroup>(
     () => ({

@@ -10,12 +10,26 @@ import styles from "./style.module.scss";
 const QuotesWidget: React.FC = () => {
   const [data, seData] = useState<QuotesData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [defaultQuote, setDefaultQuote] = useState("");
+  const [defaultAuthor, setDefaultAuthor] = useState("");
 
   const router = useRouter();
   const { locale: activeLocale } = router;
 
-  const fetchRandomQuote = async () => {
-    const languageCode = activeLocale === "En" ? "en" : "ru";
+  const showDefaultQuote = (lang: string) => {
+    if (lang === "en") {
+      setDefaultQuote("The best way to predict the future is to invent it.");
+      setDefaultAuthor("Alan Kay");
+    } else {
+      setDefaultQuote(
+        "У всего есть своя красота, но не каждый может ее увидеть."
+      );
+      setDefaultAuthor("Конфуций");
+    }
+  };
+
+  const fetchRandomQuote = async (): Promise<void> => {
+    const languageCode = activeLocale === "en" ? "en" : "ru";
     const url = `https://quotes15.p.rapidapi.com/quotes/random/?language_code=${languageCode}`;
     const options = {
       method: "GET",
@@ -29,8 +43,51 @@ const QuotesWidget: React.FC = () => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-        seData(data);
-        saveQuoteToServer(data.content);
+        console.log(data);
+
+        const englishSensitiveWords = [
+          "war",
+          "religion",
+          "suicide",
+          "violence",
+          "politics",
+        ]; 
+        const russianSensitiveWords = [
+          "война",
+          "религия",
+          "самоубийство",
+          "насилие",
+          "политика",
+          "судимость",
+          "господь",
+          "грех",
+          "кара",
+          "бог",
+          "проклятье",
+          "смерть",
+        ]; 
+
+        const authorName = ["Гитлер", "Жириновский", "Талиб"];
+
+        const containsSensitiveWord = data.tags.some(
+          (tag: string) =>
+            englishSensitiveWords.includes(tag.toLowerCase()) ||
+            russianSensitiveWords.includes(tag.toLowerCase())
+        );
+
+        const containsSensitiveAuthor = authorName.some((author) =>
+          data.originator.name.toLowerCase().includes(author.toLowerCase())
+        );
+
+        if (containsSensitiveWord || containsSensitiveAuthor) {
+          console.log(
+            "Sensitive words found in tags or author name. Fetching another quote..."
+          );
+          return showDefaultQuote(languageCode);
+        } else {
+          seData(data);
+          // saveQuoteToServer(data.content);
+        }
       } else {
         console.error("Failed to fetch quote");
       }
@@ -79,9 +136,9 @@ const QuotesWidget: React.FC = () => {
         </div>
       ) : (
         <>
-          &ldquo;{data?.content}&ldquo;
+          &ldquo;{data?.content || defaultQuote}&ldquo;
           <div className={styles["quotes__author"]}>
-            {data?.originator.name}
+            {data?.originator.name || defaultAuthor}
           </div>
         </>
       )}

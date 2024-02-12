@@ -5,18 +5,6 @@
     gap: 15px;
   }
 
-  &__loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: Montserrat;
-    color: rgba(51, 51, 51, 1);
-    font-weight: 500;
-    font-size: 20px;
-    line-height: 25px;
-    width: 396px;
-  }
-
   &__block {
     margin-left: 16px;
     display: flex;
@@ -53,5 +41,19 @@
 
   &_hidden {
     overflow: hidden;
+  }
+
+  &__skeleton {
+    display: flex;
+    flex-direction: column;
+    width: 396px;
+
+    &_title {
+      min-height: 30px;
+    }
+
+    &_content {
+      min-height: 107px;
+    }
   }
 }
