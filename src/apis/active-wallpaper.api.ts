@@ -13,7 +13,7 @@ interface PostResponse {
 }
 
 interface PostRequest {
-  userId: string;
+  uid: string;
   imageId: string;
 }
 
@@ -23,7 +23,7 @@ export const activeWallpaperApi = createApi({
   tagTypes: ["wallpaper"],
   endpoints: (builder) => ({
     getActiveWallpaper: builder.query<ImageData[], string>({
-      query: (uid: string) => `?userId=${uid}`,
+      query: (uid: string) => `?uid=${uid}`,
       providesTags: ["wallpaper"],
     }),
     changeActiveWallpaper: builder.mutation<PostResponse, PostRequest>({

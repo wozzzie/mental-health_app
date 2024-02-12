@@ -17,11 +17,11 @@ const HoroscopeWidget: React.FC = () => {
   const { zodiacSign, status, updateZodiacSign } = useHoroscopeSettings();
 
   const { user } = useAuth();
-  const userUid = user?.uid;
+  const uid = user?.uid;
 
   const saveZodiacSign = async (sign: string) => {
     try {
-      const signData = { sign, userUid };
+      const signData = { sign, uid };
       const response = await fetch(`${serverURL}/api/horoscope/zodiac-sign`, {
         method: "POST",
         headers: {
@@ -37,7 +37,7 @@ const HoroscopeWidget: React.FC = () => {
   const getHoroscope = async () => {
     try {
       const response = await fetch(
-        `${serverURL}/api/horoscope/get-horoscope?uid=${userUid}`,
+        `${serverURL}/api/horoscope/get-horoscope?uid=${uid}`,
         { method: "GET" }
       );
 
