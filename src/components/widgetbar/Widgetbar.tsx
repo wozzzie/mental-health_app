@@ -143,8 +143,6 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                 styles["widget-button"] +
                 (i.active ? " " + styles["widget-button_active"] : "")
               }
-              onMouseOver={() => (!i.active ? handleButtonMouseOver() : null)}
-              onMouseOut={handleButtonMouseOut}
             >
               <Image
                 src={i.img.src}
@@ -152,6 +150,8 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                 width={24}
                 height={24}
                 onClick={i.action}
+                onMouseOver={() => (!i.active ? handleButtonMouseOver() : null)}
+                onMouseOut={handleButtonMouseOut}
               />
               <div
                 className={styles["widget-button__title"]}
