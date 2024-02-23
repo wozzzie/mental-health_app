@@ -1,8 +1,9 @@
 import { useAuth } from "@/components/auth/authProvider";
-import { User, updateProfile } from "firebase/auth";
+import { User, updatePassword, updateProfile } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { settingsGroup } from "../settingsProvider";
+import DeleteAccountSetting from "@/components/delete-account-setting/DeleteAccountSetting";
 
 const useUserSettingsCategory = () => {
   const { user } = useAuth();
@@ -69,9 +70,26 @@ const useUserSettingsCategory = () => {
             ) as string[],
           callback: changeLanguage,
         },
+        {
+          type: "controlled",
+          name: "delete-account",
+          component: <DeleteAccountSetting />,
+        },
       ],
     };
   }, [router.locale, user?.displayName as string, user, dep]);
+
+  const deleteUser = () => {
+    if (user) {
+      user.delete().then(() => {
+        router.replace(router.asPath);
+      });
+    }
+  };
+
+  const updateUserPassword = (newPassword: string) => {
+    updatePassword(user as User, newPassword);
+  };
 
   return {
     category,

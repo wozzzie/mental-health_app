@@ -29,6 +29,18 @@ const nextConfig = {
         hostname: "mental-health-app-server.vercel.app",
         port: "",
         pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "news.google.com",
+        port: "",
+        pathname: "/**"
+      },
+      {
+        protocol: "https",
+        hostname: "media.tenor.com",
+        port: "",
+        pathname: "/**"
       }
     ],
   },

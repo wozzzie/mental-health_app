@@ -1,0 +1,47 @@
+.confirm {
+  border-radius: 10px;
+  background-color: #fffffff0;
+  position: relative;
+  margin: auto;
+
+  &__wrapper {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 200;
+    top: 0;
+    left: 0;
+    display: flex;
+  }
+  &__description {
+    color: rgb(0, 0, 0);
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+    text-align: center;
+    padding: 20px;
+  }
+  &__btns {
+    border-top: 0.33px solid rgb(199, 199, 204);
+
+    display: flex;
+    position: relative;
+    width: 100%;
+  }
+  &__abort,
+  &__confirm {
+    width: 50%;
+    color: rgb(0, 123, 254);
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: -0.43px;
+    text-align: center;
+    border: none;
+    background: transparent;
+  }
+  &__abort {
+    border-right: 0.33px solid rgb(199, 199, 204);
+  }
+}

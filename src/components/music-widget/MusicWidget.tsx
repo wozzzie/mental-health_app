@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.scss";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
 import { closeWidget } from "../screen/ScreenSlice";
@@ -15,6 +15,10 @@ import AppButton from "../app-button/AppButton";
 
 const MusicWidget = () => {
   const link = useSelector((s: RootState) => s.music.link);
+
+  useLayoutEffect(() => {
+    dispatch(setLink(localStorage.getItem("musicLink") || ""));
+  }, []);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -38,6 +42,11 @@ const MusicWidget = () => {
         : "wrong",
     [link]
   );
+
+  const handleNewLink = () => {
+    dispatch(setLink(inputRef?.current?.value || ""));
+    localStorage.setItem("musicLink", inputRef?.current?.value || "");
+  };
 
   return (
     <div className={styles["music-widget"]}>
@@ -137,7 +146,7 @@ const MusicWidget = () => {
           />
         </div>
         <AppButton
-          onClick={() => dispatch(setLink(inputRef?.current?.value || ""))}
+          onClick={handleNewLink}
           className={styles["music-link__btn"]}
         >
           {t("music.open-btn")}

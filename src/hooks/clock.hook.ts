@@ -2,7 +2,7 @@ import { useTranslation } from "next-i18next";
 import { useRouter } from "next/router";
 import { useRef, useState, useEffect, useMemo } from "react";
 
-const get2charNumber = (n: number) => {
+export const get2charNumber = (n: number) => {
   return n < 10 ? "0" + n : n;
 };
 
@@ -74,7 +74,9 @@ const useClock: useClockType = ({
   const stringTime = useMemo(
     () =>
       `${get2charNumber(
-        use24HourFormat ? (time?.hours as number) : (time?.hours as number) % 12
+        use24HourFormat
+          ? (time?.hours as number)
+          : (time?.hours as number) % 12 || 12
       )}:${get2charNumber(time?.minutes as number)}` +
       (showSeconds ? `:${get2charNumber(time?.seconds as number)}` : ""),
     [use24HourFormat, showSeconds, time]
@@ -87,7 +89,7 @@ const useClock: useClockType = ({
     [date, locale]
   );
   const PMOrAM = useMemo(
-    () => ((time?.hours as number) > 12 ? "am" : "pm"),
+    () => ((time?.hours as number) > 12 ? "pm" : "am"),
     [time]
   );
   return {

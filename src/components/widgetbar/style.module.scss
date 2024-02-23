@@ -10,9 +10,10 @@
   transition-delay: 0s, 0.5s;
   overflow: visible;
   padding: 0;
-  z-index: 200;
+  //z-index: 200;
   &_visible {
     overflow: visible;
+    z-index: 200;
   }
 
   border-radius: 32px !important;
@@ -22,10 +23,11 @@
     gap: 20px;
     justify-content: flex-start;
     align-items: flex-start;
-    margin: auto 0;
+    margin: 0;
     padding: 4px 0;
 
     &_active {
+      z-index: 200;
       img {
         background-color: #00000015;
         border-radius: 16px;
@@ -43,20 +45,31 @@
       height: 32px;
       padding: 4px 0;
       margin-left: 3px;
-    }
-    &:hover {
-      & .widget-button__title {
-        visibility: visible;
-        overflow: visible;
-        opacity: 1;
-        transition-delay: 0.3s;
+      &:hover {
+        & + .widget-button__title {
+          visibility: visible;
+          overflow: visible;
+          opacity: 1;
+          transition-delay: 0.3s;
+          z-index: auto;
+        }
       }
     }
+    // &:hover {
+    //   & .widget-button__title {
+    //     visibility: visible;
+    //     overflow: visible;
+    //     opacity: 1;
+    //     transition-delay: 0.3s;
+    //   }
+    // }
     &__title {
       //position: absolute;
       white-space: nowrap;
       //transform: translateY(-10px);
       opacity: 0;
+      visibility: hidden;
+      z-index: -10;
       //left: calc(100% + 30px);
       transition: 0.5s;
       transition-delay: 0s;
@@ -87,13 +100,15 @@
     &_main {
       display: flex;
       flex-direction: column;
+      flex: 1;
+      //padding-top: 10px;
       gap: 25px;
-      justify-items: center;
-      align-items: center;
+      justify-content: flex-start;
+      align-items: flex-start;
       //min-height: 300px;
       transition: 0.5s height;
-      width: 200px;
-      overflow: scroll;
+      width: 300px;
+      overflow: auto;
       scrollbar-width: 0;
       scrollbar-color: #00000055;
       box-shadow: 4px 2px -2px #000000;
@@ -103,10 +118,11 @@
         height: 0;
       }
       &_in {
-        margin: auto;
+        //margin: auto;
         display: flex;
         flex-direction: column;
-        gap: 33px;
+        gap: 5px;
+        flex: 1;
       }
     }
 

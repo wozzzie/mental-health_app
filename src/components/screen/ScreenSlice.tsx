@@ -1,3 +1,4 @@
+"use client";
 import { createSlice, nanoid } from "@reduxjs/toolkit";
 import { ReactNode } from "react";
 import MusicWidget from "../music-widget/MusicWidget";
@@ -5,6 +6,11 @@ import QuotesWidget from "../quotes-widget/QuotesWidget";
 import TarotWidget from "../tarot-widget/TarotWidget";
 import HoroscopeWidget from "../horoscope-widget/Horoscope";
 import ClockWidget from "../clock-widget/ClockWidget";
+import BreatheAnimation from "../breathe-animation/BreatheAnimation";
+import BreathWidget from "../breath-widget/BreathWidget";
+import NewsWidget from "../news-widget/NewsWidget";
+import GifWidget from "../gif-widget/GifWidget";
+import store from "@/store/store";
 
 export type WidgetAbstraction = {
   id: string;
@@ -36,6 +42,11 @@ type InitialStateType = {
   settingsWindowActive: boolean;
 };
 
+type WindowDimensions = {
+  width: number;
+  height: number;
+};
+
 const initialState: InitialStateType = {
   widgets: [
     {
@@ -50,24 +61,13 @@ const initialState: InitialStateType = {
       },
     },
     {
-      id: "2",
-      x: 0,
-      y: 0,
-      component: <>meditation</>,
-      active: false,
-      icon: {
-        src: "/meditation.svg",
-        alt: "Meditation",
-      },
-    },
-    {
       id: "3",
       x: 0,
       y: 0,
-      component: <></>,
+      component: <GifWidget />,
       active: false,
       icon: {
-        src: "/gif-widget.svg",
+        src: "/kitten.svg",
         alt: "Kittens",
       },
     },
@@ -86,7 +86,7 @@ const initialState: InitialStateType = {
       id: "5",
       x: 0,
       y: 0,
-      component: <>News</>,
+      component: <NewsWidget />,
       active: false,
       icon: {
         src: "/news.svg",
@@ -111,7 +111,7 @@ const initialState: InitialStateType = {
       component: <HoroscopeWidget />,
       active: false,
       icon: {
-        src: "/tarot.svg",
+        src: "/horoscope.svg",
         alt: "Horoscope",
       },
     },
@@ -122,8 +122,19 @@ const initialState: InitialStateType = {
       component: <ClockWidget />,
       active: false,
       icon: {
-        src: "/tarot.svg",
+        src: "/clock.svg",
         alt: "Clock",
+      },
+    },
+    {
+      id: "9",
+      x: 0,
+      y: 0,
+      component: <BreathWidget />,
+      active: false,
+      icon: {
+        src: "/breath.svg",
+        alt: "Breathe widget",
       },
     },
   ],
@@ -140,6 +151,17 @@ type WidgetMutatorInPayload = {
   };
 };
 
+const saveWidgets = (widgets: InitialStateType) => {
+  localStorage.setItem("widgets", JSON.stringify(widgets));
+  localStorage.setItem(
+    "windowDimensions",
+    JSON.stringify({
+      width: window.innerWidth,
+      height: window.innerHeight,
+    })
+  );
+};
+
 export const screenSlice = createSlice({
   name: "screen",
   initialState: initialState,
@@ -149,6 +171,7 @@ export const screenSlice = createSlice({
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = false;
       else console.log("close: widget not found");
+      saveWidgets(state);
     },
 
     raiseWidget: (state, action: IDInPayload) => {
@@ -159,18 +182,21 @@ export const screenSlice = createSlice({
       } else {
         console.log("raise: widget not found ");
       }
+      saveWidgets(state);
     },
 
     openWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = true;
       else console.log("open: widget not found");
+      saveWidgets(state);
     },
 
     toggleWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = !w.active;
       else console.log("toggle: widget not found");
+      saveWidgets(state);
     },
 
     changeWidgetPosition: (state, action: WidgetMutatorInPayload) => {
@@ -181,15 +207,18 @@ export const screenSlice = createSlice({
         widgetToMutate.x = action.payload.x;
         widgetToMutate.y = action.payload.y;
       }
+      saveWidgets(state);
     },
 
     openWallpaperWindow: (s) => {
       s.wallpaperWindowActive = true;
       s.settingsWindowActive = false;
+      saveWidgets(s);
     },
 
     closeWallpaperWindow: (s) => {
       s.wallpaperWindowActive = false;
+      saveWidgets(s);
     },
 
     toggleWallpaperWindow: (s) => {
@@ -197,15 +226,18 @@ export const screenSlice = createSlice({
       s.settingsWindowActive = s.wallpaperWindowActive
         ? false
         : s.settingsWindowActive;
+      saveWidgets(s);
     },
 
     openSettingsWindow: (s) => {
       s.settingsWindowActive = true;
       s.wallpaperWindowActive = false;
+      saveWidgets(s);
     },
 
     closeSettingsWindow: (s) => {
       s.settingsWindowActive = false;
+      saveWidgets(s);
     },
 
     toggleSettingsWindow: (s) => {
@@ -213,6 +245,37 @@ export const screenSlice = createSlice({
       s.wallpaperWindowActive = s.settingsWindowActive
         ? false
         : s.wallpaperWindowActive;
+      saveWidgets(s);
+    },
+
+    getPreviousWidgetsState: (s) => {
+      const previousState = JSON.parse(
+        localStorage.getItem("widgets") || "{}"
+      ) as InitialStateType | null;
+
+      const previousDimensions = JSON.parse(
+        localStorage.getItem("windowDimensions") || "{}"
+      ) as WindowDimensions | null;
+
+      if (
+        previousState &&
+        previousDimensions &&
+        previousDimensions.height === window.innerHeight &&
+        previousDimensions.width === window.innerWidth
+      ) {
+        console.log(
+          JSON.parse(
+            localStorage.getItem("widgets") || "{}"
+          ) as WindowDimensions
+        );
+        s.settingsWindowActive = previousState.settingsWindowActive;
+        s.wallpaperWindowActive = previousState.wallpaperWindowActive;
+        const tmp = s.widgets;
+        s.widgets = previousState.widgets.map((item) => ({
+          ...item,
+          component: s.widgets.find((i) => i.id === item.id)?.component,
+        }));
+      } else console.log("77777");
     },
   },
 });
@@ -229,6 +292,7 @@ export const {
   toggleSettingsWindow,
   openSettingsWindow,
   closeSettingsWindow,
+  getPreviousWidgetsState,
 } = screenSlice.actions;
 
 export default screenSlice.reducer;

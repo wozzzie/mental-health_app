@@ -335,5 +335,8 @@
   "horoscope": {
     "select-option": "Выберите опцию",
     "search": "Искать"
+  },
+  "news": {
+    "title": "Новости"
   }
 }

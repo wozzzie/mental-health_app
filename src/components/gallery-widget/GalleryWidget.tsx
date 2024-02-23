@@ -30,7 +30,7 @@ const GalleryWidget = () => {
 
   const getBgFromServer = async () => {
     try {
-      const response = await fetch(`${serverURL}/api/images?uid=${user}`, {
+      const response = await fetch(`${serverURL}/api/images?uid=${user?.uid}`, {
         method: "GET",
       });
       if (response.ok) {
@@ -46,7 +46,6 @@ const GalleryWidget = () => {
   };
 
   const handleImageClick = (imageSource: string, imageId: string) => {
-    console.log(images);
     changeActiveWallpaper({ imageId, uid: user?.uid as string });
   };
 
@@ -76,8 +75,9 @@ const GalleryWidget = () => {
       if (response.status === 200) {
         console.log("Image saved to the server successfully");
         const responseData = await response.json();
-        const serverImageUrl = responseData.image;
-        setImages((prevImages) => [...prevImages, { image: serverImageUrl }]);
+        const serverImage = responseData.image;
+        console.log(serverImage?.image);
+        setImages((prevImages) => [...prevImages, serverImage]);
       } else {
         console.error(
           "Failed to save image to the server. Response details:",

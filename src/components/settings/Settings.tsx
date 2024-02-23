@@ -79,14 +79,16 @@ const Settings: FC<Props> = ({ transitionState }) => {
                       className={styles["settings__element"]}
                       key={i + " " + chosenGroup}
                     >
-                      <div className={styles["settings__description"]}>
-                        {t(
-                          "settings." +
-                            settings.groups[chosenGroup].name +
-                            "." +
-                            item.name
-                        )}
-                      </div>
+                      {item.type !== "controlled" && (
+                        <div className={styles["settings__description"]}>
+                          {t(
+                            "settings." +
+                              settings.groups[chosenGroup].name +
+                              "." +
+                              item.name
+                          )}
+                        </div>
+                      )}
                       {item.type === "switch" ? (
                         <SettingsSwitch
                           isActive={item.value}
@@ -126,6 +128,8 @@ const Settings: FC<Props> = ({ transitionState }) => {
                         </div>
                       ) : item.type === "form" ? (
                         <SettingsForm formSetting={item} />
+                      ) : item.type === "controlled" ? (
+                        item.component
                       ) : (
                         ""
                       )}

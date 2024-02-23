@@ -1,0 +1,13 @@
+.delete-account {
+  color: rgb(255, 56, 43);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.43px;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s all;
+  &:active {
+    color: rgb(180, 40, 30);
+  }
+}
