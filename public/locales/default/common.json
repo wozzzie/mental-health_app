@@ -334,5 +334,8 @@
   "horoscope": {
     "select-option": "Select an option",
     "search": "Search"
+  },
+  "news": {
+    "title": "News"
   }
 }

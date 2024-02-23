@@ -325,5 +325,8 @@
       "group-name": "Horoscope",
       "choose-zodiac-sign": "Choose zodiac sign"
     }
+  },
+  "news": {
+    "title": "Новини"
   }
 }
