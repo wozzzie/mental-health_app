@@ -5,10 +5,6 @@ import { useEffect, useRef, useState } from "react";
 const useGif = () => {
   const next = useRef<string | null>(null);
   const query = useGetGifQuery(next.current);
-
-  useEffect(() => {
-    next.current = query.data?.next || null;
-  }, [query.data?.next]);
   return query;
 };
 
