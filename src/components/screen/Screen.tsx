@@ -9,6 +9,7 @@ import {
 
 import {
   WidgetAbstraction,
+  getPreviousWidgetsState,
   toggleSettingsWindow,
   toggleWallpaperWindow,
   toggleWidget,
@@ -25,6 +26,8 @@ import { useGetActiveWallpaperQuery } from "@/apis/active-wallpaper.api";
 import styles from "./style.module.scss";
 import Widgetbar from "../widgetbar/Widgetbar";
 import Settings from "../settings/Settings";
+import { ImageData } from "@/types/types";
+import serverURL from "@/constants/serverURL";
 
 type ScreenProps = {
   className?: string;
@@ -41,8 +44,25 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
   );
 
   useEffect(() => {
-    if (activeWallpaper) {
-      setWallpaper(activeWallpaper[0].image);
+    dispatch(getPreviousWidgetsState());
+  }, []);
+
+  useEffect(() => {
+    console.log(activeWallpaper);
+  }, [activeWallpaper]);
+
+  const formatImageURL = (imageData: ImageData) => {
+    console.log("formatted!");
+    const ret = (
+      imageData.isDefault ? imageData.image : `${serverURL}/${imageData.image}`
+    ).replace(/\\/, "/");
+    console.log(ret);
+    return ret;
+  };
+
+  useEffect(() => {
+    if (activeWallpaper && activeWallpaper.length) {
+      setWallpaper(formatImageURL(activeWallpaper[0]));
     } else {
       setWallpaper("app-bg.jpeg");
     }
@@ -116,7 +136,7 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
           },
           {
             img: {
-              src: "/wallpaper.svg",
+              src: "/settings.svg",
               alt: "Wallpapers",
             },
             action: () => dispatch(toggleSettingsWindow()),
