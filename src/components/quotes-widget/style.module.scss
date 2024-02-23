@@ -1,3 +1,27 @@
-.widget__wrapper {
-  width: 411px;
+.quotes {
+  &__wrapper {
+    width: 411px;
+  }
+
+  &__author {
+    text-align: right;
+    font-style: italic;
+  }
+
+  &__skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: end;
+
+    &_content {
+      min-height: 100px;
+    }
+
+    &_author {
+      width: 50%;
+
+      min-height: 20px;
+    }
+  }
 }

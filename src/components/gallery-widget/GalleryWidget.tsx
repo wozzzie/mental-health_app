@@ -46,7 +46,6 @@ const GalleryWidget = () => {
   };
 
   const handleImageClick = (imageSource: string, imageId: string) => {
-    console.log(imageId);
     changeActiveWallpaper({ imageId, uid: user?.uid as string });
   };
 

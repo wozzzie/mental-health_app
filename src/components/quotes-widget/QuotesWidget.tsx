@@ -1,21 +1,35 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { useRouter } from "next/router";
-import { AppDispatch } from "../../store/store";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
+import serverURL from "@/constants/serverURL";
+import Skeleton from "../skeleton/Skeleton";
+import { QuotesData } from "@/types/types";
 
 import styles from "./style.module.scss";
-import serverURL from "@/constants/serverURL";
 
 const QuotesWidget: React.FC = () => {
+  const [data, seData] = useState<QuotesData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [defaultQuote, setDefaultQuote] = useState("");
+  const [defaultAuthor, setDefaultAuthor] = useState("");
+
   const router = useRouter();
   const { locale: activeLocale } = router;
 
-  const dispatch: AppDispatch = useDispatch();
-  const [quote, setQuote] = useState("");
+  const showDefaultQuote = (lang: string) => {
+    if (lang === "en") {
+      setDefaultQuote("The best way to predict the future is to invent it.");
+      setDefaultAuthor("Alan Kay");
+    } else {
+      setDefaultQuote(
+        "У всего есть своя красота, но не каждый может ее увидеть."
+      );
+      setDefaultAuthor("Конфуций");
+    }
+  };
 
-  const fetchRandomQuote = async () => {
-    const languageCode = activeLocale === "En" ? "en" : "ru";
+  const fetchRandomQuote = async (): Promise<void> => {
+    const languageCode = activeLocale === "en" ? "en" : "ru";
     const url = `https://quotes15.p.rapidapi.com/quotes/random/?language_code=${languageCode}`;
     const options = {
       method: "GET",
@@ -29,9 +43,51 @@ const QuotesWidget: React.FC = () => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
+        console.log(data);
 
-        saveQuoteToServer(data.content);
-        setQuote(data.content);
+        const englishSensitiveWords = [
+          "war",
+          "religion",
+          "suicide",
+          "violence",
+          "politics",
+        ]; 
+        const russianSensitiveWords = [
+          "война",
+          "религия",
+          "самоубийство",
+          "насилие",
+          "политика",
+          "судимость",
+          "господь",
+          "грех",
+          "кара",
+          "бог",
+          "проклятье",
+          "смерть",
+        ]; 
+
+        const authorName = ["Гитлер", "Жириновский", "Талиб"];
+
+        const containsSensitiveWord = data.tags.some(
+          (tag: string) =>
+            englishSensitiveWords.includes(tag.toLowerCase()) ||
+            russianSensitiveWords.includes(tag.toLowerCase())
+        );
+
+        const containsSensitiveAuthor = authorName.some((author) =>
+          data.originator.name.toLowerCase().includes(author.toLowerCase())
+        );
+
+        if (containsSensitiveWord || containsSensitiveAuthor) {
+          console.log(
+            "Sensitive words found in tags or author name. Fetching another quote..."
+          );
+          return showDefaultQuote(languageCode);
+        } else {
+          seData(data);
+          // saveQuoteToServer(data.content);
+        }
       } else {
         console.error("Failed to fetch quote");
       }
@@ -61,13 +117,31 @@ const QuotesWidget: React.FC = () => {
     }
   };
 
+  const getQuote = async () => {
+    setLoading(true);
+    await fetchRandomQuote();
+    setLoading(false);
+  };
+
   useEffect(() => {
-    fetchRandomQuote();
+    getQuote();
   }, []);
 
   return (
-    <WidgetWrapper className={styles["widget__wrapper"]}>
-      &ldquo;{quote}&ldquo;
+    <WidgetWrapper className={styles["quotes__wrapper"]}>
+      {loading ? (
+        <div className={styles["quotes__skeleton"]}>
+          <Skeleton className={styles["quotes__skeleton_content"]} />
+          <Skeleton className={styles["quotes__skeleton_author"]} />
+        </div>
+      ) : (
+        <>
+          &ldquo;{data?.content || defaultQuote}&ldquo;
+          <div className={styles["quotes__author"]}>
+            {data?.originator.name || defaultAuthor}
+          </div>
+        </>
+      )}
     </WidgetWrapper>
   );
 };

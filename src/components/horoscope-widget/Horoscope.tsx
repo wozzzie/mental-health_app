@@ -5,49 +5,23 @@ import { ZodiacSignData } from "@/types/types";
 import ChooseSignWindow from "./ChooseSignWindow";
 import { useAuth } from "../auth/authProvider";
 import serverURL from "@/constants/serverURL";
+import Skeleton from "../skeleton/Skeleton";
+import { useHoroscopeSettings } from "../settings/settingsProvider";
 
 import styles from "./style.module.scss";
-import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
 
 const HoroscopeWidget: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [selectedZodiac, setSelectedZodiac] = useState<string | null>(null);
   const [zodiacSigns, setZodiacSigns] = useState<string[]>([]);
   const [data, setData] = useState<ZodiacSignData | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [userSelected, setUserSelected] = useState<boolean>(false);
-  const [initialRender, setInitialRender] = useState<boolean>(true);
+  const { zodiacSign, status, updateZodiacSign } = useHoroscopeSettings();
 
   const { user } = useAuth();
-  const userUid = user?.uid;
-  console.log(user)
-
-  const checkUserSign = async () => {
-    try {
-      const response = await fetch(
-        `${serverURL}/api/horoscope/check-user-sign?uid=${userUid}`,
-        { method: "GET" }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to check user sign");
-      }
-
-      const data = await response.json();
-      if (data.success && data.hasChosenSign) {
-        setUserSelected(true);
-        await fetchHoroscope();
-      } else {
-        setLoading(false);
-      }
-    } catch (error: any) {
-      console.error("Error checking user sign:", error.message);
-    }
-  };
+  const uid = user?.uid;
 
   const saveZodiacSign = async (sign: string) => {
     try {
-      const signData = { sign, userUid };
+      const signData = { sign, uid };
       const response = await fetch(`${serverURL}/api/horoscope/zodiac-sign`, {
         method: "POST",
         headers: {
@@ -55,8 +29,6 @@ const HoroscopeWidget: React.FC = () => {
         },
         body: JSON.stringify(signData),
       });
-
-      const responseData = await response.json();
     } catch (error: any) {
       console.error("Error saving zodiac sign:", error.message);
     }
@@ -65,7 +37,7 @@ const HoroscopeWidget: React.FC = () => {
   const getHoroscope = async () => {
     try {
       const response = await fetch(
-        `${serverURL}/api/horoscope/get-horoscope?uid=${userUid}`,
+        `${serverURL}/api/horoscope/get-horoscope?uid=${uid}`,
         { method: "GET" }
       );
 
@@ -85,13 +57,16 @@ const HoroscopeWidget: React.FC = () => {
   };
 
   const handleSaveClick = async () => {
-    setLoading(true);
     await saveZodiacSign(inputValue);
-    setSelectedZodiac(inputValue);
-    setInitialRender(false);
-    await getHoroscope();
-    setLoading(false);
+    updateZodiacSign(inputValue);
   };
+
+  useEffect(() => {
+    setData(null);
+    if (zodiacSign) {
+      getHoroscope();
+    }
+  }, [zodiacSign]);
 
   useEffect(() => {
     setZodiacSigns([
@@ -108,64 +83,50 @@ const HoroscopeWidget: React.FC = () => {
       "Aquarius",
       "Pisces",
     ]);
-
-    checkUserSign();
   }, []);
-
-  const fetchHoroscope = async () => {
-    setLoading(true);
-    await getHoroscope();
-    setLoading(false);
-  };
 
   return (
     <WidgetWrapper className={styles["widget__wrapper"]}>
-      <SmoothResizeBlock
-        classNames={
-          !(selectedZodiac || userSelected || loading)
-            ? styles["horoscope_smooth"]
-            : styles["horoscope_hidden"]
-        }
-      >
-        {selectedZodiac || userSelected || loading ? (
-          <>
-            {loading ? (
-              <div className={styles["horoscope__loading"]}>
-                <span>Loading...</span>
-              </div>
-            ) : (
-              <>
-                <div className={styles["horoscope__block"]}>
-                  <Image
-                    src={data?.horoscope.icon as string}
-                    alt="zodiac sign"
-                    width={32}
-                    height={28}
-                  />
-                  <h1 className={styles["horoscope__title"]}>
-                    {data?.horoscope.sign}
-                  </h1>
-                </div>
-                <div className={styles["horoscope__divider"]}></div>
-                <div className={styles["horoscope__text"]}>
-                  {data?.horoscope.horoscope}
-                </div>
-              </>
-            )}
-          </>
+      <>
+        {status === "pending" || status === "start" ? (
+          <div className={styles["horoscope__skeleton"]}>
+            <Skeleton className={styles["horoscope__skeleton_title"]} />
+            <div className={styles["horoscope__divider"]}></div>
+            <Skeleton className={styles["horoscope__skeleton_content"]} />
+          </div>
+        ) : zodiacSign === null ? (
+          <ChooseSignWindow
+            options={zodiacSigns}
+            inputValue={inputValue}
+            handleZodiacChange={handleZodiacChange}
+            handleSaveClick={handleSaveClick}
+          />
+        ) : data === null ? (
+          <div className={styles["horoscope__skeleton"]}>
+            <Skeleton className={styles["horoscope__skeleton_title"]} />
+            <div className={styles["horoscope__divider"]}></div>
+            <Skeleton className={styles["horoscope__skeleton_content"]} />
+          </div>
         ) : (
           <>
-            {initialRender && (
-              <ChooseSignWindow
-                options={zodiacSigns}
-                inputValue={inputValue}
-                handleZodiacChange={handleZodiacChange}
-                handleSaveClick={handleSaveClick}
+            <div className={styles["horoscope__block"]}>
+              <Image
+                src={data?.horoscope.icon as string}
+                alt="zodiac sign"
+                width={32}
+                height={28}
               />
-            )}
+              <h1 className={styles["horoscope__title"]}>
+                {data?.horoscope.sign}
+              </h1>
+            </div>
+            <div className={styles["horoscope__divider"]}></div>
+            <div className={styles["horoscope__text"]}>
+              {data?.horoscope.horoscope}
+            </div>
           </>
         )}
-      </SmoothResizeBlock>
+      </>
     </WidgetWrapper>
   );
 };
