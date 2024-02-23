@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="350"
+   height="360"
+   viewBox="0 0 92.604165 95.249999"
+   version="1.1"
+   id="svg7788"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs1" />
+   <defs>
+   <linearGradient id="Gradient1">
+      <stop class="stop1" offset="0%" />
+      <stop class="stop2" offset="50%" />
+      <stop class="stop3" offset="100%" />
+   </linearGradient>
+</defs>
+  <g
+     id="layer7788">
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect1"
+       width="26.458332"
+       height="26.458332"
+       x="63.5"
+       y="2.6458337"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect1-3"
+       width="26.458332"
+       height="26.458332"
+       x="63.5"
+       y="34.395832"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect1-7"
+       width="26.458332"
+       height="26.458332"
+       x="63.5"
+       y="66.145836"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2"
+       width="52.916664"
+       height="18.520834"
+       x="2.6458337"
+       y="2.6458337"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2-7"
+       width="52.916664"
+       height="18.520834"
+       x="2.6458337"
+       y="34.395832"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2-9"
+       width="52.916664"
+       height="18.520834"
+       x="2.6458337"
+       y="66.145836"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2-2"
+       width="52.916664"
+       height="5.2916665"
+       x="2.6458337"
+       y="23.8125"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2-2-6"
+       width="52.916664"
+       height="5.2916665"
+       x="2.6458337"
+       y="55.5625"
+       rx="2.6458333"
+       ry="2.6458333" />
+    <rect
+       style="fill-opacity:0.333333;stroke:#000000;stroke-width:0;stroke-dasharray:none"
+       id="rect2-2-9"
+       width="52.916664"
+       height="5.2916665"
+       x="2.6458337"
+       y="87.3125"
+       rx="2.6458333"
+       ry="2.6458333" />
+  </g>
+  <rect class="anim-rect"></rect>
+  <style>
+      @keyframes skeleton {
+         from {
+            transform:translateX(-350px);
+         }
+         to {
+            transform: translateX(200px);
+         }
+      }
+      .anim-rect {
+         fill: url(#Gradient1);
+         transform: translateX(-350px);
+         animation: skeleton 1s infinite;
+         width: 350px;
+         height: 360px;
+      }
+      .stop1 {
+         stop-color: #ffffff00;
+      }
+      .stop2 {
+         stop-color: #ffffff55;
+      }
+      .stop3 {
+         stop-color: #ffffff00;
+      }
+
+      #svg1 {
+         overflow: hidden;
+         fill:#000000;
+      }
+      #layer7788 rect {
+         fill: #666;
+      }
+   </style>
+</svg>
