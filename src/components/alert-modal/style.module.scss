@@ -35,7 +35,6 @@
   }
   &__abort,
   &__confirm {
-    width: 50%;
     color: rgb(0, 123, 254);
     font-size: 17px;
     font-weight: 400;
@@ -45,6 +44,7 @@
     border: none;
     background: transparent;
     padding: 10px 0;
+    flex: 1;
   }
   &__abort {
     border-right: 0.33px solid rgb(199, 199, 204);

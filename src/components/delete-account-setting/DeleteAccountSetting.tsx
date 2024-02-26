@@ -18,6 +18,7 @@ const DeleteAccountSetting: FC = () => {
 
   const handleConfirmModal = async () => {
     await user?.delete();
+    localStorage.clear();
     router.push(ROUTES.WELCOME);
   };
 
@@ -32,7 +33,7 @@ const DeleteAccountSetting: FC = () => {
   return (
     <>
       <div className={styles["delete-account"]} onClick={handleTextClick}>
-        {t("delete-accout.setting")}
+        {t("delete-account.setting")}
       </div>
       <ConfirmModal
         descriptionText={t("delete-account.modal")}

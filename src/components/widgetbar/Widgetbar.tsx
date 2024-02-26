@@ -9,6 +9,10 @@ import {
   toggleWallpaperWindow,
 } from "../screen/ScreenSlice";
 import { useState, useMemo, FC, useRef, useEffect } from "react";
+import { useTranslation } from "next-i18next";
+import { logout } from "@/firebase/firebaseClient";
+import { useRouter } from "next/router";
+import ROUTES from "@/constants/routes";
 
 type WidgetButton = {
   img: {
@@ -60,6 +64,14 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
     } else {
       setWrapperActive(true);
     }
+  };
+
+  const { t } = useTranslation();
+  const { push } = useRouter();
+
+  const handleLogOut = async () => {
+    await logout();
+    push(ROUTES.WELCOME);
   };
 
   return (
@@ -165,13 +177,22 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                     : {}
                 }
               >
-                {i.img.alt}
+                {t("tooltip." + i.img.alt)}
               </div>
             </div>
           ))}
         </div>
       </div>
-      <div></div>
+      <div className={styles["widget__end"]}>
+        <Image
+          src="/logout.svg"
+          alt="Log out"
+          width={18}
+          height={18}
+          className={styles["widget__logout"]}
+          onClick={handleLogOut}
+        />
+      </div>
     </WidgetWrapper>
   );
 };

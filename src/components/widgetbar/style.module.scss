@@ -27,7 +27,7 @@
     padding: 4px 0;
 
     &_active {
-      z-index: 200;
+      //z-index: 200;
       img {
         background-color: #00000015;
         border-radius: 16px;
@@ -132,5 +132,18 @@
       align-items: center;
       gap: 22px;
     }
+  }
+  &__end {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: hidden;
+    padding-left: 23px;
+    padding-bottom: 23px;
+  }
+
+  &__logout {
+    display: block;
+    position: relative;
+    cursor: pointer;
   }
 }

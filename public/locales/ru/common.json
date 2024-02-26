@@ -316,20 +316,25 @@
   "settings": {
     "settings": "Settings",
     "select-default": "Выберите значение",
-    "change": "Change",
+    "change": "Изменить",
     "user": {
-      "group-name": "User",
-      "change-language": "Change language",
-      "change-username": "Change username"
+      "group-name": "Пользователь",
+      "change-language": "Изменить язык",
+      "change-username": "Изменить юзернейм",
+      "change-password": "Изменить пароль",
+      "old-password": "Старый пароль",
+      "password-update": "Загрузка...",
+      "password-success": "Пароль успешно изменён",
+      "wrong-password": "Неправильный старый пароль!"
     },
     "clock": {
-      "group-name": "Clock",
-      "24-hour-format": "Use 24 hour format",
-      "show-seconds": "Show seconds"
+      "group-name": "Часы",
+      "24-hour-format": "Исапользовать 24-часовой формат",
+      "show-seconds": "Показывать секунды"
     },
     "horoscope": {
-      "group-name": "Horoscope",
-      "choose-zodiac-sign": "Choose zodiac sign"
+      "group-name": "Гороскоп",
+      "choose-zodiac-sign": "Выберите знак зодиака"
     }
   },
   "horoscope": {
@@ -338,5 +343,23 @@
   },
   "news": {
     "title": "Новости"
+  },
+  "delete-account": {
+    "setting": "Удалить аккаунт",
+    "modal": "Вы уверены, что хотите удалить аккаунт?",
+    "modal-abort": "Отмена",
+    "modal-confirm": "Удалить"
+  },
+  "tooltip": {
+    "music": "Музыка",
+    "kittens": "Котята",
+    "quote": "Цитаты",
+    "news": "Новости",
+    "tarot": "Карта таро",
+    "horoscope": "Гороскоп",
+    "clock": "Часы",
+    "breathe": "Дыхание",
+    "wallpapers": "Обои",
+    "settings": "Настройки"
   }
 }

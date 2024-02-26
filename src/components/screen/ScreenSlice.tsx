@@ -57,7 +57,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/music.svg",
-        alt: "Music",
+        alt: "music",
       },
     },
     {
@@ -68,7 +68,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/kitten.svg",
-        alt: "Kittens",
+        alt: "kittens",
       },
     },
     {
@@ -79,7 +79,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/quotes.svg",
-        alt: "Daily Quote",
+        alt: "quote",
       },
     },
     {
@@ -90,7 +90,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/news.svg",
-        alt: "News",
+        alt: "news",
       },
     },
     {
@@ -101,7 +101,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/tarot.svg",
-        alt: "Tarot",
+        alt: "tarot",
       },
     },
     {
@@ -112,7 +112,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/horoscope.svg",
-        alt: "Horoscope",
+        alt: "horoscope",
       },
     },
     {
@@ -123,7 +123,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/clock.svg",
-        alt: "Clock",
+        alt: "clock",
       },
     },
     {
@@ -134,7 +134,7 @@ const initialState: InitialStateType = {
       active: false,
       icon: {
         src: "/breath.svg",
-        alt: "Breathe widget",
+        alt: "breathe",
       },
     },
   ],

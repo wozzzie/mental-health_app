@@ -7,6 +7,7 @@
   padding: 2px;
   background-color: var(--Fills-Secondary, rgba(120, 120, 128, 0.16));
   transition: 0.3s background-color;
+  flex-shrink: 0;
   cursor: pointer;
 
   &_active {

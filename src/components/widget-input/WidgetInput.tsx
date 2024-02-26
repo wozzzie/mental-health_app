@@ -8,6 +8,8 @@ interface Props {
   placeholder: string;
   className?: string;
   elementRef?: RefObject<HTMLInputElement>;
+  inputProps?: any;
+  variant?: "default" | "warning" | "success";
 }
 
 const WidgetInput: FC<Props> = ({
@@ -15,6 +17,8 @@ const WidgetInput: FC<Props> = ({
   small = false,
   className = "",
   elementRef = null,
+  inputProps = null,
+  variant = "default",
   ...props
 }) => {
   return (
@@ -25,9 +29,15 @@ const WidgetInput: FC<Props> = ({
         styles["widget-input"] +
         (small ? " " + styles["widget-input_small"] : "") +
         " " +
-        className
+        className +
+        (variant === "warning"
+          ? " " + styles["widget-input_warning"]
+          : variant === "success"
+          ? " " + styles["widget-input_success"]
+          : "")
       }
       {...(elementRef ? { ref: elementRef } : {})}
+      {...(inputProps || {})}
     ></input>
   );
 };

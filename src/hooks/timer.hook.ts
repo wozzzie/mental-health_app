@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { get2charNumber } from "./clock.hook";
 
 const useTimer = () => {
@@ -21,19 +21,25 @@ const useTimer = () => {
   }, []);
 
   const setClockTimeout = (seconds: number) => {
-    const newDate = new Date();
-    newDate.setSeconds(newDate.getSeconds() + seconds);
+    const newDate = new Date(new Date().getTime() + seconds * 1000);
     setEndTime(newDate);
+    console.log("CUR: ", time?.toString());
   };
 
-  const hasTime = useCallback(() => {
-    return endTime && time ? endTime?.getTime() > time?.getSeconds() : false;
+  useEffect(() => {
+    console.log("END: ", endTime?.toString());
+  }, [endTime]);
+
+  const hasTime = useMemo(() => {
+    return endTime && time ? endTime?.getTime() > time?.getTime() : false;
   }, [time, endTime]);
 
   const stringTimer = useMemo(() => {
-    if (!time || !endTime) return "0:00";
+    if (!time || !endTime) {
+      return "0:00";
+    }
     const timeLeft = new Date(
-      Math.max(0, time?.getTime() - endTime?.getTime())
+      Math.max(0, endTime?.getTime() - time?.getTime())
     );
     return `${timeLeft.getMinutes()}:${get2charNumber(timeLeft.getSeconds())}`;
   }, [time, endTime]);

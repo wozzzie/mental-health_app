@@ -1,70 +1,87 @@
 @keyframes pulse {
-  0% {
+  0%,
+  10% {
     transform: rotate(180deg) scale(0.15);
   }
+  90%,
   100% {
     transform: scale(1);
   }
 }
 
 @keyframes circle-1 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(-35px, -50px);
   }
 }
 
 @keyframes circle-2 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(35px, 50px);
   }
 }
 
 @keyframes circle-4 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(-60px, 0);
   }
 }
 
 @keyframes circle-3 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(60px, 0);
   }
 }
 
 @keyframes circle-5 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(-35px, 50px);
   }
 }
 
 @keyframes circle-6 {
-  0% {
+  0%,
+  10% {
     transform: translate(0, 0);
   }
+  90%,
   100% {
     transform: translate(35px, -50px);
   }
 }
 
+$animationDuration: 4.5s;
+
 .watch-face {
   height: 325px;
   width: 325px;
-  animation: pulse 4s cubic-bezier(0.5, 0, 0.5, 1) alternate infinite;
+  animation: pulse $animationDuration cubic-bezier(0.5, 0, 0.5, 1) alternate
+    infinite;
   transform-origin: center;
   display: flex;
 }
@@ -92,26 +109,26 @@
   }
 
   &:nth-child(1) {
-    animation: circle-1 4s ease alternate infinite;
+    animation: circle-1 $animationDuration ease alternate infinite;
   }
 
   &:nth-child(2) {
-    animation: circle-2 4s ease alternate infinite;
+    animation: circle-2 $animationDuration ease alternate infinite;
   }
 
   &:nth-child(3) {
-    animation: circle-3 4s ease alternate infinite;
+    animation: circle-3 $animationDuration ease alternate infinite;
   }
 
   &:nth-child(4) {
-    animation: circle-4 4s ease alternate infinite;
+    animation: circle-4 $animationDuration ease alternate infinite;
   }
 
   &:nth-child(5) {
-    animation: circle-5 4s ease alternate infinite;
+    animation: circle-5 $animationDuration ease alternate infinite;
   }
 
   &:nth-child(6) {
-    animation: circle-6 4s ease alternate infinite;
+    animation: circle-6 $animationDuration ease alternate infinite;
   }
 }
