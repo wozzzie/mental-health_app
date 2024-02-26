@@ -322,8 +322,8 @@
       "show-seconds": "Показувати секунди"
     },
     "horoscope": {
-      "group-name": "Horoscope",
-      "choose-zodiac-sign": "Choose zodiac sign"
+      "group-name": "Гороскоп",
+      "choose-zodiac-sign": "Виберiть знак зодіаку"
     }
   },
   "news": {

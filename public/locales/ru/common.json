@@ -328,8 +328,8 @@
       "show-seconds": "Показывать секунды"
     },
     "horoscope": {
-      "group-name": "Horoscope",
-      "choose-zodiac-sign": "Choose zodiac sign"
+      "group-name": "Гороскоп",
+      "choose-zodiac-sign": "Выберите знак зодиака"
     }
   },
   "horoscope": {
