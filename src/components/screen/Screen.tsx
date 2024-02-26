@@ -128,7 +128,7 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
           {
             img: {
               src: "/wallpaper.svg",
-              alt: "Wallpapers",
+              alt: "wallpapers",
             },
             action: () => dispatch(toggleWallpaperWindow()),
             key: "wallpaper",
@@ -137,7 +137,7 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
           {
             img: {
               src: "/settings.svg",
-              alt: "Wallpapers",
+              alt: "settings",
             },
             action: () => dispatch(toggleSettingsWindow()),
             key: "settings",

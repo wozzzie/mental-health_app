@@ -308,18 +308,18 @@
     }
   },
   "settings": {
-    "settings": "Settings",
-    "select-default": "Choose value",
-    "change": "Change",
+    "settings": "Налаштування",
+    "select-default": "Виберiть значення",
+    "change": "змiнити",
     "user": {
-      "group-name": "User",
-      "change-language": "Change language",
-      "change-username": "Change username"
+      "group-name": "Користувач",
+      "change-language": "Змiнити мову",
+      "change-username": "Змiнити ім'я користувача"
     },
     "clock": {
-      "group-name": "Clock",
-      "24-hour-format": "Use 24 hour format",
-      "show-seconds": "Show seconds"
+      "group-name": "Годинник",
+      "24-hour-format": "Використовувати двадцятичотиригодинний формат",
+      "show-seconds": "Показувати секунди"
     },
     "horoscope": {
       "group-name": "Horoscope",
@@ -328,5 +328,23 @@
   },
   "news": {
     "title": "Новини"
+  },
+  "delete-account": {
+    "setting": "Видалiти аккаунт",
+    "modal": "Ви впевнені, що хочете видалити свій обліковий запис?",
+    "modal-abort": "Відмена",
+    "modal-confirm": "Видалити"
+  },
+  "tooltip": {
+    "music": "Музика",
+    "kittens": "Кошенята",
+    "quote": "Цитати",
+    "news": "Новини",
+    "tarot": "Карта таро",
+    "horoscope": "Гороскоп",
+    "clock": "Годинник",
+    "breathe": "Дихання",
+    "wallpapers": "Шпалери",
+    "settings": "Налаштування"
   }
 }

@@ -9,6 +9,7 @@ import {
   toggleWallpaperWindow,
 } from "../screen/ScreenSlice";
 import { useState, useMemo, FC, useRef, useEffect } from "react";
+import { useTranslation } from "next-i18next";
 
 type WidgetButton = {
   img: {
@@ -61,6 +62,8 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
       setWrapperActive(true);
     }
   };
+
+  const { t } = useTranslation();
 
   return (
     <WidgetWrapper className={wrapperClasses}>
@@ -165,7 +168,7 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
                     : {}
                 }
               >
-                {i.img.alt}
+                {t("tooltip." + i.img.alt)}
               </div>
             </div>
           ))}

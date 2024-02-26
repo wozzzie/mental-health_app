@@ -337,5 +337,23 @@
   },
   "news": {
     "title": "News"
+  },
+  "delete-account": {
+    "setting": "Delete account",
+    "modal": "Are you sure you want delete your account?",
+    "modal-abort": "Cancel",
+    "modal-confirm": "Delete"
+  },
+  "tooltip": {
+    "music": "Music",
+    "kittens": "Kitten gifs",
+    "quote": "Quotes",
+    "news": "News",
+    "tarot": "Tarot card",
+    "horoscope": "Horoscope",
+    "clock": "Clock",
+    "breathe": "Breath widget",
+    "wallpapers": "Wallpapers",
+    "settings": "Settings"
   }
 }
