@@ -316,11 +316,16 @@
   "settings": {
     "settings": "Settings",
     "select-default": "Выберите значение",
-    "change": "Change",
+    "change": "Изменить",
     "user": {
       "group-name": "Пользователь",
-      "change-language": "Сменить язык",
-      "change-username": "Сменить юзернейм"
+      "change-language": "Изменить язык",
+      "change-username": "Изменить юзернейм",
+      "change-password": "Изменить пароль",
+      "old-password": "Старый пароль",
+      "password-update": "Загрузка...",
+      "password-success": "Пароль успешно изменён",
+      "wrong-password": "Неправильный старый пароль!"
     },
     "clock": {
       "group-name": "Часы",

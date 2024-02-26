@@ -310,11 +310,16 @@
   "settings": {
     "settings": "Налаштування",
     "select-default": "Виберiть значення",
-    "change": "змiнити",
+    "change": "Змiнити",
     "user": {
       "group-name": "Користувач",
       "change-language": "Змiнити мову",
-      "change-username": "Змiнити ім'я користувача"
+      "change-username": "Змiнити ім'я користувача",
+      "change-password": "Змiнити пароль",
+      "old-password": "Старий пароль",
+      "password-update": "Завантаження...",
+      "password-success": "Пароль успішно змінено",
+      "wrong-password": "Невірний старий пароль!"
     },
     "clock": {
       "group-name": "Годинник",

@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useEffect, useMemo, useState } from "react";
 import { settingsGroup } from "../settingsProvider";
 import DeleteAccountSetting from "@/components/delete-account-setting/DeleteAccountSetting";
+import ChangePasswordSetting from "@/components/change-password-setting/ChangePasswordSetting";
 
 const useUserSettingsCategory = () => {
   const { user } = useAuth();
@@ -69,6 +70,11 @@ const useUserSettingsCategory = () => {
               //languageNames.get(locale as string) || (locale as string)
             ) as string[],
           callback: changeLanguage,
+        },
+        {
+          type: "controlled",
+          name: "change-password",
+          component: <ChangePasswordSetting />,
         },
         {
           type: "controlled",

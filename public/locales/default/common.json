@@ -319,7 +319,12 @@
     "user": {
       "group-name": "User",
       "change-language": "Change language",
-      "change-username": "Change username"
+      "change-username": "Change username",
+      "change-password": "Change password",
+      "old-password": "Old password",
+      "password-update": "Loading...",
+      "password-success": "Password has been successfully changed",
+      "wrong-password": "Wrong old password!"
     },
     "clock": {
       "group-name": "Clock",
