@@ -4,7 +4,9 @@
   justify-items: center;
   align-items: flex-start;
   min-height: 429px;
-  min-width: 1000px;
+  min-width: 800px;
+  max-width: 1000px;
+  flex: 1;
   padding-bottom: 37px;
   padding-right: 0;
   z-index: 2;
@@ -17,6 +19,8 @@
     z-index: 10;
     opacity: 0;
     transition: 250ms opacity;
+    width: calc(100% - 100px);
+    max-width: 1000px;
     background-color: #fffffff0;
     &_visible {
       opacity: 1;
