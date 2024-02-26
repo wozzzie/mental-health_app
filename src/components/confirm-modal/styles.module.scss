@@ -3,6 +3,9 @@
   background-color: #fffffff0;
   position: relative;
   margin: auto;
+  * {
+    font-family: "SFProText", sans-serif;
+  }
 
   &__wrapper {
     width: 100%;
@@ -40,6 +43,7 @@
     text-align: center;
     border: none;
     background: transparent;
+    padding: 10px 0;
   }
   &__abort {
     border-right: 0.33px solid rgb(199, 199, 204);
