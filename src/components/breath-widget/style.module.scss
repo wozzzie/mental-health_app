@@ -1,3 +1,19 @@
 .breath-widget {
-  //padding: 30px;
+  &__timer-choose {
+    display: flex;
+    gap: 10px;
+  }
+
+  &__timer-btn {
+    flex: 1;
+  }
+
+  &__timer-left {
+    flex: 1;
+    text-align: center;
+    height: 47px;
+    line-height: 47px;
+    font-size: 30px;
+    font-weight: 600;
+  }
 }
