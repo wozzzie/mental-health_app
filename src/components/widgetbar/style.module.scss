@@ -133,4 +133,17 @@
       gap: 22px;
     }
   }
+  &__end {
+    display: flex;
+    flex-direction: column-reverse;
+    overflow: hidden;
+    padding-left: 23px;
+    padding-bottom: 23px;
+  }
+
+  &__logout {
+    display: block;
+    position: relative;
+    cursor: pointer;
+  }
 }
