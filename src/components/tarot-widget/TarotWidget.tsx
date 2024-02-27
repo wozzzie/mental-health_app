@@ -49,11 +49,6 @@ const TarotWidget = () => {
     e.preventDefault();
     setWidgetState("card");
   };
-  useEffect(() => {
-    if (randomCard) {
-      console.log(randomCard);
-    }
-  }, [randomCard]);
 
   useEffect(() => {
     if (isError) {

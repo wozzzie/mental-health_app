@@ -75,7 +75,6 @@ const ChangePasswordSetting: FC = () => {
 
         await updatePassword(user, password);
         setLoading(false);
-        console.log("here alert");
         setAlertActive(true);
         reset();
       } catch (e) {

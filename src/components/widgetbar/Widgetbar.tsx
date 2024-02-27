@@ -45,7 +45,6 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
     disableTimeout.current = setTimeout(() => {
       setOverflow(false);
       disableTimeout.current = null;
-      console.log("time");
     }, 300);
   };
 

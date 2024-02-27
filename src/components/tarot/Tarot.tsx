@@ -39,7 +39,6 @@ const Tarot: React.FC = () => {
 
       if (response.ok) {
         const tarot = await response.json();
-        console.log("Tarot data received:", tarot);
         setTarotData(tarot);
       } else {
         console.error(
@@ -56,11 +55,6 @@ const Tarot: React.FC = () => {
 
   useEffect(() => {
     getTarotFromServer();
-
-    console.log(
-      "tarotData",
-      tarotData ? Object.entries(tarotData).map((el) => el[1].cards) : "ss"
-    );
     //eslint-disable-next-line
   }, []);
 

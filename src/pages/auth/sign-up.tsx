@@ -37,11 +37,9 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
 const SignUp = () => {
   const onSignUp = async (email: string, password: string, name: string) => {
-    console.log("authCallback called with", email);
     try {
       const result = await registerWithEmailAndPassword(email, password, name);
 
-      console.log("Registration success:", result);
       return result;
     } catch (error) {
       console.error("Registration error:", error);

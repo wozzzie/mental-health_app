@@ -170,7 +170,6 @@ export const screenSlice = createSlice({
       // delete by ID
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = false;
-      else console.log("close: widget not found");
       saveWidgets(state);
     },
 
@@ -180,7 +179,6 @@ export const screenSlice = createSlice({
         state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, widgetToRaise];
       } else {
-        console.log("raise: widget not found ");
       }
       saveWidgets(state);
     },
@@ -188,14 +186,12 @@ export const screenSlice = createSlice({
     openWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = true;
-      else console.log("open: widget not found");
       saveWidgets(state);
     },
 
     toggleWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = !w.active;
-      else console.log("toggle: widget not found");
       saveWidgets(state);
     },
 
@@ -263,19 +259,37 @@ export const screenSlice = createSlice({
         previousDimensions.height === window.innerHeight &&
         previousDimensions.width === window.innerWidth
       ) {
-        console.log(
-          JSON.parse(
-            localStorage.getItem("widgets") || "{}"
-          ) as WindowDimensions
-        );
         s.settingsWindowActive = previousState.settingsWindowActive;
         s.wallpaperWindowActive = previousState.wallpaperWindowActive;
         const tmp = s.widgets;
-        s.widgets = previousState.widgets.map((item) => ({
-          ...item,
-          component: s.widgets.find((i) => i.id === item.id)?.component,
-        }));
-      } else console.log("77777");
+        // s.widgets = previousState.widgets.map((item) => ({
+        //   ...item,
+        //   component: s.widgets.find((i) => i.id === item.id)?.component,
+        // }));
+        s.widgets = s.widgets.map((item) => {
+          const prevState = previousState.widgets.find(
+            (i) => i.icon.alt === item.icon.alt
+          );
+          if (prevState)
+            return {
+              ...item,
+              x: prevState.x,
+              y: prevState.y,
+            };
+          else return item;
+        });
+        s.widgets.sort((a, b) => {
+          const prevA = previousState.widgets.find(
+            (i) => i.icon.alt === a.icon.alt
+          );
+          const prevB = previousState.widgets.find(
+            (i) => i.icon.alt === b.icon.alt
+          );
+          const indexOfA = prevA ? previousState.widgets.indexOf(prevA) : -1;
+          const indexOfB = prevB ? previousState.widgets.indexOf(prevB) : -1;
+          return indexOfA - indexOfB;
+        });
+      }
     },
   },
 });

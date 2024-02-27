@@ -25,30 +25,27 @@ const useHoroscopeSettingsCategory = () => {
 
   const getZodiacSignFromServer = async () => {
     try {
-      setStatus("pending")
+      setStatus("pending");
 
       const response = await fetch(
         `${serverURL}/api/horoscope/get-horoscope?uid=${uid}`,
         { method: "GET" }
       );
-    
-      if(response.ok || response.status === 404) {
-        setStatus("fetched")
-      } 
+
+      if (response.ok || response.status === 404) {
+        setStatus("fetched");
+      }
 
       const data = await response.json();
-      console.log(data)
       if (data.success) {
-        setZodiacSign(data.horoscope.sign)
+        setZodiacSign(data.horoscope.sign);
       }
 
       if (!response.ok && response.status !== 404) {
         throw new Error("Failed to fetch horoscope");
       }
-
     } catch (error: any) {
-      setStatus('error')
-      console.log(error)
+      setStatus("error");
       console.error("Error getting horoscope:", error.message);
     }
   };
@@ -63,11 +60,9 @@ const useHoroscopeSettingsCategory = () => {
         },
         body: JSON.stringify(signData),
       });
-
     } catch (error: any) {
       console.error("Error saving zodiac sign:", error.message);
     }
-  
   };
 
   const updateZodiacSign = (option: string) => {
@@ -77,7 +72,7 @@ const useHoroscopeSettingsCategory = () => {
   };
 
   useEffect(() => {
-    if(uid){
+    if (uid) {
       getZodiacSignFromServer();
     }
   }, [uid]);

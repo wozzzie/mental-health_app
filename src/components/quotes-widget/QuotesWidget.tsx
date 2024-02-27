@@ -43,7 +43,6 @@ const QuotesWidget: React.FC = () => {
       const response = await fetch(url, options);
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
 
         const englishSensitiveWords = [
           "war",
@@ -51,7 +50,7 @@ const QuotesWidget: React.FC = () => {
           "suicide",
           "violence",
           "politics",
-        ]; 
+        ];
         const russianSensitiveWords = [
           "война",
           "религия",
@@ -65,7 +64,7 @@ const QuotesWidget: React.FC = () => {
           "бог",
           "проклятье",
           "смерть",
-        ]; 
+        ];
 
         const authorName = ["Гитлер", "Жириновский", "Талиб"];
 
@@ -80,9 +79,6 @@ const QuotesWidget: React.FC = () => {
         );
 
         if (containsSensitiveWord || containsSensitiveAuthor) {
-          console.log(
-            "Sensitive words found in tags or author name. Fetching another quote..."
-          );
           return showDefaultQuote(languageCode);
         } else {
           seData(data);
@@ -108,7 +104,6 @@ const QuotesWidget: React.FC = () => {
       });
 
       if (response.status === 201) {
-        console.log("Quote saved to the server successfully");
       } else {
         console.error("Failed to save quote to the server");
       }

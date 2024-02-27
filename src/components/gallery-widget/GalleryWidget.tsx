@@ -40,7 +40,6 @@ const GalleryWidget = () => {
         throw new Error("Failed to retrieve images");
       }
     } catch (error) {
-      console.log(error);
       console.error("Error fetching images:", error);
     }
   };
@@ -73,10 +72,8 @@ const GalleryWidget = () => {
       });
 
       if (response.status === 200) {
-        console.log("Image saved to the server successfully");
         const responseData = await response.json();
         const serverImage = responseData.image;
-        console.log(serverImage?.image);
         setImages((prevImages) => [...prevImages, serverImage]);
       } else {
         console.error(
