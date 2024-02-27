@@ -185,13 +185,21 @@ export const screenSlice = createSlice({
 
     openWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
-      if (w) w.active = true;
+      if (w) {
+        w.active = true;
+        state.widgets = state.widgets.filter((i) => i.id !== action.payload);
+        state.widgets = [...state.widgets, w];
+      }
       saveWidgets(state);
     },
 
     toggleWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
-      if (w) w.active = !w.active;
+      if (w) {
+        w.active = !w.active;
+        state.widgets = state.widgets.filter((i) => i.id !== action.payload);
+        state.widgets = [...state.widgets, w];
+      }
       saveWidgets(state);
     },
 
