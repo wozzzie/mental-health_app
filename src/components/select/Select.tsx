@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./style.module.scss";
 import { Transition, TransitionStatus } from "react-transition-group";
 import { useTranslation } from "react-i18next";
@@ -11,7 +11,26 @@ type SelectProps = {
 
 const Select = ({ onChange, inputValue, options }: SelectProps) => {
   const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+  const firstClick = useRef<boolean>(false);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const handleBlur = () => {
+      if (firstClick.current) {
+        setIsOptionsVisible(false);
+        firstClick.current = false;
+      } else firstClick.current = true;
+    };
+
+    if (isOptionsVisible) {
+      document.addEventListener("click", handleBlur);
+    } else {
+      document.removeEventListener("click", handleBlur);
+    }
+    return () => {
+      document.removeEventListener("click", handleBlur);
+    };
+  }, [isOptionsVisible]);
 
   const handleSelectToggle = () => {
     setIsOptionsVisible(!isOptionsVisible);

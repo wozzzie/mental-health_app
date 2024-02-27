@@ -55,6 +55,8 @@
     border-top: none;
     background-color: #fff;
     transition: 0.3s all;
+    max-height: 234px;
+    overflow: auto;
   }
 
   &__option {
