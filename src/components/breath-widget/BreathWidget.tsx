@@ -44,7 +44,7 @@ const BreathWidget = () => {
                     </AppButton>
                   </div>
                   <div className={styles["breath-widget__timer-btn"]}>
-                    <AppButton onClick={() => setClockTimeout(90)}>
+                    <AppButton onClick={() => setClockTimeout(120)}>
                       2:00
                     </AppButton>
                   </div>
