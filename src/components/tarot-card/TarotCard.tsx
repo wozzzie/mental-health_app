@@ -25,7 +25,6 @@ const TarotCard = ({ img, className, reversed = false }: Props) => {
   const [imageLoaded, setImageLoaded] = useState<boolean>(false);
 
   const handleLoad = () => {
-    console.log("7788");
     setImageLoaded(true);
   };
   const rotatedStyles = useMemo<string>(

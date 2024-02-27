@@ -23,12 +23,7 @@ const useTimer = () => {
   const setClockTimeout = (seconds: number) => {
     const newDate = new Date(new Date().getTime() + seconds * 1000);
     setEndTime(newDate);
-    console.log("CUR: ", time?.toString());
   };
-
-  useEffect(() => {
-    console.log("END: ", endTime?.toString());
-  }, [endTime]);
 
   const hasTime = useMemo(() => {
     return endTime && time ? endTime?.getTime() > time?.getTime() : false;

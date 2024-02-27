@@ -42,10 +42,6 @@ const useUserSettingsCategory = () => {
     router.push({ pathname, query }, undefined, { locale });
   };
 
-  useEffect(() => {
-    console.log("update");
-  }, [user?.displayName]);
-
   const category = useMemo<settingsGroup>(() => {
     const username = user?.displayName as string;
     return {

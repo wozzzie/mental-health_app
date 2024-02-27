@@ -170,7 +170,6 @@ export const screenSlice = createSlice({
       // delete by ID
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = false;
-      else console.log("close: widget not found");
       saveWidgets(state);
     },
 
@@ -180,7 +179,6 @@ export const screenSlice = createSlice({
         state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, widgetToRaise];
       } else {
-        console.log("raise: widget not found ");
       }
       saveWidgets(state);
     },
@@ -188,14 +186,12 @@ export const screenSlice = createSlice({
     openWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = true;
-      else console.log("open: widget not found");
       saveWidgets(state);
     },
 
     toggleWidget: (state, action: IDInPayload) => {
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = !w.active;
-      else console.log("toggle: widget not found");
       saveWidgets(state);
     },
 

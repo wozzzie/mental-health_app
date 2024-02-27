@@ -47,16 +47,10 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
     dispatch(getPreviousWidgetsState());
   }, []);
 
-  useEffect(() => {
-    console.log(activeWallpaper);
-  }, [activeWallpaper]);
-
   const formatImageURL = (imageData: ImageData) => {
-    console.log("formatted!");
     const ret = (
       imageData.isDefault ? imageData.image : `${serverURL}/${imageData.image}`
     ).replace(/\\/, "/");
-    console.log(ret);
     return ret;
   };
 

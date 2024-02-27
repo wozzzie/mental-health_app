@@ -33,7 +33,6 @@ const SmoothResizeBlock: FC<Props> = ({
       height: divRef.current?.scrollHeight as number,
     });
     const resizeObserver = new MutationObserver(() => {
-      console.log("resize");
       setWidgetSize({
         width: innerDivRef.current?.scrollWidth as number,
         height: innerDivRef.current?.scrollHeight as number,
