@@ -92,15 +92,9 @@ const Header = () => {
         <PageContainer flex classes={styles["top-navigation-wrapper"]}>
           <Logo className={styles["top-navigation__logo"]} />
           <nav className={styles["top-navigation-menu"]}>
-            <Link
-              href={ROUTES.WELCOME + "#home"}
-              text={t("header.link-home")}
-            />
-            <Link
-              href={ROUTES.WELCOME + "#features"}
-              text={t("header.link-features")}
-            />
-            <Link href={ROUTES.WELCOME + "#"} text={t("header.link-blog")} />
+            <Link href={"#home"} text={t("header.link-home")} />
+            <Link href={"#features"} text={t("header.link-features")} />
+            <Link href={"#"} text={t("header.link-blog")} />
             <ErrorBoundaryWithMessage>
               <LanguageSwitcher />
             </ErrorBoundaryWithMessage>
