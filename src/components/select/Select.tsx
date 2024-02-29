@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import styles from "./style.module.scss";
 import { Transition, TransitionStatus } from "react-transition-group";
 import { useTranslation } from "react-i18next";
+import Scrollbars from "rc-scrollbars";
 
 type SelectProps = {
   onChange: (option: string) => void;
@@ -15,17 +16,21 @@ const Select = ({ onChange, inputValue, options }: SelectProps) => {
   const { t } = useTranslation();
 
   useEffect(() => {
-    const handleBlur = () => {
+    const handleBlur = (e: MouseEvent) => {
       if (firstClick.current) {
         setIsOptionsVisible(false);
         firstClick.current = false;
+        console.log("if!");
       } else firstClick.current = true;
+      console.log(e);
+      console.log(firstClick);
     };
 
     if (isOptionsVisible) {
       document.addEventListener("click", handleBlur);
     } else {
       document.removeEventListener("click", handleBlur);
+      firstClick.current = false;
     }
     return () => {
       document.removeEventListener("click", handleBlur);
@@ -68,13 +73,50 @@ const Select = ({ onChange, inputValue, options }: SelectProps) => {
         unmountOnExit
       >
         {(state: TransitionStatus) => (
-          <div
+          <Scrollbars
+            autoHide
+            classes={{
+              root: styles["select__scrollable-root"],
+              // view: styles["select__scrollable-view"],
+              trackVertical: styles["select__scrollable-track-v"],
+              // trackHorizontal: styles["select__scrollable-track-h"],
+              // thumbVertical: styles["select__scrollable-thumb-v"],
+              // thumbHorizontal: styles["select__scrollable-thumb-h"],
+            }}
+            renderTrackHorizontal={(props) => (
+              <div
+                {...props}
+                className={styles["select__scrollable-track-h"]}
+              />
+            )}
+            renderTrackVertical={(props) => (
+              <div
+                {...props}
+                className={styles["select__scrollable-track-v"]}
+              />
+            )}
+            renderThumbHorizontal={(props) => (
+              <div
+                {...props}
+                className={styles["select__scrollable-thumb-h"]}
+              />
+            )}
+            renderThumbVertical={(props) => (
+              <div
+                {...props}
+                className={styles["select__scrollable-thumb-v"]}
+              />
+            )}
+            renderView={(props) => (
+              <div {...props} className={styles["select__scrollable-view"]} />
+            )}
             className={styles["select__options"]}
             style={{
               ...transitionStyles.entering,
               ...transitionStyles[
                 state as "entering" | "entered" | "exiting" | "exited"
               ],
+              height: Math.min(6, options.length) * 39,
             }}
           >
             {options.map((option) => (
@@ -86,7 +128,7 @@ const Select = ({ onChange, inputValue, options }: SelectProps) => {
                 {option}
               </div>
             ))}
-          </div>
+          </Scrollbars>
         )}
       </Transition>
     </div>
