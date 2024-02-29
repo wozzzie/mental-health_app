@@ -39,7 +39,7 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
   const { user } = useAuth();
 
   const widgets = useSelector((s: RootState) => s.screen.widgets);
-  const { data: activeWallpaper } = useGetActiveWallpaperQuery(
+  const { data: activeWallpaper, isFetching } = useGetActiveWallpaperQuery(
     user?.uid as string
   );
 
@@ -103,14 +103,30 @@ const Screen: React.FC<ScreenProps> = ({ className }) => {
 
   const comp = (a: WidgetAbstraction, b: WidgetAbstraction) => +a.id - +b.id;
 
+  const wallpaperTimeout = 300;
+
+  const skeletonVisible = useSelector(
+    (s: RootState) => s.screen.skeletonVisible
+  );
+
   return (
     <div
       className={classes}
       style={{
-        transition: "0.5s background-image",
         ...backgroundStyle,
       }}
     >
+      <Transition timeout={wallpaperTimeout} in={skeletonVisible}>
+        {(s) => (
+          <div
+            className={styles["screen__wallpaper-skeleton"]}
+            style={{
+              transition: `${wallpaperTimeout}ms opacity`,
+              opacity: s === "entered" || s === "entering" ? 1 : 0,
+            }}
+          ></div>
+        )}
+      </Transition>
       <Widgetbar
         buttons={[
           ...[...widgets].sort(comp).map((i: WidgetAbstraction) => ({
