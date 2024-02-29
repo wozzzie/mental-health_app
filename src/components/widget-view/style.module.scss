@@ -20,7 +20,18 @@
     position: relative;
     display: flex;
     justify-items: space-between;
-    transition: 0.5s opacity;
+    transition: opacity 0.5s;
+
+    &__btn {
+      box-sizing: content-box;
+      transition: background-color 300ms;
+      padding: 4px;
+      border-radius: 4px;
+      &:hover {
+        background-color: #00000022;
+      }
+    }
+
     & + * {
       margin: auto;
     }
@@ -30,7 +41,6 @@
       position: absolute;
       right: 0;
       display: block;
-      padding: 0;
       img {
         display: block;
       }
