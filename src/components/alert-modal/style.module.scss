@@ -45,6 +45,9 @@
     background: transparent;
     padding: 10px 0;
     flex: 1;
+    &:active {
+      background-color: #ccc;
+    }
   }
   &__abort {
     border-right: 0.33px solid rgb(199, 199, 204);
