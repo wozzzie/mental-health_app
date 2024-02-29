@@ -40,6 +40,7 @@ type InitialStateType = {
   widgets: Array<WidgetAbstraction>;
   wallpaperWindowActive: boolean;
   settingsWindowActive: boolean;
+  skeletonVisible: boolean;
 };
 
 type WindowDimensions = {
@@ -141,6 +142,7 @@ const initialState: InitialStateType = {
 
   wallpaperWindowActive: false,
   settingsWindowActive: false,
+  skeletonVisible: true,
 };
 
 type WidgetMutatorInPayload = {
@@ -299,6 +301,12 @@ export const screenSlice = createSlice({
         });
       }
     },
+    showSkeleton: (s) => {
+      s.skeletonVisible = true;
+    },
+    hideSkeleton: (s) => {
+      s.skeletonVisible = false;
+    },
   },
 });
 
@@ -315,6 +323,8 @@ export const {
   openSettingsWindow,
   closeSettingsWindow,
   getPreviousWidgetsState,
+  hideSkeleton,
+  showSkeleton,
 } = screenSlice.actions;
 
 export default screenSlice.reducer;
