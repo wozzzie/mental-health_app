@@ -361,5 +361,9 @@
     "breathe": "Дыхание",
     "wallpapers": "Обои",
     "settings": "Настройки"
+  },
+  "logout": {
+    "description": "Вы уверены, что хотите выйти?",
+    "confirm": "Выйти"
   }
 }
