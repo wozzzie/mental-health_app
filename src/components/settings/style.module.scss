@@ -3,7 +3,7 @@
   flex-wrap: nowrap;
   justify-items: center;
   align-items: flex-start;
-  min-height: 429px;
+  height: 429px;
   max-width: 1000px;
   * {
     font-family: "SFProText", sans-serif;
@@ -15,6 +15,19 @@
   z-index: 2;
 
   gap: 20px;
+
+  &__close {
+    display: block;
+    position: absolute;
+    right: 25px;
+    top: 25px;
+    transition: 300ms background-color;
+    padding: 5px;
+    border-radius: 5px;
+    &:hover {
+      background-color: #00000022;
+    }
+  }
 
   &__bounds {
     position: absolute;
@@ -112,7 +125,6 @@
   &__validation {
     margin-left: 20px;
     margin-top: 10px;
-    color: rgb(143, 0, 0);
-    font-weight: bold;
+    color: rgb(255, 56, 43);
   }
 }

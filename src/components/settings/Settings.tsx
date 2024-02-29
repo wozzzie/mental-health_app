@@ -24,6 +24,9 @@ import SettingsForm from "./SettingsForm";
 import { createPortal } from "react-dom";
 import { useDispatch } from "react-redux";
 import { closeSettingsWindow } from "../screen/ScreenSlice";
+import Image from "next/image";
+import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
+import Scrollbars from "rc-scrollbars";
 
 type Props = {
   transitionState: TransitionStatus;
@@ -67,7 +70,15 @@ const Settings: FC<Props> = ({ transitionState }) => {
             : "")
         }
       >
-        <h2 className={styles["settings__header"]}>{t("settings.settings")}</h2>
+        <h2 className={styles["settings__header"]}>
+          {t("settings.settings")}
+          <span
+            className={styles["settings__close"]}
+            onClick={() => dispatch(closeSettingsWindow())}
+          >
+            <Image width={20} height={20} src="/close.svg" alt="close" />
+          </span>
+        </h2>
         <div className={styles["settings"]}>
           <div className={styles["settings__groups"]}>
             {settings.groups.map((group, i) => (
@@ -89,8 +100,10 @@ const Settings: FC<Props> = ({ transitionState }) => {
           <SwitchTransition>
             <Transition key={chosenGroup} timeout={300} mountOnEnter>
               {(s) => (
-                <div
-                  className={styles["settings__chosen"]}
+                <Scrollbars
+                  classes={{
+                    view: styles["settings__chosen"],
+                  }}
                   style={{
                     transition: "300ms all",
                     opacity: s === "entered" || s === "entering" ? 1 : 0,
@@ -98,8 +111,8 @@ const Settings: FC<Props> = ({ transitionState }) => {
                 >
                   {(settings.groups[chosenGroup] as settingsGroup).settings.map(
                     (item, i) => (
-                      <div
-                        className={styles["settings__element"]}
+                      <SmoothResizeBlock
+                        innerClassNames={styles["settings__element"]}
                         key={i + " " + chosenGroup}
                       >
                         {item.type !== "controlled" && (
@@ -157,10 +170,10 @@ const Settings: FC<Props> = ({ transitionState }) => {
                         ) : (
                           ""
                         )}
-                      </div>
+                      </SmoothResizeBlock>
                     )
                   )}
-                </div>
+                </Scrollbars>
               )}
             </Transition>
           </SwitchTransition>
