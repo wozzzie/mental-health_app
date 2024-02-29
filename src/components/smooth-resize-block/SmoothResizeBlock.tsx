@@ -6,12 +6,14 @@ type Props = {
   children: ReactNode;
   timeout?: number;
   classNames?: string;
+  innerClassNames?: string;
 };
 
 const SmoothResizeBlock: FC<Props> = ({
   children,
   timeout = 300,
   classNames = "",
+  innerClassNames = "",
 }) => {
   const divRef = useRef<HTMLDivElement>(null);
   const innerDivRef = useRef<HTMLDivElement>(null);
@@ -56,7 +58,9 @@ const SmoothResizeBlock: FC<Props> = ({
         boxSizing: "content-box",
       }}
     >
-      <div ref={innerDivRef}>{children}</div>
+      <div ref={innerDivRef} className={innerClassNames}>
+        {children}
+      </div>
     </div>
   );
 };
