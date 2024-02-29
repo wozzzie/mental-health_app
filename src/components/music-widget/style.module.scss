@@ -1,6 +1,10 @@
 @mixin embed-placeholder {
   height: 100px;
-  background-color: #fff;
+  background-color: #f2f2f7;
+  transition: 300ms background-color;
+  .music-widget:hover & {
+    background-color: #fff;
+  }
 
   border-radius: 20px;
   padding: 20px;
@@ -35,17 +39,28 @@
     flex-wrap: nowrap;
     overflow: hidden;
     &__wrapper {
-      width: 70%;
+      flex: 1;
     }
 
     &__btn {
-      width: calc(30% - 10px);
+      width: 0;
+      height: 0;
+      position: absolute;
+      z-index: -1;
+      overflow: hidden;
     }
   }
 
   &:hover .music-link {
     opacity: 1;
     max-height: 100px;
+  }
+
+  &:hover {
+    .wrong-url-message,
+    .start-message {
+      background-color: #fff;
+    }
   }
 
   .wrong-url-message {
