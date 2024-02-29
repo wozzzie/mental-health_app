@@ -17,6 +17,12 @@
     }
   }
 
+  &:hover {
+    .switch__toggle {
+      box-shadow: 0px 0px 6px #34c759;
+    }
+  }
+
   &__checkbox {
     opacity: 0;
     width: 0;
