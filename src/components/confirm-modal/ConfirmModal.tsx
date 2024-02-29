@@ -1,7 +1,9 @@
+"use client";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { createPortal } from "react-dom";
 import { Transition } from "react-transition-group";
+import { object } from "yup";
 
 type Props = {
   descriptionText: string;
@@ -20,6 +22,7 @@ const ConfirmModal: FC<Props> = ({
   onConfirm,
   active,
 }) => {
+  if (typeof window !== "object") return null;
   const timeout = 300;
 
   return createPortal(
@@ -31,6 +34,7 @@ const ConfirmModal: FC<Props> = ({
             transition: `${timeout}ms all`,
             opacity: s === "entered" || s === "entering" ? 1 : 0,
           }}
+          onClick={onAbort}
         >
           <div className={styles["confirm"]}>
             <div className={styles["confirm__description"]}>

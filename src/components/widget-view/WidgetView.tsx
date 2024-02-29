@@ -62,7 +62,10 @@ const WidgetView: React.FC<WidgetAbstraction & IncludesTransitionState> = ({
       >
         <WidgetWrapper hideOnBlur className={styles["widget-wrapper"]}>
           <div className={styles["widget-control"]}>
-            <button onClick={() => dispatch(closeWidget(id))}>
+            <button
+              className={styles["widget-control__btn"]}
+              onClick={() => dispatch(closeWidget(id))}
+            >
               <Image src="/close.svg" alt="close" width={15} height={15} />
             </button>
           </div>

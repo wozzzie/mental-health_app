@@ -1,3 +1,12 @@
+@keyframes skeleton-anim {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
 .screen {
   background-size: cover;
   background-position: center;
@@ -8,6 +17,23 @@
   display: flex;
   background-size: cover;
   position: relative;
+
+  &__wallpaper-skeleton {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    left: 0;
+    top: 0;
+    &::after {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #00000000, #fff 50%, #00000000);
+      animation: skeleton-anim 1s infinite;
+    }
+  }
 }
 
 .widgets-container {

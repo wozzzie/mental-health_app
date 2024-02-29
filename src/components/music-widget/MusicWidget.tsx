@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./style.module.scss";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { FormEvent, useEffect, useLayoutEffect, useRef, useState } from "react";
 import WidgetWrapper from "../widget-wrapper/WidgetWrapper";
 import Image from "next/image";
 import { closeWidget } from "../screen/ScreenSlice";
@@ -43,7 +43,8 @@ const MusicWidget = () => {
     [link]
   );
 
-  const handleNewLink = () => {
+  const handleNewLink = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     dispatch(setLink(inputRef?.current?.value || ""));
     localStorage.setItem("musicLink", inputRef?.current?.value || "");
   };
@@ -135,7 +136,7 @@ const MusicWidget = () => {
           </CSSTransition>
         </SwitchTransition>
       </SmoothResizeBlock>
-      <div className={styles["music-link"]}>
+      <form className={styles["music-link"]} onSubmit={handleNewLink}>
         <div className={styles["music-link__wrapper"]}>
           <WidgetInput
             className={styles["music-link-input"]}
@@ -145,13 +146,10 @@ const MusicWidget = () => {
             name="music-link-input"
           />
         </div>
-        <AppButton
-          onClick={handleNewLink}
-          className={styles["music-link__btn"]}
-        >
+        <AppButton type="submit" className={styles["music-link__btn"]}>
           {t("music.open-btn")}
         </AppButton>
-      </div>
+      </form>
     </div>
   );
 };

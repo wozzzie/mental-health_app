@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { ImageData } from "@/types/types";
 import serverURL from "@/constants/serverURL";
+import { showSkeleton } from "@/components/screen/ScreenSlice";
 
 type ChangeActiveWallpaperArgs = {
   uid: string;
@@ -35,6 +36,9 @@ export const activeWallpaperApi = createApi({
         },
         body,
       }),
+      onQueryStarted: (arg, { dispatch }) => {
+        dispatch(showSkeleton());
+      },
       invalidatesTags: ["wallpaper"],
     }),
   }),

@@ -16,6 +16,7 @@ import {
 import AlertModal from "../alert-modal/AlertModal";
 import { auth, firebase } from "@/firebase/firebaseClient";
 import { FirebaseError } from "firebase/app";
+import SmoothResizeBlock from "../smooth-resize-block/SmoothResizeBlock";
 
 const ChangePasswordSetting: FC = () => {
   const { t } = useTranslation();
@@ -118,20 +119,25 @@ const ChangePasswordSetting: FC = () => {
             variant={errors.password ? "warning" : "default"}
             className={styles["password__input"]}
           />
-          {errors.password && (
+          <SmoothResizeBlock>
             <div className={styles["password__error"]}>
-              {errors.password.message}
+              {errors.password?.message || ""}
             </div>
-          )}
+          </SmoothResizeBlock>
         </div>
-        <Transition timeout={transitionTimeout} in={showRestOfForm}>
+        <Transition
+          timeout={transitionTimeout}
+          in={showRestOfForm}
+          mountOnEnter
+          unmountOnExit
+        >
           {(s) => (
             <div
               className={styles["password__hiding-part"]}
               style={{
                 transition: `${transitionTimeout}ms all`,
                 opacity: s === "entered" || s === "entering" ? 1 : 0,
-                maxHeight: s === "entered" || s === "entering" ? 500 : 0,
+                //maxHeight: s === "entered" || s === "entering" ? 500 : 0,
               }}
             >
               <div className={styles["password__repeat-input"]}>
@@ -145,11 +151,11 @@ const ChangePasswordSetting: FC = () => {
                   }}
                   variant={errors.passwordRepeat ? "warning" : "default"}
                 />
-                {errors.passwordRepeat && (
+                <SmoothResizeBlock>
                   <div className={styles["password__error"]}>
-                    {errors.passwordRepeat.message}
+                    {errors.passwordRepeat?.message || ""}
                   </div>
-                )}
+                </SmoothResizeBlock>
               </div>
               <div className={styles["password__old-password"]}>
                 <WidgetInput

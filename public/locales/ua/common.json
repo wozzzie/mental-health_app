@@ -335,7 +335,7 @@
     "title": "Новини"
   },
   "delete-account": {
-    "setting": "Видалiти аккаунт",
+    "setting": "Видалити аккаунт",
     "modal": "Ви впевнені, що хочете видалити свій обліковий запис?",
     "modal-abort": "Відмена",
     "modal-confirm": "Видалити"
@@ -351,5 +351,9 @@
     "breathe": "Дихання",
     "wallpapers": "Шпалери",
     "settings": "Налаштування"
+  },
+  "logout": {
+    "description": "Ви впевнені, що хочете вийти?",
+    "confirm": "Log out"
   }
 }

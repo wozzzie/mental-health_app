@@ -12,13 +12,22 @@
     display: inline-block;
   }
 
+  &__scrollable {
+    &-root {
+      position: absolute !important;
+    }
+    &-track-v {
+      padding: 20px 0;
+    }
+  }
+
   &__trigger {
     position: relative;
     height: 100%;
     padding: 0 15px;
     line-height: 57.09px;
     background-color: #fff;
-    box-shadow: 0 0 14px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.1);
     border-radius: 20px;
     color: rgba(102, 102, 102, 1);
     cursor: pointer;
@@ -55,6 +64,7 @@
     border-top: none;
     background-color: #fff;
     transition: 0.3s all;
+    max-height: 234px;
   }
 
   &__option {

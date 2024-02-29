@@ -358,5 +358,9 @@
     "breathe": "Breath widget",
     "wallpapers": "Wallpapers",
     "settings": "Settings"
+  },
+  "logout": {
+    "description": "Are you sure you want to log out?",
+    "confirm": "Log out"
   }
 }

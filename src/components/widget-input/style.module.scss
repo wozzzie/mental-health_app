@@ -9,9 +9,10 @@
   font-weight: 500;
   line-height: 26px;
   width: 100%;
-  height: 47px;
+  height: 57px;
   padding: 20px;
   transition: 300ms all;
+  user-select: auto !important;
   &::placeholder {
     color: #666;
   }

@@ -1,4 +1,6 @@
+import { hideSkeleton } from "@/components/screen/ScreenSlice";
 import { useEffect, useMemo, useState, useRef } from "react";
+import { useDispatch } from "react-redux";
 
 export interface BackgroundStyle {
   backgroundImage: string;
@@ -8,6 +10,7 @@ const WHITE_BG = "/white.svg";
 
 const useWallpaper = (placeholderBG: string = WHITE_BG) => {
   const [wallpaper, setWallpaper] = useState<string | null>(null);
+  const dispatch = useDispatch();
 
   const [backgroundStyle, setBackgroundStyle] = useState<BackgroundStyle>({
     backgroundImage: `url(${placeholderBG})`,
@@ -28,6 +31,7 @@ const useWallpaper = (placeholderBG: string = WHITE_BG) => {
         setBackgroundStyle(() => ({
           backgroundImage: `url(${wallpaper})`,
         }));
+        dispatch(hideSkeleton());
       };
       newWallpaper.current.addEventListener("load", handleLoad);
       return () =>
