@@ -14,6 +14,7 @@ import { logout } from "@/firebase/firebaseClient";
 import { useRouter } from "next/router";
 import ROUTES from "@/constants/routes";
 import { Scrollbars } from "rc-scrollbars";
+import ConfirmModal from "../confirm-modal/ConfirmModal";
 
 type WidgetButton = {
   img: {
@@ -74,22 +75,25 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
     push(ROUTES.WELCOME);
   };
 
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
+
   return (
-    <WidgetWrapper className={wrapperClasses}>
-      <div
-        className={styles["widget__menu"]}
-        onClick={handleToggleWrapperActive}
-      >
-        <Image
-          src="/burger-menu.svg"
-          width={18}
-          height={12}
-          alt="Burger menu"
-        />
-      </div>
-      <div className={styles["widget__block_main"]}>
-        <div className={styles["widget__block_main_in"]}>
-          {/* <div
+    <>
+      <WidgetWrapper className={wrapperClasses}>
+        <div
+          className={styles["widget__menu"]}
+          onClick={handleToggleWrapperActive}
+        >
+          <Image
+            src="/burger-menu.svg"
+            width={18}
+            height={12}
+            alt="Burger menu"
+          />
+        </div>
+        <div className={styles["widget__block_main"]}>
+          <div className={styles["widget__block_main_in"]}>
+            {/* <div
           className={styles["widget__gallery"]}
           onClick={() => dispatch(toggleWallpaperWindow())}
         >
@@ -148,93 +152,102 @@ const Widgetbar: FC<Props> = ({ buttons }) => {
         <div className={styles["widget__settings"]}>
           <Image src="/settings.svg" width={19.49} height={20} alt="Settings" />
         </div> */}
-          <Scrollbars
-            classes={{
-              root: styles["widget__scrollable-root"],
-              // view: styles["widget__scrollable-view"],
-              // trackVertical: styles["widget__scrollable-track-v"],
-              // trackHorizontal: styles["widget__scrollable-track-h"],
-              // thumbVertical: styles["widget__scrollable-thumb-v"],
-              // thumbHorizontal: styles["widget__scrollable-thumb-h"],
-            }}
-            disableDefaultStyles
-            renderTrackHorizontal={(props) => (
-              <div
-                {...props}
-                className={styles["widget__scrollable-track-h"]}
-              />
-            )}
-            renderTrackVertical={(props) => (
-              <div
-                {...props}
-                className={styles["widget__scrollable-track-v"]}
-              />
-            )}
-            renderThumbHorizontal={(props) => (
-              <div
-                {...props}
-                className={styles["widget__scrollable-thumb-h"]}
-              />
-            )}
-            renderThumbVertical={(props) => (
-              <div
-                {...props}
-                className={styles["widget__scrollable-thumb-v"]}
-              />
-            )}
-            renderView={(props) => (
-              <div {...props} className={styles["widget__scrollable-view"]} />
-            )}
-          >
-            {buttons.map((i: WidgetButton) => (
-              <div
-                key={i.key}
-                className={
-                  styles["widget-button"] +
-                  (i.active ? " " + styles["widget-button_active"] : "")
-                }
-              >
-                <Image
-                  src={i.img.src}
-                  alt={i.img.alt}
-                  width={24}
-                  height={24}
-                  onClick={i.action}
-                  onMouseOver={() =>
-                    !i.active ? handleButtonMouseOver() : null
-                  }
-                  onMouseOut={handleButtonMouseOut}
-                />
+            <Scrollbars
+              classes={{
+                root: styles["widget__scrollable-root"],
+                // view: styles["widget__scrollable-view"],
+                // trackVertical: styles["widget__scrollable-track-v"],
+                // trackHorizontal: styles["widget__scrollable-track-h"],
+                // thumbVertical: styles["widget__scrollable-thumb-v"],
+                // thumbHorizontal: styles["widget__scrollable-thumb-h"],
+              }}
+              disableDefaultStyles
+              renderTrackHorizontal={(props) => (
                 <div
-                  className={styles["widget-button__title"]}
-                  style={
-                    i.active
-                      ? {
-                          opacity: 0,
-                          visibility: "hidden",
-                          transition: "none",
-                        }
-                      : {}
+                  {...props}
+                  className={styles["widget__scrollable-track-h"]}
+                />
+              )}
+              renderTrackVertical={(props) => (
+                <div
+                  {...props}
+                  className={styles["widget__scrollable-track-v"]}
+                />
+              )}
+              renderThumbHorizontal={(props) => (
+                <div
+                  {...props}
+                  className={styles["widget__scrollable-thumb-h"]}
+                />
+              )}
+              renderThumbVertical={(props) => (
+                <div
+                  {...props}
+                  className={styles["widget__scrollable-thumb-v"]}
+                />
+              )}
+              renderView={(props) => (
+                <div {...props} className={styles["widget__scrollable-view"]} />
+              )}
+            >
+              {buttons.map((i: WidgetButton) => (
+                <div
+                  key={i.key}
+                  className={
+                    styles["widget-button"] +
+                    (i.active ? " " + styles["widget-button_active"] : "")
                   }
                 >
-                  {t("tooltip." + i.img.alt)}
+                  <Image
+                    src={i.img.src}
+                    alt={i.img.alt}
+                    width={24}
+                    height={24}
+                    onClick={i.action}
+                    onMouseOver={() =>
+                      !i.active ? handleButtonMouseOver() : null
+                    }
+                    onMouseOut={handleButtonMouseOut}
+                  />
+                  <div
+                    className={styles["widget-button__title"]}
+                    style={
+                      i.active
+                        ? {
+                            opacity: 0,
+                            visibility: "hidden",
+                            transition: "none",
+                          }
+                        : {}
+                    }
+                  >
+                    {t("tooltip." + i.img.alt)}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Scrollbars>
+              ))}
+            </Scrollbars>
+          </div>
         </div>
-      </div>
-      <div className={styles["widget__end"]}>
-        <Image
-          src="/logout.svg"
-          alt="Log out"
-          width={18}
-          height={18}
-          className={styles["widget__logout"]}
-          onClick={handleLogOut}
-        />
-      </div>
-    </WidgetWrapper>
+        <div className={styles["widget__end"]}>
+          <Image
+            src="/logout.svg"
+            alt="Log out"
+            width={30}
+            height={30}
+            className={styles["widget__logout"]}
+            onClick={() => setModalOpen(true)}
+          />
+        </div>
+      </WidgetWrapper>
+      <ConfirmModal
+        active={modalOpen}
+        descriptionText={t("logout.description")}
+        abortText={t("delete-account.modal-abort")}
+        confirmText={t("logout.confirm")}
+        onAbort={() => setModalOpen(false)}
+        onConfirm={handleLogOut}
+      />
+    </>
   );
 };
 
