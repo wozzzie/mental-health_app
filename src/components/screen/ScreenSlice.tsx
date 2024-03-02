@@ -285,6 +285,7 @@ export const screenSlice = createSlice({
               ...item,
               x: prevState.x,
               y: prevState.y,
+              active: prevState.active,
             };
           else return item;
         });
