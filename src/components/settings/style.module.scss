@@ -24,6 +24,7 @@
     transition: 300ms background-color;
     padding: 5px;
     border-radius: 5px;
+    cursor: pointer;
     &:hover {
       background-color: #00000022;
     }
