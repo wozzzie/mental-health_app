@@ -80,7 +80,7 @@
   &__element {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     min-width: 450px;
     gap: 10px;
   }
@@ -127,5 +127,15 @@
     margin-left: 20px;
     margin-top: 10px;
     color: rgb(255, 56, 43);
+  }
+
+  &__description {
+    line-height: 57px;
+  }
+
+  &__switch {
+    height: 57px;
+    display: flex;
+    align-items: center;
   }
 }

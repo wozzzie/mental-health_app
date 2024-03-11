@@ -126,20 +126,22 @@ const Settings: FC<Props> = ({ transitionState }) => {
                           </div>
                         )}
                         {item.type === "switch" ? (
-                          <SettingsSwitch
-                            isActive={item.value}
-                            onChange={(isActive: boolean) => {
-                              // settings.change((s) => {
-                              //   const tmp = { ...s };
-                              //   tmp.groups[chosenGroup].settings[i] = {
-                              //     ...tmp.groups[chosenGroup].settings[i],
-                              //     value: isActive,
-                              //   } as switchSetting;
-                              //   return tmp;
-                              // });
-                              item.callback(isActive);
-                            }}
-                          />
+                          <div className={styles["settings__switch"]}>
+                            <SettingsSwitch
+                              isActive={item.value}
+                              onChange={(isActive: boolean) => {
+                                // settings.change((s) => {
+                                //   const tmp = { ...s };
+                                //   tmp.groups[chosenGroup].settings[i] = {
+                                //     ...tmp.groups[chosenGroup].settings[i],
+                                //     value: isActive,
+                                //   } as switchSetting;
+                                //   return tmp;
+                                // });
+                                item.callback(isActive);
+                              }}
+                            />
+                          </div>
                         ) : item.type === "select-form" ? (
                           <div className={styles["settings__select"]}>
                             <Select
