@@ -173,6 +173,7 @@ export const screenSlice = createSlice({
       const w = state.widgets.find((i) => i.id === action.payload);
       if (w) w.active = false;
       saveWidgets(state);
+      state.wallpaperWindowActive = false;
     },
 
     raiseWidget: (state, action: IDInPayload) => {
@@ -180,7 +181,7 @@ export const screenSlice = createSlice({
       if (widgetToRaise !== undefined) {
         state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, widgetToRaise];
-      } else {
+        state.wallpaperWindowActive = false;
       }
       saveWidgets(state);
     },
@@ -191,6 +192,7 @@ export const screenSlice = createSlice({
         w.active = true;
         state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, w];
+        state.wallpaperWindowActive = false;
       }
       saveWidgets(state);
     },
@@ -201,6 +203,7 @@ export const screenSlice = createSlice({
         w.active = !w.active;
         state.widgets = state.widgets.filter((i) => i.id !== action.payload);
         state.widgets = [...state.widgets, w];
+        state.wallpaperWindowActive = false;
       }
       saveWidgets(state);
     },

@@ -11,14 +11,14 @@
   padding: 20px 20px;
   z-index: 10;
   max-width: 1440px;
-    // height: 5rem; /* 80px */
+  // height: 5rem; /* 80px */
   //   background-color: black;
   margin: 0 auto;
 
-//   &_sticky {
-//     background-color: #230555;
-//     height: 60px;
-//   }
+  //   &_sticky {
+  //     background-color: #230555;
+  //     height: 60px;
+  //   }
 
   &__logo {
     filter: invert(28%) sepia(12%) saturate(272%) hue-rotate(290deg)
@@ -92,26 +92,26 @@
 }
 
 .top-navigation {
-  min-height:100px;
+  min-height: 100px;
   position: relative;
-  
 
   & .top-navigation-wrapper {
     min-height: 100px;
     padding-bottom: 10px;
     padding-top: 10px;
     position: relative;
-    gap:20px;
+    gap: 20px;
+    max-width: 100%;
+    flex-wrap: wrap;
   }
 
   &__logo {
-    height:50px;
-    width:298px;
+    height: 50px;
+    width: 298px;
     display: block;
     position: relative;
     margin: auto 0;
     flex-grow: 0;
-
   }
 
   &-menu {
@@ -120,52 +120,44 @@
     position: relative;
     justify-content: space-around;
     max-width: 350px;
-    gap:20px;
-    flex-grow:1;
+    gap: 20px;
+    flex-grow: 1;
     &__element {
       display: block;
       position: relative;
-      color: var(--colors-heading, #1E0E62);
-/* Text / Paragraph */
+      color: var(--colors-heading, #1e0e62);
+      /* Text / Paragraph */
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 26px;
-      text-decoration: none; 
-      margin:auto 0;
+      text-decoration: none;
+      margin: auto 0;
     }
-
   }
 
   .sign-buttons {
-    width:230px;
-    margin:auto 0;
+    margin: auto 0;
     position: relative;
     display: flex;
     justify-content: space-around;
-    gap:10px;
+    gap: 10px;
 
     &__sign-up-btn {
-      height:40px;
-      width:100px;
-      border-radius:20px;
+      height: 40px;
+      width: 100px;
+      border-radius: 20px;
       border: none;
-      background: #FFC75F;
-      color:#fff;
+      background: #ffc75f;
+      color: #fff;
       display: block;
     }
 
     &__sign-in-btn {
       display: block;
       background: none;
-      border:none;
-      width:100px;
+      border: none;
+      width: 100px;
     }
-  }
-}
-
-:lang(ru) {
-  .sign-buttons {
-    width: 290px;
   }
 }
