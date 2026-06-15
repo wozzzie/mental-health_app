@@ -1,34 +1,30 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+📌 Project Goal
+A digital platform for tracking emotional wellbeing and providing users with structured mental wellness tools.
 
-## Getting Started
+👥 Stakeholders
+End Users (customers)
+Product Owner
+Development Team
+QA Team
 
-First, run the development server:
+📊 Business Requirements
+Users should be able to create an account
+Users should track emotional state daily
+System should visualize emotional progress
+Users should access personalized wellness content
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+👤 User Stories
+US-1
+As a user, I want to log my emotional state daily so that I can track my mental wellbeing over time.
+US-2
+As a user, I want to see my emotional history in a visual format so I can understand my progress.
+US-3
+As a user, I want to receive personalized suggestions based on my emotional trends.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+🔄 BPMN (Process: Daily Emotion Tracking)
+Process flow:
+User → Opens App → Select Emotion → Adds Note → Saves Entry → System Stores Data → Updates Dashboard → Shows Emotional Chart
+Actors:
+User
+Application System
+Database
